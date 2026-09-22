@@ -15,8 +15,10 @@ website:
         text: Home
       - text: Topics
         menu:
-          - href: notes/topic-01.qmd
-            text: "Topic 1: What Is Machine Learning?"
+          - href: notes/Introduction.qmd
+            text: "Introduction — Notes"
+          - href: slides/Introduction.qmd
+            text: "Introduction — Slides"
   page-footer:
     center: "COMP-SCI 465R · Adu Baffour, PhD · University of Missouri–Kansas City"
 

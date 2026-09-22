@@ -9,4 +9,9 @@ Graded work, solutions, and grades live in Canvas.
 
 ## Topics
 
-- [Topic 1: What Is Machine Learning?](notes/topic-01.qmd)
+### Introduction: How do machines learn?
+
+Core vocabulary, the five types of machine learning, features and models, the
+bias–variance trade-off, and the scikit-learn workflow.
+
+[Notes](notes/Introduction.qmd) · [Slides](slides/Introduction.qmd)

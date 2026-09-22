@@ -1,9 +1,0 @@
----
-title: "Topic 1: What Is Machine Learning?"
----
-
-## Slides
-
-<iframe src="../slides/topic-01.html" width="100%" height="500" style="border:1px solid #ccc;" title="Topic 1 slides"></iframe>
-
-[Open the slides full screen](../slides/topic-01.qmd)
