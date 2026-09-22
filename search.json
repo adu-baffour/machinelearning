@@ -1,0 +1,65 @@
+[
+  {
+    "objectID": "notes/week-01.html",
+    "href": "notes/week-01.html",
+    "title": "Week 1: What Is Statistical Learning?",
+    "section": "",
+    "text": "Open the slides full screen"
+  },
+  {
+    "objectID": "notes/week-01.html#slides",
+    "href": "notes/week-01.html#slides",
+    "title": "Week 1: What Is Statistical Learning?",
+    "section": "",
+    "text": "Open the slides full screen"
+  },
+  {
+    "objectID": "notes/week-01.html#notes",
+    "href": "notes/week-01.html#notes",
+    "title": "Week 1: What Is Statistical Learning?",
+    "section": "Notes",
+    "text": "Notes\nExpanded notes for this week go here: the explanations, examples, and context that do not fit on slides."
+  },
+  {
+    "objectID": "notes/week-01.html#self-check",
+    "href": "notes/week-01.html#self-check",
+    "title": "Week 1: What Is Statistical Learning?",
+    "section": "Self-check",
+    "text": "Self-check\nShort practice questions will go here."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Intro to Machine Learning",
+    "section": "",
+    "text": "Welcome. This site hosts the slides, notes, and labs for the course."
+  },
+  {
+    "objectID": "index.html#how-to-use-this-site",
+    "href": "index.html#how-to-use-this-site",
+    "title": "Intro to Machine Learning",
+    "section": "How to use this site",
+    "text": "How to use this site\n\nEach topic has a notes page with the slides embedded at the top.\nSlides open full screen from the link under each deck. Press F for full screen and S for speaker view.\nLabs are runnable Python notebooks.\n\nGraded work, solutions, and grades live in Canvas, not here."
+  },
+  {
+    "objectID": "slides/week-01.html#learning-objectives",
+    "href": "slides/week-01.html#learning-objectives",
+    "title": "Week 1: What Is Statistical Learning?",
+    "section": "Learning objectives",
+    "text": "Learning objectives\nBy the end of this lecture you should be able to:\n\nExplain the difference between prediction and inference\nDistinguish supervised from unsupervised learning\nDescribe the bias-variance trade-off in one sentence\n\n\nSpeaker notes go here. They appear in speaker view (press S) and never on the public slide."
+  },
+  {
+    "objectID": "slides/week-01.html#the-core-idea",
+    "href": "slides/week-01.html#the-core-idea",
+    "title": "Week 1: What Is Statistical Learning?",
+    "section": "The core idea",
+    "text": "The core idea\nWe observe inputs \\(X\\) and an output \\(Y\\) and assume\n\\[\nY = f(X) + \\varepsilon\n\\]\nStatistical learning is the set of methods for estimating \\(f\\)."
+  },
+  {
+    "objectID": "slides/week-01.html#a-first-look-at-data",
+    "href": "slides/week-01.html#a-first-look-at-data",
+    "title": "Week 1: What Is Statistical Learning?",
+    "section": "A first look at data",
+    "text": "A first look at data\n\nimport numpy as np\nimport matplotlib.pyplot as plt\n\nrng = np.random.default_rng(42)\nx = rng.uniform(0, 10, 100)\ny = 2 * np.sin(x) + x / 2 + rng.normal(0, 0.8, 100)\n\nplt.scatter(x, y, alpha=0.6)\nplt.xlabel(\"X\"); plt.ylabel(\"Y\")\nplt.title(\"Noisy observations of an unknown f\")\nplt.show()"
+  }
+]
