@@ -1,0 +1,49 @@
+---
+title: "Week 1: What Is Statistical Learning?"
+author: "Adu Baffour, PhD"
+format:
+  revealjs:
+    slide-number: true
+    preview-links: auto
+    code-copy: true
+---
+
+## Learning objectives
+
+By the end of this lecture you should be able to:
+
+- Explain the difference between **prediction** and **inference**
+- Distinguish supervised from unsupervised learning
+- Describe the bias-variance trade-off in one sentence
+
+::: notes
+Speaker notes go here. They appear in speaker view (press S) and never on the public slide.
+:::
+
+## The core idea
+
+We observe inputs $X$ and an output $Y$ and assume
+
+$$
+Y = f(X) + \varepsilon
+$$
+
+Statistical learning is the set of methods for estimating $f$.
+
+## A first look at data
+
+```{python}
+#| echo: true
+#| fig-height: 3.5
+import numpy as np
+import matplotlib.pyplot as plt
+
+rng = np.random.default_rng(42)
+x = rng.uniform(0, 10, 100)
+y = 2 * np.sin(x) + x / 2 + rng.normal(0, 0.8, 100)
+
+plt.scatter(x, y, alpha=0.6)
+plt.xlabel("X"); plt.ylabel("Y")
+plt.title("Noisy observations of an unknown f")
+plt.show()
+```

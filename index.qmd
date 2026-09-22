@@ -1,0 +1,14 @@
+---
+title: "Intro to Machine Learning"
+subtitle: "Course companion site"
+---
+
+Welcome. This site hosts the slides, notes, and labs for the course.
+
+## How to use this site
+
+- Each topic has a notes page with the slides embedded at the top.
+- Slides open full screen from the link under each deck. Press **F** for full screen and **S** for speaker view.
+- Labs are runnable Python notebooks.
+
+Graded work, solutions, and grades live in Canvas, not here.
