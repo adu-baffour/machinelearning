@@ -1,0 +1,1532 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Introduction – Introduction to Machine Learning</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-b85bc7c33db8c58e0ec93c3465666fed.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-89af0c2d685ccb09a4d7d65decb66752.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-34dbf897b697f50edbbc4554a08e61a3.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-89af0c2d685ccb09a4d7d65decb66752.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Introduction to Machine Learning</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-topics" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Topics</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-topics">    
+        <li>
+    <a class="dropdown-item" href="../notes/Introduction.html">
+ <span class="dropdown-text">Introduction — Notes</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../slides/Introduction.html">
+ <span class="dropdown-text">Introduction — Slides</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#slides" id="toc-slides" class="nav-link active" data-scroll-target="#slides">Slides</a></li>
+  <li><a href="#objectives" id="toc-objectives" class="nav-link" data-scroll-target="#objectives">Objectives</a></li>
+  <li><a href="#introduction-to-machine-learning" id="toc-introduction-to-machine-learning" class="nav-link" data-scroll-target="#introduction-to-machine-learning">1. Introduction to machine learning</a>
+  <ul class="collapse">
+  <li><a href="#what-is-machine-learning" id="toc-what-is-machine-learning" class="nav-link" data-scroll-target="#what-is-machine-learning">What is machine learning?</a></li>
+  <li><a href="#machine-learning-vs.-traditional-programming" id="toc-machine-learning-vs.-traditional-programming" class="nav-link" data-scroll-target="#machine-learning-vs.-traditional-programming">Machine learning vs.&nbsp;traditional programming</a></li>
+  <li><a href="#where-machine-learning-fits-in-ai" id="toc-where-machine-learning-fits-in-ai" class="nav-link" data-scroll-target="#where-machine-learning-fits-in-ai">Where machine learning fits in AI</a></li>
+  <li><a href="#what-is-a-model" id="toc-what-is-a-model" class="nav-link" data-scroll-target="#what-is-a-model">What is a model?</a>
+  <ul class="collapse">
+  <li><a href="#a-worked-example" id="toc-a-worked-example" class="nav-link" data-scroll-target="#a-worked-example">A worked example</a></li>
+  </ul></li>
+  <li><a href="#what-is-an-algorithm" id="toc-what-is-an-algorithm" class="nav-link" data-scroll-target="#what-is-an-algorithm">What is an algorithm?</a></li>
+  <li><a href="#model-vs.-algorithm" id="toc-model-vs.-algorithm" class="nav-link" data-scroll-target="#model-vs.-algorithm">Model vs.&nbsp;algorithm</a></li>
+  <li><a href="#worked-example-predicting-a-rideshare-price" id="toc-worked-example-predicting-a-rideshare-price" class="nav-link" data-scroll-target="#worked-example-predicting-a-rideshare-price">Worked example: predicting a rideshare price</a></li>
+  <li><a href="#what-is-a-dataset" id="toc-what-is-a-dataset" class="nav-link" data-scroll-target="#what-is-a-dataset">What is a dataset?</a></li>
+  <li><a href="#input-and-output-features" id="toc-input-and-output-features" class="nav-link" data-scroll-target="#input-and-output-features">Input and output features</a></li>
+  <li><a href="#knowledge-check-which-feature-is-the-target" id="toc-knowledge-check-which-feature-is-the-target" class="nav-link" data-scroll-target="#knowledge-check-which-feature-is-the-target">Knowledge check: which feature is the target?</a></li>
+  <li><a href="#types-of-machine-learning" id="toc-types-of-machine-learning" class="nav-link" data-scroll-target="#types-of-machine-learning">Types of machine learning</a></li>
+  <li><a href="#supervised-learning" id="toc-supervised-learning" class="nav-link" data-scroll-target="#supervised-learning">Supervised learning</a></li>
+  <li><a href="#unsupervised-learning" id="toc-unsupervised-learning" class="nav-link" data-scroll-target="#unsupervised-learning">Unsupervised learning</a></li>
+  <li><a href="#reinforcement-learning" id="toc-reinforcement-learning" class="nav-link" data-scroll-target="#reinforcement-learning">Reinforcement learning</a></li>
+  <li><a href="#semi-supervised-learning" id="toc-semi-supervised-learning" class="nav-link" data-scroll-target="#semi-supervised-learning">Semi-supervised learning</a></li>
+  <li><a href="#self-supervised-learning" id="toc-self-supervised-learning" class="nav-link" data-scroll-target="#self-supervised-learning">Self-supervised learning</a></li>
+  <li><a href="#knowledge-check-matching-tasks-to-learning-types" id="toc-knowledge-check-matching-tasks-to-learning-types" class="nav-link" data-scroll-target="#knowledge-check-matching-tasks-to-learning-types">Knowledge check: matching tasks to learning types</a></li>
+  </ul></li>
+  <li><a href="#features-and-models" id="toc-features-and-models" class="nav-link" data-scroll-target="#features-and-models">2. Features and models</a>
+  <ul class="collapse">
+  <li><a href="#types-of-features" id="toc-types-of-features" class="nav-link" data-scroll-target="#types-of-features">Types of features</a></li>
+  <li><a href="#exploratory-data-analysis" id="toc-exploratory-data-analysis" class="nav-link" data-scroll-target="#exploratory-data-analysis">Exploratory data analysis</a></li>
+  <li><a href="#classification-models" id="toc-classification-models" class="nav-link" data-scroll-target="#classification-models">Classification models</a></li>
+  <li><a href="#regression-models" id="toc-regression-models" class="nav-link" data-scroll-target="#regression-models">Regression models</a></li>
+  <li><a href="#unsupervised-models-clustering" id="toc-unsupervised-models-clustering" class="nav-link" data-scroll-target="#unsupervised-models-clustering">Unsupervised models: clustering</a></li>
+  <li><a href="#unsupervised-models-outlier-detection" id="toc-unsupervised-models-outlier-detection" class="nav-link" data-scroll-target="#unsupervised-models-outlier-detection">Unsupervised models: outlier detection</a></li>
+  <li><a href="#unsupervised-models-dimension-reduction" id="toc-unsupervised-models-dimension-reduction" class="nav-link" data-scroll-target="#unsupervised-models-dimension-reduction">Unsupervised models: dimension reduction</a></li>
+  <li><a href="#knowledge-check-matching-tasks-to-unsupervised-models" id="toc-knowledge-check-matching-tasks-to-unsupervised-models" class="nav-link" data-scroll-target="#knowledge-check-matching-tasks-to-unsupervised-models">Knowledge check: matching tasks to unsupervised models</a></li>
+  </ul></li>
+  <li><a href="#biasvariance-trade-off" id="toc-biasvariance-trade-off" class="nav-link" data-scroll-target="#biasvariance-trade-off">3. Bias–variance trade-off</a>
+  <ul class="collapse">
+  <li><a href="#generalization-the-goal-of-machine-learning" id="toc-generalization-the-goal-of-machine-learning" class="nav-link" data-scroll-target="#generalization-the-goal-of-machine-learning">Generalization: the goal of machine learning</a></li>
+  <li><a href="#what-is-bias" id="toc-what-is-bias" class="nav-link" data-scroll-target="#what-is-bias">What is bias?</a></li>
+  <li><a href="#what-is-variance" id="toc-what-is-variance" class="nav-link" data-scroll-target="#what-is-variance">What is variance?</a></li>
+  <li><a href="#the-biasvariance-trade-off" id="toc-the-biasvariance-trade-off" class="nav-link" data-scroll-target="#the-biasvariance-trade-off">The bias–variance trade-off</a></li>
+  <li><a href="#training-vs.-test-accuracy" id="toc-training-vs.-test-accuracy" class="nav-link" data-scroll-target="#training-vs.-test-accuracy">Training vs.&nbsp;test accuracy</a></li>
+  <li><a href="#knowledge-check-reading-fit-from-graphs" id="toc-knowledge-check-reading-fit-from-graphs" class="nav-link" data-scroll-target="#knowledge-check-reading-fit-from-graphs">Knowledge check: reading fit from graphs</a></li>
+  </ul></li>
+  <li><a href="#machine-learning-workflow" id="toc-machine-learning-workflow" class="nav-link" data-scroll-target="#machine-learning-workflow">4. Machine learning workflow</a>
+  <ul class="collapse">
+  <li><a href="#the-six-steps" id="toc-the-six-steps" class="nav-link" data-scroll-target="#the-six-steps">The six steps</a></li>
+  <li><a href="#scikit-learn" id="toc-scikit-learn" class="nav-link" data-scroll-target="#scikit-learn">scikit-learn</a></li>
+  <li><a href="#practice-the-ml-workflow" id="toc-practice-the-ml-workflow" class="nav-link" data-scroll-target="#practice-the-ml-workflow">Practice: the ML workflow</a></li>
+  </ul></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary">Summary</a></li>
+  <li><a href="#further-reading" id="toc-further-reading" class="nav-link" data-scroll-target="#further-reading">Further reading</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/adu-baffour/machinelearning/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Introduction</h1>
+<p class="subtitle lead">How do machines learn?</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="slides" class="level2">
+<h2 class="anchored" data-anchor-id="slides">Slides</h2>
+<iframe src="../slides/Introduction.html" width="100%" height="500" style="border:1px solid #ccc;" title="Introduction slides">
+</iframe>
+<p><a href="../slides/Introduction.html">Open the slides full screen</a></p>
+</section>
+<section id="objectives" class="level2">
+<h2 class="anchored" data-anchor-id="objectives">Objectives</h2>
+<p>By the end of this topic, you will be able to:</p>
+<ul>
+<li>Define core machine learning concepts and learning types.</li>
+<li>Identify features, targets, models, and algorithms.</li>
+<li>Explain generalization and bias–variance trade-offs.</li>
+<li>Apply the basic machine learning workflow using scikit-learn.</li>
+</ul>
+<p>These notes follow the slides in order, grouped into the four parts of the course outline: introduction to machine learning, features and models, the bias–variance trade-off, and the machine learning workflow.</p>
+</section>
+<section id="introduction-to-machine-learning" class="level1">
+<h1>1. Introduction to machine learning</h1>
+<section id="what-is-machine-learning" class="level2">
+<h2 class="anchored" data-anchor-id="what-is-machine-learning">What is machine learning?</h2>
+<p>Machine learning is a subfield of artificial intelligence where computers learn patterns from data and make predictions without being explicitly programmed.</p>
+<p>It helps to break a machine learning system into three parts:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Part</th>
+<th>What it is</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Input</td>
+<td>Historical data</td>
+<td>Spreadsheets, sensor readings, images, text</td>
+</tr>
+<tr class="even">
+<td>Process</td>
+<td>A learning algorithm</td>
+<td>Linear regression, decision trees, a neural network</td>
+</tr>
+<tr class="odd">
+<td>Output</td>
+<td>A predictive model</td>
+<td>A trained function that makes predictions on new input data</td>
+</tr>
+</tbody>
+</table>
+<p>Machine learning draws on computer science, artificial intelligence, statistics, and mathematics. The combination matters: statistics supplies the reasoning about uncertainty, and computer science supplies the means to apply that reasoning to data at scale. [CHECK — this gloss on why the combination matters is mine; the slide lists the fields but does not characterise their roles.]</p>
+</section>
+<section id="machine-learning-vs.-traditional-programming" class="level2">
+<h2 class="anchored" data-anchor-id="machine-learning-vs.-traditional-programming">Machine learning vs.&nbsp;traditional programming</h2>
+<p>The difference is in what you supply and what the computer produces.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th></th>
+<th>You supply</th>
+<th>Computer produces</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Traditional programming</td>
+<td>Rules + data</td>
+<td>Answers</td>
+</tr>
+<tr class="even">
+<td>Machine learning</td>
+<td>Data + answers</td>
+<td>Rules (the model)</td>
+</tr>
+</tbody>
+</table>
+<p>A spam filter makes the contrast concrete. In traditional programming you write the rule yourself — this fragment assumes <code>subject</code> holds the email’s subject line:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="st">"FREE!!!"</span> <span class="kw">in</span> subject:</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    label <span class="op">=</span> <span class="st">"spam"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>In machine learning you supply 10,000 labeled emails, and the algorithm produces the rule. That rule is the model.</p>
+<p>Machine learning is the tool for problems where the rules are too complex, unknown, or constantly changing to write by hand. Spam is a good example of all three at once: the patterns are subtle, nobody can enumerate them, and senders deliberately change tactics. [CHECK — the “all three at once” reading of the spam example is my elaboration; the slide states the three conditions but does not tie them to spam.]</p>
+</section>
+<section id="where-machine-learning-fits-in-ai" class="level2">
+<h2 class="anchored" data-anchor-id="where-machine-learning-fits-in-ai">Where machine learning fits in AI</h2>
+<p>The terms nest inside one another:</p>
+<p><strong>Artificial Intelligence → Machine Learning (this course) → Deep Learning → LLMs</strong></p>
+<p>Artificial intelligence is the broad goal of getting systems to perform tasks that normally require human cognition and decision-making. Machine learning is the subset that learns those capabilities from data.</p>
+<p>Some parts of AI are not machine learning: knowledge representation, constraint optimization, logical and probabilistic reasoning, and planning. These solve problems by reasoning over rules you provide rather than by learning patterns from examples. [CHECK — this contrast is mine; the slide notes name these areas but do not say how they work.]</p>
+<p>ChatGPT is one member of this family. This course teaches the family — the concepts every member shares.</p>
+</section>
+<section id="what-is-a-model" class="level2">
+<h2 class="anchored" data-anchor-id="what-is-a-model">What is a model?</h2>
+<p>A model is a mathematical function that maps inputs to outputs to make predictions:</p>
+<p><span class="math display">\[\hat{y} = f_{\theta}(x)\]</span></p>
+<p>For a linear model:</p>
+<p><span class="math display">\[f_{\theta}(x) = \theta_0 + \theta_1 x\]</span></p>
+<p>where:</p>
+<ul>
+<li><span class="math inline">\(x\)</span> is the input feature</li>
+<li><span class="math inline">\(\hat{y}\)</span> is the predicted output</li>
+<li><span class="math inline">\(\theta\)</span> are the model parameters — the values the model learns during training</li>
+</ul>
+<p>The parameters are what training produces. Once trained, the model can be reused over and over to predict outcomes.</p>
+<section id="a-worked-example" class="level3">
+<h3 class="anchored" data-anchor-id="a-worked-example">A worked example</h3>
+<p>Suppose training on rideshare data produced <span class="math inline">\(\theta_0 = 2.50\)</span> and <span class="math inline">\(\theta_1 = 1.75\)</span>, where <span class="math inline">\(x\)</span> is trip distance in miles. The fitted model is</p>
+<p><span class="math display">\[\hat{y} = 2.50 + 1.75x\]</span></p>
+<p>For a 3.2-mile trip:</p>
+<p><span class="math display">\[\hat{y} = 2.50 + 1.75(3.2) = 2.50 + 5.60 = 8.10\]</span></p>
+<p>so the model predicts $8.10. Read the parameters this way: <span class="math inline">\(\theta_0\)</span> is the base fare that applies to any trip, and <span class="math inline">\(\theta_1\)</span> is the additional cost per mile.</p>
+<p>[CHECK — the numbers 2.50 and 1.75, the 3.2-mile trip, the resulting $8.10, and the reading of <span class="math inline">\(\theta_0\)</span> as a base fare and <span class="math inline">\(\theta_1\)</span> as cost per mile are all mine. The slides give the formula and the rideshare setting but no fitted values and no interpretation of the coefficients.]</p>
+</section>
+</section>
+<section id="what-is-an-algorithm" class="level2">
+<h2 class="anchored" data-anchor-id="what-is-an-algorithm">What is an algorithm?</h2>
+<p>An algorithm is a step-by-step procedure used to train a model on data.</p>
+<p><span class="math display">\[\mathcal{A} : (\textit{data},\ \textit{hyperparameters}) \rightarrow f_{\theta^{*}}\]</span></p>
+<p>It takes:</p>
+<ul>
+<li><strong>Input:</strong> training data and hyperparameters</li>
+<li><strong>Process:</strong> optimization rules</li>
+<li><strong>Output:</strong> a trained model <span class="math inline">\(f_{\theta^{*}}\)</span>, where <span class="math inline">\(\theta^{*}\)</span> are the best-fitting parameters</li>
+</ul>
+<p>Gradient descent algorithms are used to train regression models. In scikit-learn, <code>SGDRegressor()</code> uses stochastic gradient descent, updating the model’s weights gradually as it sees each data point.</p>
+</section>
+<section id="model-vs.-algorithm" class="level2">
+<h2 class="anchored" data-anchor-id="model-vs.-algorithm">Model vs.&nbsp;algorithm</h2>
+<p>This distinction is subtle but really important:</p>
+<ul>
+<li>A <strong>model</strong> is the mathematical function that makes predictions. Once trained, it can be reused over and over.</li>
+<li>An <strong>algorithm</strong> is the method used to train the model. It iteratively adjusts the model’s parameters to reduce error.</li>
+</ul>
+<p>Put another way: the model is the structure, and the algorithm is the recipe for filling in that structure with the right values. The algorithm is the process; the model is the result.</p>
+<p>The two terms are sometimes used interchangeably in casual conversation, but the difference matters once you start talking about training, optimization, and deployment.</p>
+</section>
+<section id="worked-example-predicting-a-rideshare-price" class="level2">
+<h2 class="anchored" data-anchor-id="worked-example-predicting-a-rideshare-price">Worked example: predicting a rideshare price</h2>
+<p>The goal is to predict the price of a ride using input features.</p>
+<p>For each trip, a rideshare company records inputs such as distance, starting location, traffic conditions, time of day, and vehicle type. Those inputs are passed into a machine learning model, which uses an algorithm or statistical model to predict the price. The predicted price is the model’s output.</p>
+<p>This is a supervised learning task: the training data is labeled, because the correct price of each past trip is already known. Once trained, the model can predict the price of a new trip from similar features.</p>
+</section>
+<section id="what-is-a-dataset" class="level2">
+<h2 class="anchored" data-anchor-id="what-is-a-dataset">What is a dataset?</h2>
+<p>A dataset is a structured collection of data, consisting of:</p>
+<ul>
+<li><strong>Features</strong> (or variables): a measurable property — a column. For example time, price, or vehicle type.</li>
+<li><strong>Instances</strong> (or samples): a single data point — a row. For example one rideshare trip.</li>
+</ul>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>distance</th>
+<th>cab_type</th>
+<th>time_stamp</th>
+<th>destination</th>
+<th>price</th>
+<th>surge_multiplier</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1.3</td>
+<td>Uber</td>
+<td>08:04.4</td>
+<td>Theatre District</td>
+<td>17.5</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>1.35</td>
+<td>Lyft</td>
+<td>22:57.4</td>
+<td>South Station</td>
+<td>7</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td>1.1</td>
+<td>Lyft</td>
+<td>15:09.6</td>
+<td>Financial District</td>
+<td>13.5</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+<p>When data is organized in a table like this — in a spreadsheet or a pandas dataframe — it is called tabular data. Each row is one instance and each column is one feature. This format is extremely common, and it is the type used in most of our examples.</p>
+</section>
+<section id="input-and-output-features" class="level2">
+<h2 class="anchored" data-anchor-id="input-and-output-features">Input and output features</h2>
+<p>Features split into two roles:</p>
+<ul>
+<li><strong>Input features</strong> (predictors, explanatory variables, <span class="math inline">\(\mathbf{X}\)</span>): the known information fed into the model.</li>
+<li><strong>Output feature</strong> (target, response, <span class="math inline">\(\mathbf{y}\)</span>): the value we want the model to predict.</li>
+</ul>
+<p>In the rideshare example, the input is distance and the output is price:</p>
+<blockquote class="blockquote">
+<p>input feature: distance → model → output feature: price</p>
+</blockquote>
+<p>A useful shorthand: inputs are <em>what you know</em>, and the output is <em>what you want to find out</em>. Which features play which role is decided by the machine learning task, or research question. Choosing good input features is critical to building accurate models.</p>
+</section>
+<section id="knowledge-check-which-feature-is-the-target" class="level2">
+<h2 class="anchored" data-anchor-id="knowledge-check-which-feature-is-the-target">Knowledge check: which feature is the target?</h2>
+<p>A hospital wants to predict which nurses are likely to quit, and has collected this data:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Employee ID</th>
+<th>Age</th>
+<th>Quit?</th>
+<th>Department</th>
+<th>Daily rate</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1415194</td>
+<td>34</td>
+<td>No</td>
+<td>Maternity</td>
+<td>404</td>
+</tr>
+<tr class="even">
+<td>1620383</td>
+<td>30</td>
+<td>No</td>
+<td>Maternity</td>
+<td>1312</td>
+</tr>
+<tr class="odd">
+<td>1533398</td>
+<td>25</td>
+<td>Yes</td>
+<td>Cardiology</td>
+<td>383</td>
+</tr>
+<tr class="even">
+<td>1479961</td>
+<td>35</td>
+<td>No</td>
+<td>Maternity</td>
+<td>982</td>
+</tr>
+<tr class="odd">
+<td>1570909</td>
+<td>38</td>
+<td>No</td>
+<td>Cardiology</td>
+<td>508</td>
+</tr>
+</tbody>
+</table>
+<p>Work through two questions:</p>
+<ol type="1">
+<li>What is the output feature (target)?</li>
+<li>What is / are the input feature(s)?</li>
+</ol>
+<p>[CHECK — this paragraph of reasoning guidance is mine, not on the slide.] To reason about it, ask what the hospital is trying to find out, and then ask of every remaining column whether it could plausibly help predict that. One column is an identifier rather than a measured property of the nurse, and identifiers carry no predictive information even though they are stored as numbers.</p>
+<p>The rule of thumb to carry forward: <strong>always ask whether a feature is informative or just a label.</strong></p>
+<p><em>Answers are worked through in class.</em></p>
+</section>
+<section id="types-of-machine-learning" class="level2">
+<h2 class="anchored" data-anchor-id="types-of-machine-learning">Types of machine learning</h2>
+<p>The type of machine learning you use depends on the task and on what data you have.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Type</th>
+<th>Data</th>
+<th>Typical tasks</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Supervised</td>
+<td>Data has labels</td>
+<td>Regression (predict a number), classification (predict a category)</td>
+</tr>
+<tr class="even">
+<td>Unsupervised</td>
+<td>No labels: find structure</td>
+<td>Clustering (group similar rows), dimension reduction (compress columns)</td>
+</tr>
+<tr class="odd">
+<td>Reinforcement</td>
+<td>Learn from rewards</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<p>Applied to the rideshare setting:</p>
+<ul>
+<li>Predicting the price of a trip from distance and time is <strong>supervised</strong>, since the output feature (price) is known.</li>
+<li>Categorizing customers as “commuters”, “sports fans”, or “tourists” is <strong>unsupervised</strong>, since those categories are not an observed feature.</li>
+<li>Adjusting the price after a customer declines is <strong>reinforcement learning</strong>: the prediction is updated based on the customer’s decision.</li>
+</ul>
+<p>Two further paradigms — semi-supervised and self-supervised learning — are covered below.</p>
+</section>
+<section id="supervised-learning" class="level2">
+<h2 class="anchored" data-anchor-id="supervised-learning">Supervised learning</h2>
+<p>Models learn from labeled data: we give them both the inputs and the correct outputs, and the model learns the relationship between the two. It is the most common machine learning approach.</p>
+<p>There are two categories:</p>
+<ul>
+<li><strong>Regression</strong> predicts numbers. Example: predict a ride price, such as $17.32.</li>
+<li><strong>Classification</strong> predicts categories. Example: predict animal type, cat vs.&nbsp;dog.</li>
+</ul>
+<p>The quick test: if the output is numeric, it is regression; if it is categorical, it is classification.</p>
+</section>
+<section id="unsupervised-learning" class="level2">
+<h2 class="anchored" data-anchor-id="unsupervised-learning">Unsupervised learning</h2>
+<p>Models find structure in unlabeled data — no output labels are provided. The model is given a dataset and asked to discover structure or relationships within it.</p>
+<ul>
+<li><strong>Clustering:</strong> group rides into “commuters”, “sports fans”, “tourists”.</li>
+<li><strong>Outlier detection:</strong> find suspicious rides with abnormally high prices.</li>
+<li><strong>Dimensionality reduction:</strong> transform the data, for example with PCA — combining time and distance into a single “trip intensity” measure.</li>
+</ul>
+<p>This is especially useful for exploratory analysis, or whenever labels are unavailable.</p>
+</section>
+<section id="reinforcement-learning" class="level2">
+<h2 class="anchored" data-anchor-id="reinforcement-learning">Reinforcement learning</h2>
+<p>Models learn by trial and error: they take actions and receive feedback. A model — called an agent — interacts with an environment and learns from the rewards or penalties it receives.</p>
+<ul>
+<li><strong>Agent:</strong> the decision-maker</li>
+<li><strong>Environment:</strong> where it operates</li>
+<li><strong>Reward:</strong> feedback after an action</li>
+</ul>
+<p>A self-driving car learning to stay in its lane earns rewards when it stays centered and penalties when it crosses a lane. Reinforcement learning is used in robotics, game AI, and recommendation systems.</p>
+</section>
+<section id="semi-supervised-learning" class="level2">
+<h2 class="anchored" data-anchor-id="semi-supervised-learning">Semi-supervised learning</h2>
+<p>Semi-supervised learning combines a small amount of labeled data with a large pool of unlabeled data.</p>
+<p>The motivation is cost: labeling data is time-consuming and expensive, so you will often have plenty of unlabeled instances and few labeled ones. Some algorithms can work with data that is only partially labeled.</p>
+<p>For example, only 100 rides have prices labeled, but 10,000 do not. The model starts with the labeled data, then generalizes by learning from the rest. This is widely used in domains like medical imaging and natural language processing, where labeled data is rare but unlabeled data is abundant.</p>
+</section>
+<section id="self-supervised-learning" class="level2">
+<h2 class="anchored" data-anchor-id="self-supervised-learning">Self-supervised learning</h2>
+<p>Self-supervised learning learns from unlabeled data by creating its own labels. No human labeling is involved — the labels are generated from the input itself.</p>
+<ul>
+<li><strong>In NLP:</strong> mask a word in a sentence and train the model to guess it. Given “The cab arrived at the ___“, the model learns to predict the missing word from the surrounding context.</li>
+<li><strong>In vision:</strong> cut out part of an image and train the model to predict what is missing.</li>
+</ul>
+<p>This approach is behind large language models such as ChatGPT, BERT, and DALL·E. Its power is that it can learn from vast amounts of raw data without manual annotation.</p>
+</section>
+<section id="knowledge-check-matching-tasks-to-learning-types" class="level2">
+<h2 class="anchored" data-anchor-id="knowledge-check-matching-tasks-to-learning-types">Knowledge check: matching tasks to learning types</h2>
+<p>Match each task to the best type of machine learning — supervised, unsupervised, semi-supervised, self-supervised, or reinforcement learning:</p>
+<ol type="1">
+<li>Prescribing a new chemotherapy drug dosage based on a patient’s response to earlier treatment.</li>
+<li>Predicting whether a nurse is likely to quit.</li>
+<li>Grouping patients with similar clinical profiles from EHRs, with no outcome labels.</li>
+<li>Pretraining a model on clinical notes by predicting masked words.</li>
+<li>Training a diagnosis model with 100 labeled X-rays and 10,000 unlabeled ones.</li>
+</ol>
+<p>[CHECK — this reasoning guidance is mine.] Two questions resolve most cases. First: are there labels, none, or only a few? Second: does the model receive feedback on its own actions over time, or does it generate its own labels from the raw input? Matching your data and your problem to the right paradigm is the first design decision in any machine learning solution.</p>
+<p><em>Answers are worked through in class.</em></p>
+</section>
+</section>
+<section id="features-and-models" class="level1">
+<h1>2. Features and models</h1>
+<section id="types-of-features" class="level2">
+<h2 class="anchored" data-anchor-id="types-of-features">Types of features</h2>
+<p>Features in a dataset are either categorical or numerical.</p>
+<ul>
+<li><strong>Categorical:</strong> non-numeric values, or numeric values with no mathematical meaning. Examples: “Yes”/“No”, customer type (“Regular”, “New”), address.</li>
+<li><strong>Numerical:</strong> measurable quantities with mathematical meaning. Examples: age, income, transaction amount, square footage.</li>
+</ul>
+<p>The values alone are not always enough to determine a feature’s type — context matters. Phone numbers are stored as numbers, but arithmetic on phone numbers is meaningless, so they are categorical. ZIP codes behave the same way. This matters because feature type determines how you process and encode a column.</p>
+<p>In the rideshare dataframe:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Feature</th>
+<th>Type</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>cab_type, destination</td>
+<td>Categorical</td>
+<td>Non-numerical values</td>
+</tr>
+<tr class="even">
+<td>distance, price, surge_multiplier</td>
+<td>Numerical</td>
+<td>Numerical values with meaning</td>
+</tr>
+<tr class="odd">
+<td>time_stamp</td>
+<td>Numerical</td>
+<td>Arithmetic on time is meaningful — 2018-12-01 is two days after 2018-11-29</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="exploratory-data-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="exploratory-data-analysis">Exploratory data analysis</h2>
+<p>Exploratory data analysis (EDA) is the process of exploring data through plots and descriptive statistics to identify potential relationships and patterns. It comes before any modeling.</p>
+<p>Common EDA tasks are examining distributions, visualizing correlations, and detecting outliers. Both lines below assume <code>rides</code> is a pandas dataframe of trips:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>rides[<span class="st">'distance'</span>].hist()</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>rides.plot.scatter(<span class="st">'distance'</span>, <span class="st">'price'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The histogram shows how one feature is distributed; the scatter plot reveals the relationship between two variables. [CHECK — your speaker notes say the histogram shows “the distribution of prices”, but the code plots <code>distance</code>; I have described it by feature to resolve the mismatch.]</p>
+<p>Two popular Python plotting libraries are <strong>matplotlib</strong>, for static, dynamic and interactive plots, and <strong>seaborn</strong>, a higher-level library that works especially well with dataframes.</p>
+<p>EDA shapes feature selection and preprocessing. It often reveals problems — skewed distributions, missing values, outliers — that must be addressed before modeling. The better you know your data, the better your models will be.</p>
+</section>
+<section id="classification-models" class="level2">
+<h2 class="anchored" data-anchor-id="classification-models">Classification models</h2>
+<p>Classification models are supervised models that predict categories or labels from input features.</p>
+<ul>
+<li><strong>Examples:</strong> logistic regression, naïve Bayes, k-nearest neighbors, decision trees, support vector machines, neural networks.</li>
+<li><strong>Use case:</strong> predict whether to accept (Yes) or decline (No) an offer.</li>
+<li><strong>Output:</strong> discrete class labels — Yes and No.</li>
+</ul>
+<p>A classification model may predict the class directly, or predict the probability that an instance belongs to a given class. In the probability case, the predicted probability is compared against a threshold to produce a class prediction.</p>
+<p>Input features may be categorical or numerical, but <strong>the output feature must be categorical.</strong></p>
+</section>
+<section id="regression-models" class="level2">
+<h2 class="anchored" data-anchor-id="regression-models">Regression models</h2>
+<p>Regression models are supervised models that predict continuous numerical values.</p>
+<ul>
+<li><strong>Examples:</strong> linear regression, regression trees, k-NN regression.</li>
+<li><strong>Use case:</strong> predict the salary attached to an offer.</li>
+<li><strong>Output:</strong> a real-valued number, for example $70,065.</li>
+</ul>
+<p>As with classification, input features may be categorical or numerical, but <strong>the output feature should always be numerical.</strong></p>
+<p>The distinction from classification is exactly the output type: regression models predict numbers, classification models predict categories.</p>
+</section>
+<section id="unsupervised-models-clustering" class="level2">
+<h2 class="anchored" data-anchor-id="unsupervised-models-clustering">Unsupervised models: clustering</h2>
+<p>Clustering groups similar observations together without labeled data.</p>
+<ul>
+<li><strong>Examples:</strong> K-Means clustering, hierarchical clustering.</li>
+<li><strong>Use cases:</strong> customer segmentation, behavior profiling.</li>
+<li><strong>Output:</strong> cluster assignments, for example Cluster 1, Cluster 2.</li>
+</ul>
+<p>K-Means assigns each instance to one of K groups based on feature similarity. Hierarchical clustering instead builds a tree-like structure of nested clusters. Note what the output is: not a predicted value but a group label.</p>
+</section>
+<section id="unsupervised-models-outlier-detection" class="level2">
+<h2 class="anchored" data-anchor-id="unsupervised-models-outlier-detection">Unsupervised models: outlier detection</h2>
+<p>Outlier detection identifies rare or unusual instances that do not fit the general pattern.</p>
+<ul>
+<li><strong>Example:</strong> DBSCAN, which detects outliers as a by-product of clustering.</li>
+<li><strong>Use cases:</strong> fraud detection (spotting abnormal transactions), error checking (finding data-entry mistakes or system glitches).</li>
+</ul>
+<p>No labels are required — the algorithm finds anomalies from the data itself, by comparing each point’s behavior to the others. This is a practical technique when working with real-world, noisy datasets.</p>
+</section>
+<section id="unsupervised-models-dimension-reduction" class="level2">
+<h2 class="anchored" data-anchor-id="unsupervised-models-dimension-reduction">Unsupervised models: dimension reduction</h2>
+<p>Dimension reduction simplifies high-dimensional data while keeping important structure.</p>
+<p>The most common method is <strong>Principal Component Analysis (PCA)</strong>, which transforms the original features into a smaller number of new, uncorrelated variables called principal components. Think of it as combining features that are strongly related — distance and time, say — into new features that capture the variance.</p>
+<ul>
+<li><strong>Data compression:</strong> reducing storage or transmission requirements.</li>
+<li><strong>Noise reduction:</strong> removing irrelevant or redundant features.</li>
+<li><strong>Visualization:</strong> reducing data to 2D so it can be plotted.</li>
+</ul>
+<p>Dimension reduction is often a crucial step before clustering or classification when a dataset has dozens or hundreds of features.</p>
+</section>
+<section id="knowledge-check-matching-tasks-to-unsupervised-models" class="level2">
+<h2 class="anchored" data-anchor-id="knowledge-check-matching-tasks-to-unsupervised-models">Knowledge check: matching tasks to unsupervised models</h2>
+<p>Match each task to dimension reduction, outlier detection, or clustering:</p>
+<ol type="1">
+<li>Group rideshare customers into categories such as “frequent user”, “sports fan”, and “commuter”.</li>
+<li>Identify customers with unusual behavior.</li>
+<li>Combine trip distance and rating into a quality measure.</li>
+</ol>
+<p>All three use unlabeled data, but they serve different purposes. [CHECK — the prompt to ask which of the three goals applies is my phrasing.] Ask what the goal is: to discover groups, to find anomalies, or to simplify the data.</p>
+<p><em>Answers are worked through in class.</em></p>
+</section>
+</section>
+<section id="biasvariance-trade-off" class="level1">
+<h1>3. Bias–variance trade-off</h1>
+<section id="generalization-the-goal-of-machine-learning" class="level2">
+<h2 class="anchored" data-anchor-id="generalization-the-goal-of-machine-learning">Generalization: the goal of machine learning</h2>
+<p>A model that memorizes its training data can score 100% on it and still be useless.</p>
+<p>We do not care how well a model does on data it has seen. We care how well it does on data it has not. That target — performance on unseen data — is called <strong>generalization</strong>. The test set exists to estimate it: it simulates the future.</p>
+<p>This is why data is split into training and test sets before any model is fit, and why a score on training data is never by itself evidence that a model works. [CHECK — my inference from the slide; stated here as a consequence.]</p>
+</section>
+<section id="what-is-bias" class="level2">
+<h2 class="anchored" data-anchor-id="what-is-bias">What is bias?</h2>
+<p>In machine learning, bias is not a social or ethical term. It refers to error caused by incorrect or overly strong assumptions in the model — the part of the error that persists no matter how much data you collect.</p>
+<p>More formally, the error for one instance is the difference between the observed and predicted value:</p>
+<p><span class="math display">\[e_i = y_i - \hat{y}_i\]</span></p>
+<p>and the bias is the average error across all predictions:</p>
+<p><span class="math display">\[\text{Bias} = \text{mean}(e_i)\]</span></p>
+<p>A model is <strong>unbiased</strong> when that mean difference is always 0. Least squares regression is a regression model whose weights are estimated so that the bias is guaranteed to be 0.</p>
+<p>A model with high bias is too simple to capture the true patterns in the data. It consistently underperforms — this is <strong>underfitting</strong>. Predicting every ride’s price with a single constant is the extreme case. [CHECK — the reading that this prediction ignores the input entirely, and is therefore systematically wrong however much data you gather, is my elaboration of the slide’s example.]</p>
+<p>Bias may come from poor model fitting or violated model assumptions. It may also come from systematic errors in the data itself — underrepresenting a particular group, or failing to measure an important feature.</p>
+</section>
+<section id="what-is-variance" class="level2">
+<h2 class="anchored" data-anchor-id="what-is-variance">What is variance?</h2>
+<p>Variance measures how much predictions fluctuate across different subsets of the same dataset. Statistically, variance is the average squared difference between an observation and the mean; <strong>error variance</strong> is the variance of a model’s prediction errors.</p>
+<p>A model may perform very well on the training data, but if its predictions change drastically with every new sample, it has high variance. That is <strong>overfitting</strong> — the model is memorizing noise in the training set instead of learning general patterns. Your model gets all the answers right on one dataset and fails on the next.</p>
+<p>A good model has both low bias and low error variance, so its predicted values are consistently close to the observed values.</p>
+</section>
+<section id="the-biasvariance-trade-off" class="level2">
+<h2 class="anchored" data-anchor-id="the-biasvariance-trade-off">The bias–variance trade-off</h2>
+<p>Bias and variance pull against each other:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Model complexity</th>
+<th>Bias</th>
+<th>Variance</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Simple</td>
+<td>High</td>
+<td>Low</td>
+<td>Underfits — misses patterns, but is stable</td>
+</tr>
+<tr class="even">
+<td>Complex</td>
+<td>Low</td>
+<td>High</td>
+<td>Overfits — captures detail, but does not generalize</td>
+</tr>
+</tbody>
+</table>
+<p>The goal is the sweet spot: a model complex enough to capture the key relationships, but not so complex that it overreacts to noise.</p>
+<p>The archery analogy in the speaker notes is a good way to hold this in mind. Prediction is like trying to hit a bullseye:</p>
+<ul>
+<li><strong>Low bias, low error variance:</strong> consistently hits the bullseye — the good model.</li>
+<li><strong>Low bias, high error variance:</strong> occasionally hits the bullseye, but is inconsistent.</li>
+<li><strong>High bias, low error variance:</strong> consistently hits the same spot, just not the centre.</li>
+<li><strong>High bias, high error variance:</strong> inaccurate <em>and</em> inconsistent — the worst case.</li>
+</ul>
+<p>This is why we split data into training and test sets and watch performance carefully during tuning.</p>
+</section>
+<section id="training-vs.-test-accuracy" class="level2">
+<h2 class="anchored" data-anchor-id="training-vs.-test-accuracy">Training vs.&nbsp;test accuracy</h2>
+<p>Plotting accuracy against model complexity shows the trade-off directly: training accuracy rises monotonically, while test accuracy rises, peaks, then falls.</p>
+<p>The peak of the test curve is the sweet spot — enough model complexity to learn the underlying pattern in the dataset, but not so much that the model starts fitting noise. The widening gap between the two curves past that peak is the visible signature of overfitting. [CHECK — describing the widening gap as the signature of overfitting is my addition; the slide describes the two curves but does not name the gap.]</p>
+</section>
+<section id="knowledge-check-reading-fit-from-graphs" class="level2">
+<h2 class="anchored" data-anchor-id="knowledge-check-reading-fit-from-graphs">Knowledge check: reading fit from graphs</h2>
+<p>Given the three model graphs on the slides:</p>
+<ol type="1">
+<li>Which of the models has the greatest prediction variance?</li>
+<li>Which model is most likely to be underfitted?</li>
+</ol>
+<p>[CHECK — this paragraph on how to read the graphs is mine.] Read the shape of the fitted line against the data points. A line that stays far from most points is making a strong assumption the data does not support. A line that bends to pass through nearly every point has fit the noise as well as the signal. A line that follows the trend without chasing individual points is balanced.</p>
+<p>These visual cues are often more intuitive than the equations, and you will see them again in model diagnostics later in the course.</p>
+<p><em>Answers are worked through in class.</em></p>
+</section>
+</section>
+<section id="machine-learning-workflow" class="level1">
+<h1>4. Machine learning workflow</h1>
+<section id="the-six-steps" class="level2">
+<h2 class="anchored" data-anchor-id="the-six-steps">The six steps</h2>
+<p>A typical machine learning pipeline includes:</p>
+<ol type="1">
+<li><strong>Frame</strong> — what is <span class="math inline">\(x\)</span>? what is <span class="math inline">\(y\)</span>? what does success mean?</li>
+<li><strong>Get &amp; split data</strong> — hold some data back.</li>
+<li><strong>Preprocess</strong> — clean, encode, scale.</li>
+<li><strong>Train</strong> — fit a model to training data.</li>
+<li><strong>Evaluate</strong> — metrics on held-out data.</li>
+<li><strong>Interpret &amp; act</strong> — explain, decide, communicate.</li>
+</ol>
+<p>In scikit-learn terms: split the data with <code>train_test_split()</code> to create training and test sets; preprocess features by scaling, encoding, or imputing values; choose a model such as <code>LinearRegression</code> or <code>DecisionTreeClassifier</code>; fit it on the training data; evaluate on the test data using accuracy, mean squared error, or another appropriate metric; then tune and, if warranted, deploy.</p>
+<p>This structure is the foundation of everything in this course, and we will refer back to it repeatedly.</p>
+</section>
+<section id="scikit-learn" class="level2">
+<h2 class="anchored" data-anchor-id="scikit-learn">scikit-learn</h2>
+<p>scikit-learn is a popular Python library for building machine learning models. It is well documented and supports both supervised and unsupervised models, along with preprocessing, training, and evaluation.</p>
+<p>The central concept is the <strong>estimator</strong>: an object that fits a model or algorithm. For example, <code>LinearRegression()</code> trains a linear model. The snippet below assumes <code>X_train</code> and <code>y_train</code> already exist:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LinearRegression</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> LinearRegression().fit(X_train, y_train)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Input and output features are separated into two structures: <code>X</code> and <code>y</code>. Each estimator is initialized into the workspace, with any user-defined settings specified at initialization. Three methods then do the work:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Method</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>.fit()</code></td>
+<td>Estimates model parameters, such as regression weights, or applies an algorithm to the input and output features</td>
+</tr>
+<tr class="even">
+<td><code>.predict()</code></td>
+<td>Calculates predicted values for a set of inputs — either new values or the original inputs</td>
+</tr>
+<tr class="odd">
+<td><code>.score()</code></td>
+<td>Calculates a performance metric based on the type of machine learning task</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="practice-the-ml-workflow" class="level2">
+<h2 class="anchored" data-anchor-id="practice-the-ml-workflow">Practice: the ML workflow</h2>
+<p>The lab walks through the full workflow in scikit-learn, from loading data to evaluating a model. The goals are to build a supervised learning pipeline and to evaluate model performance — splitting data into train and test sets, fitting a model to the training data, and evaluating it on unseen data.</p>
+<p>To begin:</p>
+<ol type="1">
+<li>Download <code>modeling_the_ml_workflow.ipynb</code> from Canvas. [CHECK — the slide says <code>modeling_the_ml_workflow.ipynb</code> but its speaker notes say <code>modeling_workflow_in_scikit_learn.ipynb</code>; confirm which is correct.]</li>
+<li>Open <a href="https://colab.research.google.com" class="uri">https://colab.research.google.com</a>.</li>
+<li>Upload and run the notebook.</li>
+</ol>
+</section>
+</section>
+<section id="summary" class="level1">
+<h1>Summary</h1>
+<ul>
+<li>Machine learning learns patterns from data to make predictions or discover structure.</li>
+<li>The learning approach depends on the data, the labels, and the task.</li>
+<li>Successful models must perform well on unseen data, not just training data.</li>
+</ul>
+<p>You should now be able to define the core vocabulary — dataset, feature, label, model, algorithm, and the training/test split — and distinguish the main learning types: supervised (labeled data), unsupervised (unlabeled), semi- and self-supervised (a mix, or labels generated from the input itself), and reinforcement learning (reward-based). You should also be able to implement the workflow in scikit-learn and explain the bias–variance trade-off, recognising underfitting and overfitting.</p>
+</section>
+<section id="further-reading" class="level1">
+<h1>Further reading</h1>
+<ul>
+<li><a href="https://www.cambridge.org/highereducation/books/a-hands-on-introduction-to-machine-learning/3E57313A963BF7AF5C6330EB88ADAB2E#overview">A Hands-On Introduction to Machine Learning</a> (Chirag Shah, 2022) — read Chapter 1. It expands on many of today’s ideas with real-world case studies. If you need a Python refresher, skim Chapter 2, especially if you are new to Jupyter notebooks or pandas.</li>
+<li><a href="https://developers.google.com/machine-learning/crash-course">Google’s ML Crash Course</a> — beginner-friendly, with interactive exercises.</li>
+<li><a href="https://medium.com/swlh/machine-learning-how-to-prevent-overfitting-fdf759cc00a9">How to Prevent Overfitting</a> (Ken Hoffman, 2021) — a quick read that reinforces the bias–variance concepts.</li>
+</ul>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/adu-baffour\.github\.io\/machinelearning\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>COMP-SCI 465R · Adu Baffour, PhD · University of Missouri–Kansas City</p>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/adu-baffour/machinelearning/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

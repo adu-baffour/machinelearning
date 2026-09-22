@@ -1,0 +1,1907 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-html/tabby.min.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.10.18">
+
+  <meta name="author" content="Adu Baffour, PhD">
+  <title>Introduction to Machine Learning – Introduction</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/reveal.css">
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: 1.5em;}
+    div.column{flex: auto;}
+    @media screen {
+    div.columns{gap: min(4vw, 1.5em);}
+    div.column{overflow-x: auto;}
+    }
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-03ee58d93aa56ae2ee8298346d0b2a97.css">
+  <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+</head>
+<body class="quarto-light">
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide" data-background-image="../images/Introduction/image2.png" data-background-position="50% 42%" data-background-size="18%" class="quarto-title-block center">
+  <h1 class="title">Introduction</h1>
+  <p class="subtitle">How do machines learn?</p>
+
+<div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Adu Baffour, PhD
+</div>
+        <p class="quarto-title-affiliation">
+            CS465R / CS5565 - Intro to Machine Learning<br>University of Missouri-Kansas City<br>Division of Computing, Analytics, and Mathematics<br>School of Science and Engineering<br><a href="mailto:aabnxq@umkc.edu">aabnxq@umkc.edu</a>
+          </p>
+    </div>
+</div>
+
+</section>
+<section id="objectives" class="slide level2">
+<h2>Objectives</h2>
+<ul>
+<li>✅ Define core ML concepts and learning types</li>
+<li>✅ Identify features, targets, models, algorithms</li>
+<li>✅ Explain generalization and the bias–variance trade-off</li>
+<li>✅ Apply the ML workflow in scikit-learn</li>
+</ul>
+<aside class="notes">
+<p>Before we begin, here are our learning objectives for today’s topic. By the end of this introduction, you should be able to: Define core ML vocabulary — terms like dataset, feature, label, model, and algorithm. Understand and compare different types of machine learning — supervised, unsupervised, semi- and self-supervised, and reinforcement learning. Walk through a standard ML workflow using Python and scikit-learn. Explain the bias–variance tradeoff, which is fundamental to building generalizable models. And finally, discuss ethical concerns in machine learning and how to design responsible ML systems. Each of these objectives will align with a section of this lecture.</p>
+<p>FOR NOTES: By the end of this topic, you will be able to: ✅ Define core machine learning concepts and learning types. ✅ Identify features, targets, models, and algorithms. ✅ Explain generalization and bias–variance trade-offs. ✅ Apply the basic machine learning workflow using scikit-learn.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="outline" class="slide level2">
+<h2>Outline</h2>
+<ul>
+<li>Introduction to machine learning</li>
+<li>Features and models</li>
+<li>Bias-variance tradeoff</li>
+<li>Machine learning workflow</li>
+</ul>
+<aside class="notes">
+<p>Here’s how the topic is structured. We’ll start with an introduction to machine learning — what it is. Next, we’ll define features, models, and algorithms — these are the building blocks of any ML system. Then we’ll walk through a practical machine learning workflow using scikit-learn — from loading data to model evaluation. After that, we’ll dive into the bias–variance tradeoff — understanding why models can underfit or overfit. And we’ll wrap up by discussing machine learning ethics — an increasingly important topic in real-world AI deployment.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="lets-begin" class="slide level2">
+<h2>Let’s Begin</h2>
+<ul>
+<li>▶︎ Introduction to machine learning</li>
+<li>⏳ Features and models</li>
+<li>⏳ Bias-variance tradeoff</li>
+<li>⏳ Machine learning workflow</li>
+</ul>
+<aside class="notes">
+<p>Throughout the lecture, I’ll be checking in with this progress slide so you know where we are in the overall roadmap.</p>
+<p>Right now, we’re at the very beginning: Introduction to machine learning.</p>
+<p>We’ll build up from the fundamental question: What is machine learning and how does it work?</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="what-is-machine-learning" class="slide level2">
+<h2>What is Machine Learning?</h2>
+<ul>
+<li>Computers learn patterns from data — no rules written by hand</li>
+<li>🗂️ Input: historical data</li>
+<li>🔧 Process: learning algorithm</li>
+<li>🤖 Output: predictive model</li>
+</ul>
+
+<img data-src="../images/Introduction/image3.png" class="r-stretch"><p><a href="https://mpra.ub.uni-muenchen.de/116579/">Machine Learning algorithms, perspectives, and real-world application:</a> Empirical evidence from United States trade data (Sakshi Aggarwal, 2023)</p>
+<aside class="notes">
+<p>So, what exactly is machine learning?</p>
+<p>Machine learning is a subfield of artificial intelligence.</p>
+<p>It’s focused on building systems that learn patterns from data and make predictions — without being explicitly programmed.</p>
+<p>Let’s break that down: The input is historical data — think of spreadsheets, sensor data, images, or text. The process is a learning algorithm — this could be linear regression, decision trees, or a neural network. And the output is a predictive model — a trained function that can make future predictions based on new input data.</p>
+<p>Unlike traditional programming, where we write explicit rules, machine learning learns those rules from the data itself.</p>
+<p>That’s what makes it so powerful for automation and pattern recognition.</p>
+<p>Machine learning uses algorithms and models to make predictions and discover patterns in data.</p>
+<p>A model is a mathematical function for describing the relationship between inputs and outputs and making predictions.</p>
+<p>An algorithm is a procedure or set of decision rules used to carry out a machine learning task, such as making a prediction.</p>
+<p>Machine learning combines tools and theory from computer science, artificial intelligence, statistics, and mathematics to make predictions and apply knowledge to new data.</p>
+<p>ML – a subset of AI What’s in AI and not in ML? Areas of knowledge representation, constraint optimization, logical and probabilistic reasoning, and planning. AI is about getting systems to perform tasks that typically require human cognition and decision-making abilities.</p>
+<p>FOR NOTES: Machine learning is a subfield of artificial intelligence where computers learn patterns from data and make predictions without being explicitly programmed. 🗂️ Input: Historical data 🔧 Process: Learning algorithm 🤖 Output: Predictive model</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="ml-vs.-traditional-programming" class="slide level2">
+<h2>ML vs.&nbsp;Traditional Programming</h2>
+<ul>
+<li><strong>Traditional:</strong> Rules + Data → Computer → Answers
+<ul>
+<li>You write <code>if "FREE!!!" in subject: spam</code></li>
+</ul></li>
+<li><strong>Machine learning:</strong> Data + Answers → Computer → Rules
+<ul>
+<li>You give 10,000 labeled emails; the algorithm produces the rule: the model.</li>
+</ul></li>
+<li>📌 ML is the tool for problems where the rules are too complex, unknown, or constantly changing to write by hand.</li>
+</ul>
+<aside class="notes">
+<p>So, what exactly is machine learning?</p>
+<p>Machine learning is a subfield of artificial intelligence.</p>
+<p>It’s focused on building systems that learn patterns from data and make predictions — without being explicitly programmed.</p>
+<p>Let’s break that down: The input is historical data — think of spreadsheets, sensor data, images, or text. The process is a learning algorithm — this could be linear regression, decision trees, or a neural network. And the output is a predictive model — a trained function that can make future predictions based on new input data.</p>
+<p>Unlike traditional programming, where we write explicit rules, machine learning learns those rules from the data itself.</p>
+<p>That’s what makes it so powerful for automation and pattern recognition.</p>
+<p>Machine learning uses algorithms and models to make predictions and discover patterns in data.</p>
+<p>A model is a mathematical function for describing the relationship between inputs and outputs and making predictions.</p>
+<p>An algorithm is a procedure or set of decision rules used to carry out a machine learning task, such as making a prediction.</p>
+<p>Machine learning combines tools and theory from computer science, artificial intelligence, statistics, and mathematics to make predictions and apply knowledge to new data.</p>
+<p>ML – a subset of AI What’s in AI and not in ML? Areas of knowledge representation, constraint optimization, logical and probabilistic reasoning, and planning. AI is about getting systems to perform tasks that typically require human cognition and decision-making abilities.</p>
+<p>FOR NOTES: Traditional programming</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="where-machine-learning-fits-in-ai" class="slide level2">
+<h2>Where Machine Learning Fits in AI</h2>
+<ul>
+<li>Artificial Intelligence → <strong>Machine Learning (this course)</strong> → Deep Learning → LLMs</li>
+<li>ChatGPT is one member of the family.</li>
+<li>This course teaches the family: the concepts every member shares.</li>
+</ul>
+<aside class="notes">
+<p>Let’s talk about the concept of a model.</p>
+<p>In machine learning, a model is a mathematical function that takes input data and maps it to an output.</p>
+<p>It makes predictions based on patterns it has learned from the training data.</p>
+<p>For example, a linear model might take a feature like distance and use it to predict price, using the formula: y^=fθ(x)=θ0+θ1x = f_(x) = _0 + _1 xy^=fθ(x)=θ0+θ1x Here, xxx is the input feature, y<sup>y</sup> is the predicted output, and θrepresents the parameters — values the model learns during training.</p>
+<p>The code at the bottom shows how we create and train a model in Python using scikit-learn.</p>
+<p>This model learns to fit the best line through the data points — and then we can use it to make predictions on new data.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="what-is-a-model" class="slide level2">
+<h2>What is a Model?</h2>
+<p><span class="math display">\[\hat{y} = f_{\theta}(x)\]</span></p>
+<ul>
+<li>Linear example: <span class="math inline">\(f_{\theta}(x) = \theta_0 + \theta_1 x\)</span></li>
+<li><span class="math inline">\(x\)</span> input · <span class="math inline">\(\hat{y}\)</span> prediction · <span class="math inline">\(\theta\)</span> learned parameters</li>
+</ul>
+<aside class="notes">
+<p>Let’s talk about the concept of a model.</p>
+<p>In machine learning, a model is a mathematical function that takes input data and maps it to an output.</p>
+<p>It makes predictions based on patterns it has learned from the training data.</p>
+<p>For example, a linear model might take a feature like distance and use it to predict price, using the formula: y^=fθ(x)=θ0+θ1x = f_(x) = _0 + _1 xy^=fθ(x)=θ0+θ1x Here, xxx is the input feature, y<sup>y</sup> is the predicted output, and θrepresents the parameters — values the model learns during training.</p>
+<p>The code at the bottom shows how we create and train a model in Python using scikit-learn.</p>
+<p>This model learns to fit the best line through the data points — and then we can use it to make predictions on new data.</p>
+<p>FOR NOTES: A model is a mathematical function that maps input(s) to output(s) to make predictions: <span class="math inline">\(\hat{y} = f_{\theta}(x)\)</span> Example (linear model): <span class="math inline">\(f_{\theta}(x) = \theta_0 + \theta_1 x\)</span>, where <span class="math inline">\(x\)</span>: input feature <span class="math inline">\(\hat{y}\)</span>: predicted output <span class="math inline">\(\theta\)</span>: model parameters</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="what-is-an-algorithm" class="slide level2">
+<h2>What is an Algorithm?</h2>
+<p><span class="math display">\[\mathcal{A} : (\textit{data},\ \textit{hyperparameters}) \rightarrow f_{\theta^{*}}\]</span></p>
+<ul>
+<li>🗂️ Input: training data and hyperparameters</li>
+<li>🔧 Process: optimization rules</li>
+<li>🤖 Output: a trained model <span class="math inline">\(f_{\theta^{*}}\)</span></li>
+<li>Ex: gradient descent trains regression models</li>
+</ul>
+<aside class="notes">
+<p>Now, while the model is the function that makes predictions, the algorithm is what trains that model.</p>
+<p>Think of it like this: the model is the structure, and the algorithm is the recipe for filling in that structure with the right values.</p>
+<p>An algorithm takes: Input: training data and hyperparameters Processes: optimization steps, like gradient descent Output: a trained model with the best-fitting parameters</p>
+<p>In math terms, we can write this as: A(data,hyperparameters)→fθ∗(, ) f^*_(data,hyperparameters)→fθ∗</p>
+<p>For instance, SGDRegressor() in scikit-learn uses stochastic gradient descent to train a model. It updates the model’s weights gradually as it sees each data point. So again — the algorithm is the process, and the model is the result.</p>
+<p>FOR NOTES: An algorithm is a step-by-step procedure used to train a model on data. Examples: gradient descent algorithms are used to train regression models. It takes: 🔧 Processes: optimization rules</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="model-vs-algorithm" class="slide level2">
+<h2>Model vs Algorithm</h2>
+<ul>
+<li>🤖 Model: a mathematical function that makes predictions</li>
+<li>⚙️ Algorithm: a method that adjusts the model’s parameters using data</li>
+<li>📌 These terms are sometimes used interchangeably in casual conversation.</li>
+</ul>
+<aside class="notes">
+<p>Let’s pause and clarify this distinction:</p>
+<p>A model is the mathematical function that makes predictions. Once trained, it can be reused over and over to predict outcomes.</p>
+<p>An algorithm is the method used to train the model. It iteratively adjusts the model’s parameters to reduce error.</p>
+<p>This distinction is subtle but really important, especially when we start talking about training, optimization, and deployment.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="example-predicting-rideshare-price" class="slide level2">
+<h2>Example: Predicting Rideshare Price</h2>
+<p>Goal: Predict the price of a ride using input features.</p>
+
+<img data-src="../images/Introduction/image6.png" class="r-stretch"><p><a href="https://www.zybooks.com/catalog/machine-learning/">Machine Learning</a> (zyBooks, 2025)</p>
+<aside class="notes">
+<p>Let’s walk through a practical example of a machine learning system.</p>
+<p>Suppose we want to predict the price of a rideshare trip.</p>
+<p>Our input features might include: Distance Starting location Traffic conditions Time of day Vehicle type</p>
+<p>We feed these into a model, and it outputs the predicted price.</p>
+<p>This is a classic example of supervised learning — we’re using labeled training data where the correct price is already known, so the model can learn from it.</p>
+<p>Later, the model can predict the price for a new trip based on similar features.</p>
+<p>The price of a ride using a rideshare company like Uber or Lyft can be predicted with machine learning. Inputs like distance, starting location, traffic conditions, time, and vehicle type are recorded for each trip. Inputs are passed into a machine learning model, which uses an algorithm or statistical model to predict the price. The predicted price is the machine learning model’s output.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="what-is-a-dataset" class="slide level2">
+<h2>What is a Dataset?</h2>
+<ul>
+<li><strong>Features</strong> = columns — time, price, vehicle type</li>
+<li><strong>Instances</strong> = rows — one rideshare trip</li>
+</ul>
+<table class="caption-top" style="width:100%;">
+<colgroup>
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>distance</th>
+<th>cab_type</th>
+<th>time_stamp</th>
+<th>destination</th>
+<th>price</th>
+<th>surge_multiplier</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1.3</td>
+<td>Uber</td>
+<td>08:04.4</td>
+<td>Theatre District</td>
+<td>17.5</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>1.35</td>
+<td>Lyft</td>
+<td>22:57.4</td>
+<td>South Station</td>
+<td>7</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td>1.1</td>
+<td>Lyft</td>
+<td>15:09.6</td>
+<td>Financial District</td>
+<td>13.5</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+<p><a href="https://www.zybooks.com/catalog/machine-learning/">Machine Learning</a> (zyBooks, 2025)</p>
+<aside class="notes">
+<p>Now that we’ve talked about models and algorithms, let’s look at the data they learn from.</p>
+<p>A dataset is a structured collection of data that typically consists of features and instances.</p>
+<p>A feature is a measurable property — for example, the trip’s distance or price. These form the columns of the dataset.</p>
+<p>An instance is a single data point — for example, one rideshare trip. These are the rows of the dataset.</p>
+<p>When the data is organized in a table — like in a spreadsheet or a pandas dataframe — it’s called tabular data.</p>
+<p>This format is extremely common and will be the type we use for most of our examples.</p>
+<p>Dataframes store data in tabular format: Each row contains a single instance and each column contains a single feature. Features in the ride share dataframe include distance, cab type, time stamp, destination, price, and adjustment for high demand (surge multiplier). Each instance represents a single rideshare trip.</p>
+<p>FOR NOTES: A dataset is a structured collection of data, consisting of: Features (or variable): a measurable property (column), e.g., time, price, vehicle type Instances (or samples): a single data point (row), e.g., one rideshare trip</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="input-and-output-features" class="slide level2">
+<h2>Input and Output Features</h2>
+<ul>
+<li>Inputs (predictors, <span class="math inline">\(\mathbf{X}\)</span>): what you know</li>
+<li>Output (target, response, <span class="math inline">\(\mathbf{y}\)</span>): what you want to find out</li>
+<li>Ex: distance → model → price</li>
+</ul>
+
+<img data-src="../images/Introduction/image7.png" class="r-stretch"><p><a href="https://www.zybooks.com/catalog/machine-learning/">Machine Learning</a> (zyBooks, 2025)</p>
+<aside class="notes">
+<p>In machine learning, we divide features into inputs and outputs. Input features (also called predictors or explanatory variables) are the known information we feed into the model. The output feature (also called the target or response variable) is what we want the model to predict.</p>
+<p>In our rideshare example: Input: distance Output: price</p>
+<p>You can think of it like this: Inputs = what you know Output = what you want to find out</p>
+<p>Choosing the right input features is critical for building accurate models.</p>
+<p>FOR NOTES: Inputs (predictors, <span class="math inline">\(\mathbf{X}\)</span>): Variables used to make a prediction Output (target, response, <span class="math inline">\(\mathbf{y}\)</span>): The value we want the model to predict Task: Predict ride price based on distance Input feature: distance → model → output feature: price 📌 Think of inputs as “what you know”, and outputs as “what you want to find out.”</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="knowledge-check" class="slide level2">
+<h2>Knowledge Check</h2>
+<ul>
+<li>Goal: predict which nurses are likely to quit</li>
+<li>Which feature is the target?</li>
+<li>Which are the inputs?</li>
+</ul>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>Employee ID</th>
+<th>Age</th>
+<th>Quit?</th>
+<th>Department</th>
+<th>Daily rate</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1415194</td>
+<td>34</td>
+<td>No</td>
+<td>Maternity</td>
+<td>404</td>
+</tr>
+<tr class="even">
+<td>1620383</td>
+<td>30</td>
+<td>No</td>
+<td>Maternity</td>
+<td>1312</td>
+</tr>
+<tr class="odd">
+<td>1533398</td>
+<td>25</td>
+<td>Yes</td>
+<td>Cardiology</td>
+<td>383</td>
+</tr>
+<tr class="even">
+<td>1479961</td>
+<td>35</td>
+<td>No</td>
+<td>Maternity</td>
+<td>982</td>
+</tr>
+<tr class="odd">
+<td>1570909</td>
+<td>38</td>
+<td>No</td>
+<td>Cardiology</td>
+<td>508</td>
+</tr>
+</tbody>
+</table>
+<aside class="notes">
+<p>Let’s look at another scenario. Suppose a hospital wants to predict which nurses are likely to quit. They’ve collected data with the following features: Employee ID Age Whether the nurse quit Department Daily rate</p>
+<p>So here’s your task: The output feature is: Quit? — that’s what we’re trying to predict. The input features include: Age, Department, and Daily rate.</p>
+<p>Be sure to ignore Employee ID — it’s just an identifier, not a meaningful predictor. A good rule of thumb is: always ask, Is this feature informative, or just a label?</p>
+<p>Hospitals are interested in increasing employee retention, especially for nurses. The following table contains the employee IDs, age, whether or not a nurse recently quit, department, and daily pay rate for a sample of nurses at a large hospital.</p>
+<p>Input and output features Machine learning models use input features to predict the value of an output feature.</p>
+<p>Input features are the model’s inputs, or explanatory features.</p>
+<p>Output features are the model’s target feature, or response feature. Input and output features are selected based on the machine learning task, or research question.</p>
+<p>FOR NOTES: What is the output feature (target)? What is/are the input feature(s)? Ignore Employee ID — it’s an identifier, not a predictive variable. ⚠️ Always ask: “Is this feature informative or just a label?” Goal: Predict which nurses are likely to quit. ⚠️ Always ask: “Is this feature informative or just a label?”</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="types-of-machine-learning" class="slide level2">
+<h2>Types of Machine Learning</h2>
+<ul>
+<li><strong>Supervised</strong> — data has labels → Regression (predict a number) · Classification (predict a category)</li>
+<li><strong>Unsupervised</strong> — no labels, find structure → Clustering (group similar rows) · Dimension reduction (compress columns)</li>
+<li><strong>Reinforcement</strong> — learn from rewards</li>
+</ul>
+<aside class="notes">
+<p>Let’s now take a step back and look at the big picture of machine learning types.</p>
+<p>There are several learning paradigms, and choosing the right one depends on your task and the type of data you have.</p>
+<p>First, we have Supervised Learning. This is when we train the model using labeled data — that is, we already know the correct answers. We use it for tasks like regression and classification.</p>
+<p>Next is Unsupervised Learning, where we don’t have labeled outcomes. The model’s goal is to find patterns or structure — for example, clustering similar items together or reducing dimensionality.</p>
+<p>Then there’s Reinforcement Learning, which is different — here, the model learns by interacting with an environment and receiving feedback in the form of rewards or penalties. This is used in areas like robotics or game-playing agents.</p>
+<p>Later, we’ll also cover semi-supervised and self-supervised learning — two increasingly important techniques in modern ML.</p>
+<p>The type of machine learning used depends on the machine learning task. Predicting the price of a rideshare trip based on distance and time is a supervised learning task, since the output feature (price) is known. Categorizing customers as “commuters”, “sports fans”, or “tourists” is unsupervised learning, since these categories are not an observed feature. Adjusting the price of a rideshare after a customer has declined is reinforcement learning. The prediction is updated based on the customer’s decision.</p>
+<p>FOR NOTES: no labels: find structure</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="supervised-learning" class="slide level2">
+<h2>Supervised Learning</h2>
+<ul>
+<li>Learns from labeled data: inputs <strong>and</strong> correct outputs</li>
+<li><strong>Regression</strong> → numbers, e.g., ride price $17.32</li>
+<li><strong>Classification</strong> → categories, e.g., cat vs.&nbsp;dog</li>
+<li>📌 Numeric output = regression; categorical = classification</li>
+</ul>
+
+<img data-src="../images/Introduction/image9.png" class="r-stretch"><p><a href="https://botpenguin.com/glossary/supervised-learning">Supervised Learning: Types and Techniques</a> (Bot Pengiun, 2024)</p>
+<aside class="notes">
+<p>Let’s zoom in on supervised learning, which is the most common ML approach.</p>
+<p>In supervised learning, we give the model a set of input features and the correct output — it learns the relationship between the two.</p>
+<p>There are two major categories: Regression: This is when we predict numeric values. For example, predicting the price of a ride: $17.32. Classification: This is when we predict categories or labels. For example, classifying an animal as a cat or a dog.</p>
+<p>A quick way to distinguish the two: If the output is a number, it’s regression. If the output is a label or class, it’s classification.</p>
+<p>We’ll use supervised learning in many of our hands-on examples this semester.</p>
+<p>FOR NOTES: Models learn from labeled data — we give them both inputs and correct outputs. Regression: Predict numbers Ex: Predict ride price (e.g., $17.32) Classification: Predict categories Ex: Predict animal type: Cat vs.&nbsp;Dog 📌 If the output is numeric, it’s regression. If it’s categorical, it’s classification.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="unsupervised-learning" class="slide level2">
+<h2>Unsupervised Learning</h2>
+<ul>
+<li>Finds structure in unlabeled data — no output labels</li>
+<li><strong>Clustering:</strong> commuters, sports fans, tourists</li>
+<li><strong>Outlier detection:</strong> rides with abnormally high prices</li>
+<li><strong>Dimensionality reduction:</strong> transforming data, e.g., PCA</li>
+</ul>
+
+<img data-src="../images/Introduction/image10.png" class="r-stretch"><p><a href="https://www.zybooks.com/catalog/machine-learning/">Machine Learning</a> (zyBooks, 2025)</p>
+<aside class="notes">
+<p>Next is unsupervised learning — and this works without labeled data.</p>
+<p>The model is given a dataset and asked to discover structure or relationships within it.</p>
+<p>Common unsupervised learning tasks include: Clustering: Grouping instances into meaningful clusters — for example, rideshare customers who behave similarly. Outlier Detection: Identifying unusual or suspicious instances — like a ride that’s far too expensive. Dimensionality Reduction: Transforming a dataset with many features into fewer ones — for example, combining time and distance into a ‘trip intensity’ metric.</p>
+<p>This is especially useful for exploratory data analysis or when labels are unavailable.</p>
+<p>FOR NOTES: Models find structure in unlabeled data — no output labels provided. Clustering: Group rides into “commuters”, “sports fans”, “tourists” Outlier Detection: Find suspicious rides with abnormally high prices Dimensionality Reduction: Transforming data (e.g., PCA)</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="reinforcement-learning" class="slide level2">
+<h2>Reinforcement Learning</h2>
+<ul>
+<li>Learns by trial and error: take actions, receive feedback</li>
+<li><strong>Agent:</strong> the decision-maker</li>
+<li><strong>Environment:</strong> where it operates</li>
+<li><strong>Reward:</strong> feedback after an action</li>
+<li>Ex: a self-driving car earns rewards for staying in its lane</li>
+</ul>
+<p><img data-src="../images/Introduction/image11.png"></p>
+<p><img data-src="../images/Introduction/image12.png"></p>
+<ul>
+<li><a href="https://www.kdnuggets.com/2023/07/reinforcement-learning-teaching-computers-make-optimal-decisions.html">Reinforcement Learning: Teaching Computers to Make Optimal Decisions</a> (Bala Priya C, 2023)</li>
+<li><a href="https://www.oreilly.com/library/view/hands-on-machine-learning/9781492032632/">Hands-On Machine Learning with Scikit-Learn, Keras, and TensorFlow</a> (Aurélien Géron, 2019)</li>
+</ul>
+<aside class="notes">
+<p>Now let’s look at reinforcement learning, which is different from the others.</p>
+<p>In reinforcement learning, a model — called an agent — interacts with an environment, takes actions, and learns from rewards or penalties it receives.</p>
+<p>Think of a self-driving car learning to stay in its lane. It receives positive feedback (rewards) when it does well — like staying centered. It receives negative feedback (penalties) when it makes mistakes — like crossing a lane.</p>
+<p>Key components: The agent makes decisions The environment provides feedback The reward is the signal used to improve over time</p>
+<p>This type of learning is often used in robotics, game AI, and recommendation systems.</p>
+<p>FOR NOTES: Models learn by trial and error — they take actions and receive feedback. Ex: A self-driving car earns rewards for staying in its lane Key terms: Agent: The decision-maker Environment: Where it operates Reward: Feedback after an action</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="semi-supervised-learning" class="slide level2">
+<h2>Semi-Supervised Learning</h2>
+<ul>
+<li>Small labeled set + large unlabeled pool</li>
+<li>Ex: 100 rides priced, 10,000 not</li>
+</ul>
+
+<img data-src="../images/Introduction/image13.jpeg" class="r-stretch"><p><a href="https://maddevs.io/blog/semi-supervised-learning-explained/">Semi-Supervised Learning Explained: Techniques and Real-World Applications</a> (Roman Panarin, 2024)</p>
+<aside class="notes">
+<p>Now we get into more nuanced learning strategies — starting with semi-supervised learning.</p>
+<p>This approach uses a small amount of labeled data and a large amount of unlabeled data.</p>
+<p>Why do this? Because labeling data can be expensive and time-consuming, but there’s usually lots of unlabeled data available.</p>
+<p>Here’s an example: Suppose you have 100 ride records with labeled prices and 10,000 rides without prices. You train your model on the small labeled set, and then it begins to generalize by learning from the larger unlabeled set.</p>
+<p>Semi-supervised learning is widely used in domains like medical imaging and natural language processing, where labeled data is rare but unlabeled data is abundant</p>
+<p>Since labeling data is usually time-consuming and costly, you will often have plenty of unlabeled instances, and few labeled instances.</p>
+<p>Some algorithms can deal with data that’s partially labeled.</p>
+<p>FOR NOTES: Combines a small amount of labeled data with a large pool of unlabeled data. Ex: Only 100 images of rides have prices labeled, but 10,000 don’t. The model starts with labeled data, then generalizes by learning from the rest. Ex: Only 100 images of rides have prices labeled, but 10,000 don’t. The model starts with labeled data, then generalizes by learning from the rest.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="self-supervised-learning" class="slide level2">
+<h2>Self-Supervised Learning</h2>
+<ul>
+<li>Creates its own labels from unlabeled data</li>
+<li>📘 NLP: mask a word, train the model to guess it</li>
+<li>📷 Vision: predict the missing part of an image</li>
+</ul>
+<p><img data-src="../images/Introduction/image14.png"></p>
+<p><img data-src="../images/Introduction/image15.png"></p>
+<ul>
+<li><a href="https://www.oreilly.com/library/view/hands-on-machine-learning/9781492032632/">Hands-On Machine Learning with Scikit-Learn, Keras, and TensorFlow</a> (Aurélien Géron, 2019)</li>
+<li><a href="https://amitness.com/posts/self-supervised-learning-nlp">Self Supervised Representation Learning in NLP</a> (Amit Chaudhary, 2020)</li>
+</ul>
+<aside class="notes">
+<p>Next, we have self-supervised learning, which is one of the most exciting developments in modern machine learning.</p>
+<p>In self-supervised learning, the model is trained without any human-labeled data — instead, it generates its own labels from the input data.</p>
+<p>For example, in natural language processing: You take a sentence and mask a word: ‘The cab arrived at the ___.’ The model learns to predict the missing word — like ‘airport’ — using the surrounding context.</p>
+<p>In computer vision, you might cut out part of an image and ask the model to predict what’s missing.</p>
+<p>Self-supervised learning is behind the success of large language models like ChatGPT, BERT, and DALL·E.</p>
+<p>It’s incredibly powerful because it lets us learn from vast amounts of raw data, without manual annotation.</p>
+<p>FOR NOTES: Learns from unlabeled data by creating its own labels 📘 In NLP, mask a word in a sentence and train the model to guess it: 📷 In vision: Train a model to predict the missing part of an image</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="knowledge-check-1" class="slide level2">
+<h2>Knowledge Check</h2>
+<p>Match each task to a learning type:</p>
+<ul>
+<li>Chemotherapy dosage from a patient’s response</li>
+<li>Predicting whether a nurse is likely to quit</li>
+<li>Grouping patients from EHRs, no outcome labels</li>
+<li>Pretraining on clinical notes by predicting masked words</li>
+<li>100 labeled X-rays + 10,000 unlabeled</li>
+</ul>
+<aside class="notes">
+<p>Let’s solidify what we just learned with a quick matching exercise.</p>
+<p>Match each machine learning task to the correct learning type: 1. Prescribing a new chemotherapy drug dosage based on a patient’s response → This is Reinforcement Learning. The model is learning by trial and feedback. 2. Predicting whether a nurse is likely to quit → This is Supervised Learning. We’re training on historical data with labels. 3. Identifying high-risk patients based on EHRs → This is Unsupervised Learning. No labels, just clustering based on feature patterns.</p>
+<p>These distinctions are really important when designing a machine learning solution — you have to match your data and your problem to the right learning paradigm.</p>
+<p>1: Learn from outcomes and adjust (reward-based) 2: Predict yes/no from labeled history 3: No labels — group or score based on similarity</p>
+<p>FOR NOTES: Match the machine learning task with the best type of machine learning: supervised, unsupervised, semi-supervised, self-supervised, or reinforcement learning. Prescribing a new chemotherapy drug dosage based on a patient’s response to earlier treatment. Predicting whether a nurse is likely to quit. Grouping patients with similar clinical profiles from EHRs, with no outcome labels Pretraining a model on clinical notes by predicting masked words Training a diagnosis model with 100 labeled X-rays and 10,000 unlabeled ones</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="where-are-we-now" class="slide level2">
+<h2>Where Are We Now?</h2>
+<ul>
+<li>✅ Introduction to machine learning</li>
+<li>▶︎ Features and model</li>
+<li>⏳ Bias-variance tradeoff</li>
+<li>⏳ Machine learning workflow</li>
+</ul>
+<aside class="notes">
+<p>Let’s pause here for a moment to see where we are in the lecture.</p>
+<p>So far, we’ve: Introduced the basic idea of machine learning Talked about features, models, and algorithms Walked through the major types of machine learning: supervised, unsupervised, reinforcement, and hybrid approaches</p>
+<p>Next up, we’ll look at how to work with different types of features and start preparing data for model building. This is a good time to take stock and ask: Are there any concepts you’d like me to revisit?</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="types-of-features" class="slide level2">
+<h2>Types of Features</h2>
+<ul>
+<li><strong>Categorical:</strong> no numeric meaning — “Yes”/“No”, customer type</li>
+<li><strong>Numerical:</strong> measurable quantities — age, income, amount</li>
+<li>📌 Some numeric-looking values (e.g., ZIP code) might be categorical.</li>
+</ul>
+<table class="caption-top" style="width:100%;">
+<colgroup>
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>distance</th>
+<th>cab_type</th>
+<th>time_stamp</th>
+<th>destination</th>
+<th>price</th>
+<th>surge_multiplier</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1.3</td>
+<td>Uber</td>
+<td>08:04.4</td>
+<td>Theatre District</td>
+<td>17.5</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>1.35</td>
+<td>Lyft</td>
+<td>22:57.4</td>
+<td>South Station</td>
+<td>7</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+<p><a href="https://www.zybooks.com/catalog/machine-learning/">Machine Learning</a> (zyBooks, 2025)</p>
+<aside class="notes">
+<p>Now let’s look at feature types, which are incredibly important in machine learning.</p>
+<p>Features generally fall into two categories: Categorical Features: These are variables that represent categories or groups. They may be strings like ‘Regular’ or ‘New’, or numbers with no inherent order — like ZIP codes. Example: Yes/No values, Customer type</p>
+<p>Numerical Features: These are measurable values where arithmetic operations make sense. Example: Age, income, transaction amount</p>
+<p>One important note: just because a feature is stored as a number doesn’t mean it’s numerical in a mathematical sense. For example, ZIP codes are typically treated as categorical, because there’s no real arithmetic relationship between them. Knowing which features are which affects how we process and encode them.</p>
+<p>Feature types Features in a dataset may be categorical or numerical. A categorical feature has non-numerical values, or numerical values without mathematical meaning. Ex: Yes/no, address, type of customer (regular, occasional, new). A numerical feature has numerical values with mathematical meaning. Ex: Amount spent on a transaction, square footage of a house. The actual values in a dataframe may not be enough to determine a feature’s type—context matters. Ex: Phone numbers are numerical, but mathematical operations on phone numbers have no meaning. Thus, phone numbers are categorical features.</p>
+<p>Features in the rideshare dataframe can be classified as categorical or numerical. Categorical features have non-numerical values, such as cab type and destination. Numerical features have numerical values with meaning, such as distance, price, and surge multiplier. Time stamp is a numerical feature, since mathematical operations on time have meaning. Ex: 2018-12-01 is two days after 2018-11-29.</p>
+<p>FOR NOTES: categorical / numerical (column labels on the source table) Categorical: Non-numeric or no inherent order – e.g., “Yes”/ “No”, Customer Type (“Regular”, “New”) Numerical: Measurable quantities with mathematical meaning – e.g., Age, Income, Transaction amount Categorical: Non-numeric or no inherent order – e.g., “Yes”/ “No”, Customer Type (“Regular”, “New”)</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="exploratory-data-analysis" class="slide level2">
+<h2>Exploratory Data Analysis</h2>
+<ul>
+<li>Explore patterns with graphs and summary statistics</li>
+<li>Distributions · correlations · outliers</li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a aria-label="1"></a>rides[<span class="st">'distance'</span>].hist()</span>
+<span id="cb1-2"><a aria-label="2"></a>rides.plot.scatter(<span class="st">'distance'</span>, <span class="st">'price'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ul>
+<li>💡 EDA shapes feature selection and preprocessing</li>
+</ul>
+<p><img data-src="../images/Introduction/image16.png"></p>
+<p><img data-src="../images/Introduction/image17.png"></p>
+<p><a href="https://www.zybooks.com/catalog/machine-learning/">Machine Learning</a> (zyBooks, 2025)</p>
+<aside class="notes">
+<p>Before we train any model, we must explore the data — and that’s where Exploratory Data Analysis, or EDA, comes in.</p>
+<p>EDA helps us: Visualize distributions of data Detect patterns and correlations Spot missing values or outliers</p>
+<p>Here are a couple of examples: A histogram like rides[distance’].hist() lets you see the distribution of prices. A scatter plot like rides.plot.scatter(‘distance’, ‘price’) helps reveal relationships between two variables.</p>
+<p>EDA is both an art and a science. The better you know your data, the better your models will be. This step often reveals issues — like skewed distributions or missing values — that must be addressed before modeling.</p>
+<p>Exploratory data analysis is the process of exploring data via plots and descriptive statistics to identify potential relationships and patterns.</p>
+<p>Two popular Python libraries for plotting data are matplotlib and seaborn. matplotlib is a library for creating static, dynamic, and interactive plots. seaborn is a high-level library for creating plots that work especially well with dataframes.</p>
+<p>FOR NOTES: Use graphs and summary stats to explore patterns in data Common EDA tasks: Examine distributions, Visualize correlations, Detect outliers 💡 EDA helps shape feature selection and preprocessing strategies.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="classification-models" class="slide level2">
+<h2>Classification Models</h2>
+<ul>
+<li>Predicts <strong>categories</strong> from input features</li>
+<li>Output: discrete class labels — Yes / No</li>
+<li>Ex: accept or decline an offer</li>
+<li>Models: logistic regression, naïve Bayes, k-NN, decision trees, SVM, neural nets</li>
+</ul>
+
+<img data-src="../images/Introduction/image18.png" class="r-stretch"><p><a href="https://365datascience.com/tutorials/machine-learning-tutorials/decision-trees/">Introduction to Decision Trees: Why Should You Use Them?</a> (The 365 Team, 2024)</p>
+<aside class="notes">
+<p>Let’s now shift into different types of models — starting with classification models.</p>
+<p>Classification models are used when the output we want to predict is a category or label.</p>
+<p>Here are a few examples: Logistic Regression: A linear model used for binary classification Naïve Bayes: Based on probability and Bayes’ theorem Decision Trees: Tree-like structures that split the data based on feature values</p>
+<p>Example use case: We might want to predict whether a user will accept or decline an offer — so the model outputs a class: Yes or No. The key thing to remember is: classification problems deal with discrete outputs.</p>
+<p>Classification models are supervised machine learning models that classify instances into a predicted level, or class, of a categorical output feature based on the input features.</p>
+<p>Classification models may predict the class directly or the probability an instance belongs to a given class. In the probability case, predicted probabilities are compared against a threshold value to produce a class prediction.</p>
+<p>In classification, input features may be categorical or numerical, but output features must be categorical.</p>
+<p>FOR NOTES: Predict categories or labels based on input features Examples: Logistic Regression, Naïve Bayes, k-Nearest Neighbors, Decision Trees, Support Vector Machines, Neural Networks Example use case: Predict whether to accept (Yes) or decline (No) an offer Output: discrete class labels – Yes and No</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="regression-models" class="slide level2">
+<h2>Regression Models</h2>
+<ul>
+<li>Predicts <strong>continuous numbers</strong></li>
+<li>Output: a real value, e.g., $70,065</li>
+<li>Ex: predict the salary of an offer</li>
+<li>Models: linear regression, regression trees, k-NN regression</li>
+</ul>
+
+<img data-src="../images/Introduction/image19.png" class="r-stretch"><p><a href="https://medium.com/@yash_kulkarni/simple-linear-regression-model-to-predict-the-salary-based-on-years-of-experience-9ed93a02c5ef">Simple Linear Regression model to predict the Salary based on Years of Experience</a> (Yash Kulkarni, 2023)</p>
+<aside class="notes">
+<p>Now contrast classification with regression models.</p>
+<p>Regression is used when the output is a continuous numeric value.</p>
+<p>For example: Predicting someone’s salary based on experience Estimating the price of a rideshare trip</p>
+<p>Some common regression models: Linear Regression: Fits a straight line through the data Regression Trees: A variant of decision trees tailored for numeric outputs</p>
+<p>The important distinction is that regression models predict numbers, not categories.</p>
+<p>Later, we’ll walk through coding examples of both classification and regression using scikit-learn.”</p>
+<p>Regression models are supervised learning models that predict the value of a numerical output feature based on the input features.</p>
+<p>Ex: Simple linear regression is a regression model, since the predicted values are numerical.</p>
+<p>Like classification models, categorical or numerical input features may be used in regression.</p>
+<p>However, the output feature for a regression model should always be numerical.</p>
+<p>FOR NOTES: Predict continuous numerical values Examples: Linear Regression, Regression Trees, k-NN regression Example use case: Predict the salary of an offer Output: real-valued number (e.g., $70,065)</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="unsupervised-models-clustering" class="slide level2">
+<h2>Unsupervised Models – Clustering</h2>
+<ul>
+<li>Groups similar observations — no labels</li>
+<li>Ex: K-Means, hierarchical clustering</li>
+<li>Use: customer segmentation, behavior profiling</li>
+<li>Output: cluster assignments (Cluster 1, Cluster 2)</li>
+</ul>
+
+<img data-src="../images/Introduction/image20.png" class="r-stretch"><p><a href="https://developers.google.com/machine-learning/clustering/overview">What is clustering</a> (Google Machine Learning Education, 2025)</p>
+<aside class="notes">
+<p>Let’s revisit unsupervised models, starting with clustering.</p>
+<p>Clustering algorithms group similar instances together, without any labels.</p>
+<p>A popular method is K-Means Clustering: It assigns each instance to one of K groups based on feature similarity. Another is Hierarchical Clustering, which builds a tree-like structure of nested clusters.</p>
+<p>Use cases include: Customer segmentation: e.g., grouping rideshare users into commuters, tourists, sports fans Behavior profiling: Identifying usage patterns or lifestyle segments</p>
+<p>The output here is not a predicted value but a cluster label — like Group 1, Group 2, and so on.</p>
+<p>FOR NOTES: Group similar observations together without labeled data Examples: K-Means clustering Example use cases: Customer segmentation and behavior profiling Output: Cluster assignments (e.g., Cluster 1, Cluster 2)</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="unsupervised-models-outlier-detection" class="slide level2">
+<h2>Unsupervised Models – Outlier Detection</h2>
+<ul>
+<li>Finds rare instances that break the pattern</li>
+<li>Ex: DBSCAN</li>
+<li>Use: fraud detection, error checking</li>
+<li>No labels required — anomalies come from the data itself</li>
+</ul>
+
+<img data-src="../images/Introduction/image21.png" class="r-stretch"><p><a href="https://www.scaler.com/topics/data-mining-tutorial/outlier-analysis-in-data-mining/">Outlier Analysis in Data Mining</a> (Scaler, 2023)</p>
+<aside class="notes">
+<p>Another important type of unsupervised learning is outlier detection.</p>
+<p>These models identify instances that are unusual or rare — meaning they don’t fit the general pattern of the data.</p>
+<p>One useful algorithm here is DBSCAN, which can detect outliers as a byproduct of clustering.</p>
+<p>Use cases include: Fraud detection: Spotting abnormal transactions Data cleaning: Identifying potential entry errors or system glitches</p>
+<p>These models don’t require labeled data — they work by comparing each point’s behavior to others in the dataset. It’s a very practical technique, especially when working with real-world, noisy datasets.”</p>
+<p>FOR NOTES: Identify rare or unusual instances that don’t fit the general pattern Example: Example use cases: Error checking No labels required — algorithm finds anomalies from data itself</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="unsupervised-models-dimension-reduction" class="slide level2">
+<h2>Unsupervised Models – Dimension Reduction</h2>
+<ul>
+<li>Simplifies high-dimensional data, keeps the structure</li>
+<li>Ex: PCA — combine distance &amp; time into features capturing variance</li>
+<li>Use: compression, noise reduction, 2D visualization</li>
+</ul>
+
+<img data-src="../images/Introduction/image22.jpeg" class="r-stretch"><p><a href="https://www.sc-best-practices.org/preprocessing_visualization/dimensionality_reduction.html">Dimension Reduction</a> (Anna Schaar, 2023)</p>
+<aside class="notes">
+<p>The third major category of unsupervised models we’ll look at is dimensionality reduction.</p>
+<p>This technique is used to transform high-dimensional datasets into simple versions, while preserving as much useful information as possible.</p>
+<p>The most common method is PCA — Principal Component Analysis.</p>
+<p>PCA transforms the original features into a smaller number of new, uncorrelated variables called principal components.</p>
+<p>Think of it like combining features that are strongly related into a single, more informative feature.</p>
+<p>Example use cases include: Data compression: Reducing storage or transmission requirements Noise reduction: Removing irrelevant or redundant features Visualization: Reducing data to 2D or 3D so it can be plotted</p>
+<p>Dimensionality reduction is often a crucial step before clustering or classification when your dataset has dozens or hundreds of features.</p>
+<p>FOR NOTES: Simplify high-dimensional data while keeping important structure Example: Principal Component Analysis (PCA) Combine features (e.g., distance &amp; time) into new features capturing variance Example use cases: Visualization (e.g., reduce to 2D for plotting)</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="knowledge-check-2" class="slide level2">
+<h2>Knowledge Check</h2>
+<p>Match each task to: dimension reduction, outlier detection, or clustering.</p>
+<ul>
+<li>Group customers as “frequent user”, “sports fan”, “commuter”</li>
+<li>Identify customers with unusual behavior</li>
+<li>Combine trip distance and rating into a quality measure</li>
+</ul>
+<aside class="notes">
+<p>Let’s check your understanding of unsupervised models with a quick match-the-task activity. 1. Group rideshare customers into categories like ‘frequent user’, ‘sports fan’, or ‘commuter’ — this is clustering. 2. Identify customers with unusual behavior — this is outlier detection. 3. Combine trip distance and rating into a single ‘quality’ score — that’s dimensionality reduction.</p>
+<p>These distinctions matter because even though all of these techniques use unlabeled data, they serve very different purposes.</p>
+<p>Knowing which one to use depends on your goal: discover patterns, find anomalies, or simplify data.</p>
+<p>FOR NOTES: Match the machine learning task to the type of unsupervised model: Dimension reduction, outlier detection, and clustering. Group rideshare customers into categories such as “frequent user”, “sports fan”, and “commuter”. Identify customers with unusual behavior. Combine trip distance and rating into a quality measure.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="where-are-we-now-1" class="slide level2">
+<h2>Where Are We Now?</h2>
+<ul>
+<li>✅ Introduction to machine learning</li>
+<li>✅ Features and model</li>
+<li>▶︎ Bias-variance tradeoff</li>
+<li>⏳ Machine learning workflow</li>
+</ul>
+<aside class="notes">
+<p>We’ve now wrapped up our overview of learning paradigms and model types, both supervised and unsupervised. Just to recap, you should now understand the difference between: Regression vs.&nbsp;Classification Clustering vs.&nbsp;Outlier Detection And how dimensionality reduction fits into the process</p>
+<p>Up next, we’ll look at the machine learning workflow — that is, how we build a model from raw data using Python and scikit-learn.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="generalization-the-goal-of-machine-learning" class="slide level2">
+<h2>Generalization: The Goal of Machine Learning</h2>
+<ul>
+<li>A model that memorizes its training data can score 100% on it and still be useless</li>
+<li>What matters is performance on data it has <strong>not</strong> seen</li>
+<li>That target is <strong>generalization</strong></li>
+<li>The test set estimates it: it simulates the future</li>
+</ul>
+
+<img data-src="../images/Introduction/image23.jpeg" class="r-stretch"><aside class="notes">
+<p>FOR NOTES: A model that memorizes its training data can score 100% on it and still be useless. We do not care how well a model does on data it has seen. We care how well it does on data it hasn’t. That target — performance on unseen data — is called generalization. The test set exists to estimate it: it simulates the future.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="what-is-bias-in-ml" class="slide level2">
+<h2>What is Bias in ML?</h2>
+<ul>
+<li>Systematic error from overly strong assumptions</li>
+<li>Persists no matter how much data you collect</li>
+<li>High bias → too simple → <strong>underfits</strong></li>
+<li>Ex: predicting every ride’s price with one constant</li>
+</ul>
+
+<img data-src="../images/Introduction/image24.png" class="r-stretch"><p><a href="https://support.monolithai.com/support/solutions/articles/80000953338-predicted-vs-actual">Predicted vs.&nbsp;Actual</a> (Monolith AI, 2023)</p>
+<aside class="notes">
+<p>Let’s start with bias.</p>
+<p>In machine learning, bias is not a social or ethical term — it refers to error caused by incorrect assumptions in the model.</p>
+<p>More formally: The error for one instance is: ei=yi−y^ie_i = y_i - _iei=yi−y^i</p>
+<p>The bias is the average error across all predictions: Bias=mean(ei) = (e_i)Bias=mean(ei)</p>
+<p>A model with high bias is too simple to capture the true patterns in the data. It consistently underperforms — this is called underfitting. Example: using a constant value to predict ride prices would lead to large, systematic errors — regardless of the input.</p>
+<p>A model without bias is unbiased — the mean difference between the predicted value and observed value is always 0.</p>
+<p>Ex: Least squares regression is a regression model in which the weights are estimated such that the bias is guaranteed to be 0.</p>
+<p>Bias may result from poor model fitting or violated model assumptions.</p>
+<p>Underlying systematic errors in the data, such as underrepresenting a particular group or failing to measure an important feature, may also result in bias.</p>
+<p>FOR NOTES: Bias is a systematic error from overly strong assumptions The part of the error that persists no matter how much data you collect High bias → model too simple → underfits. Example: predicting every ride’s price with a single constant.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="what-is-variance-in-ml" class="slide level2">
+<h2>What is Variance in ML?</h2>
+<ul>
+<li>How much predictions fluctuate across subsets of the same data</li>
+<li>High variance → too complex → <strong>overfits</strong></li>
+<li>Right on one dataset, wrong on the next</li>
+</ul>
+<p><img data-src="../images/Introduction/image25.png"></p>
+<p><img data-src="../images/Introduction/image26.png"></p>
+<p><a href="https://rasbt.github.io/mlxtend/user_guide/evaluate/bias_variance_decomp/">Bias-variance decomposition for classification and regression losses</a> (mlxtend)</p>
+<aside class="notes">
+<p>Now let’s look at the other side of the coin: variance.</p>
+<p>Variance refers to how much a model’s predictions fluctuate when trained on different datasets.</p>
+<p>You might have a model that performs really well on the training data — but if it changes drastically with every new sample, it has high variance.</p>
+<p>This is often a sign of overfitting — the model is memorizing the noise in the training set instead of learning general patterns.</p>
+<p>So to recap: High bias = model is too simple → underfitting High variance = model is too complex → overfitting</p>
+<p>Our goal is to strike a balance between these two.</p>
+<p>Variance is the average squared difference between an observation and the mean.</p>
+<p>Error variance is the variance of a model’s prediction errors.</p>
+<p>Models with low bias and low error variance have predicted values that are consistently close to the observed values. A good model should have low bias and low error variance.</p>
+<p>FOR NOTES: Variance measures how much predictions fluctuate across different subsets of the same dataset. High variance means model is too complex, thus, overfits training data Your model gets all answers right on one dataset but fails on new ones.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="bias-variance-trade-off" class="slide level2">
+<h2>Bias-variance Trade-off</h2>
+<ul>
+<li>Simple models: high bias, low variance</li>
+<li>Complex models: low bias, high variance</li>
+<li>Goal: the sweet spot — best generalization</li>
+</ul>
+<p><img data-src="../images/Introduction/image28.png"></p>
+<p><img data-src="../images/Introduction/image27.png"></p>
+<p><a href="https://en.wikipedia.org/wiki/Bias%E2%80%93variance_tradeoff">Bias–variance tradeoff</a> (Wikipedia, 2025)</p>
+<aside class="notes">
+<p>So how do bias and variance interact?</p>
+<p>There’s a trade-off: Simple models tend to have high bias but low variance — they miss patterns but are stable Complex models have low bias but high variance — they capture detail but might not generalize</p>
+<p>Your job as an ML practitioner is to find the sweet spot: A model that’s complex enough to capture key relationships But not so complex that it overreacts to noise</p>
+<p>This is why we split data into training and test sets, and why we monitor model performance carefully during tuning.</p>
+<p>Understanding this tradeoff helps you choose appropriate models, adjust their complexity, and improve generalization.</p>
+<p>Archery target diagram: High bias: off-center grouping High variance: scattered shots Balanced: tight grouping near center</p>
+<p>Prediction is like attempting to hit a bullseye on a target. A good model consistently (low error variance) hits the bullseye (low bias). A model with low bias and high error variance occasionally hits the bullseye but is less consistent. A model with high bias and low error variance consistently hits the same spot on the target, just not the center. The worst case scenario is a model with high bias and high error variance. Models with high bias and error variance are inaccurate and inconsistent.</p>
+<p>FOR NOTES: High bias, Low variance Low bias, High variance Goal: Find the sweet spot where both are balanced for best generalization.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="generalizing" class="slide level2">
+<h2>Generalizing</h2>
+<p><img data-src="../images/Introduction/image29.png"></p>
+<p><img data-src="../images/Introduction/image24.png"></p>
+<ul>
+<li>Training accuracy rises monotonically; test accuracy rises, peaks, then falls.</li>
+<li>The goal is to find the sweet spot: enough model complexity to learn the underlying pattern in the dataset.</li>
+</ul>
+</section>
+<section id="knowledge-check-3" class="slide level2">
+<h2>Knowledge Check</h2>
+<ul>
+<li>Which model has the greatest prediction variance?</li>
+<li>Which model is most likely underfitted?</li>
+</ul>
+<p><img data-src="../images/Introduction/image30.png"></p>
+<p><img data-src="../images/Introduction/image31.png"></p>
+<p><img data-src="../images/Introduction/image32.png"></p>
+<p><a href="https://www.zybooks.com/catalog/machine-learning/">Machine Learning</a> (zyBooks, 2025)</p>
+<aside class="notes">
+<p>Let’s apply what we just learned with a visual knowledge check.</p>
+<p>Take a look at the three models shown in the graphs. Each one represents a different kind of fit: Model A shows a straight line far from most points — that’s underfitting, or high bias. Model B fits the data well and generalizes — that’s the ideal fit. Model C is too wiggly, hugging every data point — this is overfitting, or high variance. These visual cues are often more intuitive than equations, and you’ll see them again in diagnostics later in the course. Understanding this trade-off helps you recognize when your model is doing too little or too much.</p>
+<p>Knowledge Check – Error Patterns Examine the models: 1️⃣ Which shows highest prediction variance? → Model C 2️⃣ Which is most underfitted? → Model A ✅ Model A: flat, underfitted ✅ Model C: highly curved, overfitted ✅ Model B: balanced</p>
+<p>FOR NOTES: Given the following graphs Which of the models has the greatest prediction variance? Which model is most likely to be underfitted?</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="where-are-we-now-2" class="slide level2">
+<h2>Where Are We Now?</h2>
+<ul>
+<li>✅ Introduction to machine learning</li>
+<li>✅ Features and model</li>
+<li>✅ Bias-variance tradeoff</li>
+<li>▶︎ Machine learning workflow</li>
+</ul>
+<aside class="notes">
+<p>We’ve now completed the machine learning workflow portion of our session. Let’s review: We explored how models are built using training data We discussed model evaluation and why testing on new data is critical And we just launched into practical exercises with scikit-learn</p>
+<p>Coming up next, we’ll look at one of the most important theoretical concepts in ML — the bias–variance tradeoff. This helps us understand why some models perform well and others fail, even when the training looks good.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="machine-learning-workflow" class="slide level2">
+<h2>Machine Learning Workflow</h2>
+<ol type="1">
+<li><strong>Frame</strong> — what is x? what is y? what is success?</li>
+<li><strong>Get &amp; split data</strong> — hold some data back</li>
+<li><strong>Preprocess</strong> — clean, encode, scale</li>
+<li><strong>Train</strong> — fit a model to training data</li>
+<li><strong>Evaluate</strong> — metrics on held-out data</li>
+<li><strong>Interpret &amp; act</strong> — explain, decide, communicate</li>
+</ol>
+<aside class="notes">
+<p>Here’s what a typical machine learning workflow looks like using scikit-learn.</p>
+<p>Step by step: Load and split the data — using train_test_split() to create training and test sets Preprocess features — scale, encode, or impute values as needed Choose a model — such as LinearRegression or DecisionTreeClassifier Fit the model on the training data Evaluate on the test data — using accuracy, mean squared error, etc. Tune and deploy — improve performance, then move it into production if needed</p>
+<p>This structure will be the foundation of everything we do in this course — we’ll refer back to this workflow again and again.</p>
+<p>Input and output features are separated into two dataframes: X and y. Each estimator is loaded, or initialized, into the Python workspace. Any user-defined settings are specified during initialization. The .fit() method estimates model parameters, such as regression weights, or applies an algorithm to the input and output features. The .predict() method calculates predicted values for a set of inputs, either new values or the original inputs. The .score() method calculates a performance metric based on the type of machine learning task.</p>
+<p>FOR NOTES: A typical ML pipeline includes: (lead-in line from the source slide) what is x? what is y? what does success mean? Fit a model to training data</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="introduction-to-scikit-learn" class="slide level2">
+<h2>Introduction to scikit-learn</h2>
+<ul>
+<li>Python library for building ML models</li>
+<li>Key concept: an <strong>estimator</strong> fits a model or algorithm</li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a aria-label="1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LinearRegression</span>
+<span id="cb2-2"><a aria-label="2"></a>model <span class="op">=</span> LinearRegression().fit(X_train, y_train)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ul>
+<li>Covers supervised + unsupervised models, preprocessing, training, evaluation</li>
+</ul>
+
+<img data-src="../images/Introduction/image33.png" class="r-stretch"><p><a href="https://scikit-learn.org/stable/">Scikit-learn</a></p>
+<aside class="notes">
+<p>To build machine learning models in Python, we’ll be using scikit-learn — one of the most widely used ML libraries.</p>
+<p>It’s easy to learn, well-documented, and great for building both supervised and unsupervised models.</p>
+<p>A central concept in scikit-learn is the estimator: An estimator is any object that can fit a model to data. For example, LinearRegression() is an estimator used to fit a simple regression model. In code, we use .fit() to train the model:</p>
+<p>scikit-learn also includes tools for: Preprocessing data Splitting datasets Evaluating model performance</p>
+<p>We’ll use all of these components in the workflow you’re about to see.</p>
+<p>FOR NOTES: scikit-learn is a popular Python library for building ML models. Key concept: Estimator — an object that fits a model or algorithm. Ex: LinearRegression() trains a linear model. scikit-learn supports: Supervised + Unsupervised models, Preprocessing, Training, Evaluation. An object that fits a model or algorithm</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="practice-the-ml-workflow" class="slide level2">
+<h2>Practice: The ML Workflow</h2>
+<ul>
+<li>Build a supervised learning pipeline, then evaluate it</li>
+<li>📥 Download <code>modeling_the_ml_workflow.ipynb</code> from Canvas</li>
+<li>🌐 Open <a href="https://colab.research.google.com/">https://colab.research.google.com</a></li>
+<li>⬆️ Upload and run the notebook</li>
+</ul>
+
+<img data-src="../images/Introduction/image34.png" class="r-stretch"><p>DALL·E (ChatGPT), 2025</p>
+<aside class="notes">
+<p>Now it’s your turn to apply what we just discussed in a hands-on lab.</p>
+<p>This exercise will walk you through the full machine learning workflow using scikit-learn — from data loading to model evaluation.</p>
+<p>You’ll learn to: Build a supervised learning pipeline Split your data into train and test sets Fit a model to training data Evaluate the model’s performance on unseen data</p>
+<p>To begin: Download the notebook modeling_workflow_in_scikit_learn.ipynb from Canvas Open it in colab.research.google.com Upload and run the notebook cells</p>
+<p>This lab is designed to reinforce the workflow we just discussed and build your confidence in using Python for end-to-end machine learning.</p>
+<p>FOR NOTES: Lab Goals: Build a supervised learning pipeline; Evaluate model performance.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="summary-key-takeaways" class="slide level2">
+<h2>Summary – Key Takeaways</h2>
+<ul>
+<li>Machine learning learns patterns from data to make predictions or discover structure.</li>
+<li>The learning approach depends on the data, labels, and task.</li>
+<li>Successful models must perform well on unseen data, not just training data.</li>
+</ul>
+<aside class="notes">
+<p>Let’s wrap up with a quick summary of what we’ve covered today.</p>
+<p>You should now be able to: Define key ML terms: dataset, features, models, algorithms Distinguish among the main learning types: Supervised → labeled data Unsupervised → unlabeled data Semi- and self-supervised → mix or auto-generated labels Reinforcement learning → reward-based learning Implement an ML workflow using scikit-learn — from loading data to evaluating models Explain the bias–variance tradeoff and recognize underfitting vs.&nbsp;overfitting Apply the W3C’s 10 ethical principles to guide responsible ML system design These foundational ideas will carry through the rest of the course — from labs and projects to your final assessment.</p>
+<p>Core ML Vocabulary You can now speak the language of machine learning: datasets hold the raw observations; features are the measurable attributes; labels/targets are the truths we aim to predict; a model is the mathematical function fθf_{}fθ we train; an algorithm is the procedure that tunes θ; and the training / test split lets us judge how well the model generalizes. Four Learning Paradigms You can distinguish when to use Supervised learning (labeled data, e.g., image classification), Unsupervised learning (no labels, e.g., customer clustering), Semi- / Self-supervised learning (leveraging unlabeled data, e.g., masked-token language models), and Reinforcement learning (agents learn by reward, e.g., game-playing AIs). End-to-End ML Workflow in scikit-learn Starting with a CSV, you can now: train_test_split → preprocessing.Pipeline → model.fit → metrics.evaluate. This pipeline mindset structures every future project—from data ingestion and feature engineering to model tuning and evaluation. Ethical Design Principles Fairness, transparency, privacy, and accountability are not add-ons—they shape model choices, data collection, and deployment strategies. You should now be able to identify at least one concrete design or policy decision that supports each principle.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="further-reading" class="slide level2">
+<h2>Further Reading</h2>
+<ul>
+<li>📘 <a href="https://www.cambridge.org/highereducation/books/a-hands-on-introduction-to-machine-learning/3E57313A963BF7AF5C6330EB88ADAB2E#overview">A Hands-On Introduction to Machine Learning</a> (Chirag Shah, 2022)
+<ul>
+<li>📖 Read Chapter 1</li>
+</ul></li>
+<li><a href="https://developers.google.com/machine-learning/crash-course">Google’s ML Crash Course</a></li>
+<li><a href="https://medium.com/swlh/machine-learning-how-to-prevent-overfitting-fdf759cc00a9">How to Prevent Overfitting</a> (Ken Hoffman, 2021)</li>
+</ul>
+
+<img data-src="../images/Introduction/image35.png" class="r-stretch"><aside class="notes">
+<p>To reinforce what you’ve learned and go a bit deeper, here’s some recommended reading.</p>
+<p>Start with Chapter 1 of A Hands-On Introduction to Machine Learning by Chirag Shah. It expands on many of the ideas we’ve introduced today with real-world case studies.</p>
+<p>If you need a Python refresher, skim Chapter 2 — especially if you’re new to Jupyter notebooks or pandas.</p>
+<p>Optional but valuable: Google’s ML Crash Course — it’s beginner-friendly and includes interactive exercises. How to Prevent Overfitting by Ken Hoffman — a quick read that reinforces the bias–variance concepts.</p>
+<p>Use these as a springboard — especially if you want to explore topics like fairness, model tuning, or ethics in more detail.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+
+
+</section>
+    </div>
+  <div class="quarto-auto-generated-content" style="display: none;">
+<div class="footer footer-default">
+
+</div>
+</div></div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="../site_libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="../site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="../site_libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="../site_libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="../site_libs/revealjs/plugin/search/search.js"></script>
+  <script src="../site_libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="../site_libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': true,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'jumpToSlide': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: 'c/t',
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'none',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1050,
+
+        height: 700,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+
+        math: {
+          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    <script id="quarto-html-after-body" type="application/javascript">
+      window.document.addEventListener("DOMContentLoaded", function (event) {
+        const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+        tabsets.forEach(function(tabset) {
+          const tabby = new Tabby('#' + tabset.id);
+        });
+        const isCodeAnnotation = (el) => {
+          for (const clz of el.classList) {
+            if (clz.startsWith('code-annotation-')) {                     
+              return true;
+            }
+          }
+          return false;
+        }
+        const onCopySuccess = function(e) {
+          // button target
+          const button = e.trigger;
+          // don't keep focus
+          button.blur();
+          // flash "checked"
+          button.classList.add('code-copy-button-checked');
+          var currentTitle = button.getAttribute("title");
+          button.setAttribute("title", "Copied!");
+          let tooltip;
+          if (window.bootstrap) {
+            button.setAttribute("data-bs-toggle", "tooltip");
+            button.setAttribute("data-bs-placement", "left");
+            button.setAttribute("data-bs-title", "Copied!");
+            tooltip = new bootstrap.Tooltip(button, 
+              { trigger: "manual", 
+                customClass: "code-copy-button-tooltip",
+                offset: [0, -8]});
+            tooltip.show();    
+          }
+          setTimeout(function() {
+            if (tooltip) {
+              tooltip.hide();
+              button.removeAttribute("data-bs-title");
+              button.removeAttribute("data-bs-toggle");
+              button.removeAttribute("data-bs-placement");
+            }
+            button.setAttribute("title", currentTitle);
+            button.classList.remove('code-copy-button-checked');
+          }, 1000);
+          // clear code selection
+          e.clearSelection();
+        }
+        const getTextToCopy = function(trigger) {
+          const outerScaffold = trigger.parentElement.cloneNode(true);
+          const codeEl = outerScaffold.querySelector('code');
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+        }
+        const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+          text: getTextToCopy
+        });
+        clipboard.on('success', onCopySuccess);
+        if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+          const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+            text: getTextToCopy,
+            container: window.document.getElementById('quarto-embedded-source-code-modal')
+          });
+          clipboardModal.on('success', onCopySuccess);
+        }
+          var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+          var mailtoRegex = new RegExp(/^mailto:/);
+            var filterRegex = new RegExp("https:\/\/adu-baffour\.github\.io\/machinelearning\/");
+          var isInternal = (href) => {
+              return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+          }
+          // Inspect non-navigation links and adorn them if external
+         var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+          for (var i=0; i<links.length; i++) {
+            const link = links[i];
+            if (!isInternal(link.href)) {
+              // undo the damage that might have been done by quarto-nav.js in the case of
+              // links that we want to consider external
+              if (link.dataset.originalHref !== undefined) {
+                link.href = link.dataset.originalHref;
+              }
+            }
+          }
+        function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+          const config = {
+            allowHTML: true,
+            maxWidth: 500,
+            delay: 100,
+            arrow: false,
+            appendTo: function(el) {
+                return el.closest('section.slide') || el.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'light-border',
+            placement: 'bottom-start',
+          };
+          if (contentFn) {
+            config.content = contentFn;
+          }
+          if (onTriggerFn) {
+            config.onTrigger = onTriggerFn;
+          }
+          if (onUntriggerFn) {
+            config.onUntrigger = onUntriggerFn;
+          }
+            config['offset'] = [0,0];
+            config['maxWidth'] = 700;
+          window.tippy(el, config); 
+        }
+        const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+        for (var i=0; i<noterefs.length; i++) {
+          const ref = noterefs[i];
+          tippyHover(ref, function() {
+            // use id or data attribute instead here
+            let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+            try { href = new URL(href).hash; } catch {}
+            const id = href.replace(/^#\/?/, "");
+            const note = window.document.getElementById(id);
+            if (note) {
+              return note.innerHTML;
+            } else {
+              return "";
+            }
+          });
+        }
+        const findCites = (el) => {
+          const parentEl = el.parentElement;
+          if (parentEl) {
+            const cites = parentEl.dataset.cites;
+            if (cites) {
+              return {
+                el,
+                cites: cites.split(' ')
+              };
+            } else {
+              return findCites(el.parentElement)
+            }
+          } else {
+            return undefined;
+          }
+        };
+        var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+        for (var i=0; i<bibliorefs.length; i++) {
+          const ref = bibliorefs[i];
+          const citeInfo = findCites(ref);
+          if (citeInfo) {
+            tippyHover(citeInfo.el, function() {
+              var popup = window.document.createElement('div');
+              citeInfo.cites.forEach(function(cite) {
+                var citeDiv = window.document.createElement('div');
+                citeDiv.classList.add('hanging-indent');
+                citeDiv.classList.add('csl-entry');
+                var biblioDiv = window.document.getElementById('ref-' + cite);
+                if (biblioDiv) {
+                  citeDiv.innerHTML = biblioDiv.innerHTML;
+                }
+                popup.appendChild(citeDiv);
+              });
+              return popup.innerHTML;
+            });
+          }
+        }
+      });
+      </script>
+    
+
+</body></html>

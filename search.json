@@ -1,17 +1,262 @@
 [
   {
-    "objectID": "notes/topic-01.html",
-    "href": "notes/topic-01.html",
-    "title": "Topic 1: What Is Machine Learning?",
+    "objectID": "notes/Introduction.html",
+    "href": "notes/Introduction.html",
+    "title": "Introduction",
     "section": "",
     "text": "Open the slides full screen"
   },
   {
-    "objectID": "notes/topic-01.html#slides",
-    "href": "notes/topic-01.html#slides",
-    "title": "Topic 1: What Is Machine Learning?",
+    "objectID": "notes/Introduction.html#slides",
+    "href": "notes/Introduction.html#slides",
+    "title": "Introduction",
     "section": "",
     "text": "Open the slides full screen"
+  },
+  {
+    "objectID": "notes/Introduction.html#objectives",
+    "href": "notes/Introduction.html#objectives",
+    "title": "Introduction",
+    "section": "Objectives",
+    "text": "Objectives\nBy the end of this topic, you will be able to:\n\nDefine core machine learning concepts and learning types.\nIdentify features, targets, models, and algorithms.\nExplain generalization and bias–variance trade-offs.\nApply the basic machine learning workflow using scikit-learn.\n\nThese notes follow the slides in order, grouped into the four parts of the course outline: introduction to machine learning, features and models, the bias–variance trade-off, and the machine learning workflow."
+  },
+  {
+    "objectID": "notes/Introduction.html#what-is-machine-learning",
+    "href": "notes/Introduction.html#what-is-machine-learning",
+    "title": "Introduction",
+    "section": "What is machine learning?",
+    "text": "What is machine learning?\nMachine learning is a subfield of artificial intelligence where computers learn patterns from data and make predictions without being explicitly programmed.\nIt helps to break a machine learning system into three parts:\n\n\n\n\n\n\n\n\nPart\nWhat it is\nExample\n\n\n\n\nInput\nHistorical data\nSpreadsheets, sensor readings, images, text\n\n\nProcess\nA learning algorithm\nLinear regression, decision trees, a neural network\n\n\nOutput\nA predictive model\nA trained function that makes predictions on new input data\n\n\n\nMachine learning draws on computer science, artificial intelligence, statistics, and mathematics. The combination matters: statistics supplies the reasoning about uncertainty, and computer science supplies the means to apply that reasoning to data at scale. [CHECK — this gloss on why the combination matters is mine; the slide lists the fields but does not characterise their roles.]"
+  },
+  {
+    "objectID": "notes/Introduction.html#machine-learning-vs.-traditional-programming",
+    "href": "notes/Introduction.html#machine-learning-vs.-traditional-programming",
+    "title": "Introduction",
+    "section": "Machine learning vs. traditional programming",
+    "text": "Machine learning vs. traditional programming\nThe difference is in what you supply and what the computer produces.\n\n\n\n\nYou supply\nComputer produces\n\n\n\n\nTraditional programming\nRules + data\nAnswers\n\n\nMachine learning\nData + answers\nRules (the model)\n\n\n\nA spam filter makes the contrast concrete. In traditional programming you write the rule yourself — this fragment assumes subject holds the email’s subject line:\nif \"FREE!!!\" in subject:\n    label = \"spam\"\nIn machine learning you supply 10,000 labeled emails, and the algorithm produces the rule. That rule is the model.\nMachine learning is the tool for problems where the rules are too complex, unknown, or constantly changing to write by hand. Spam is a good example of all three at once: the patterns are subtle, nobody can enumerate them, and senders deliberately change tactics. [CHECK — the “all three at once” reading of the spam example is my elaboration; the slide states the three conditions but does not tie them to spam.]"
+  },
+  {
+    "objectID": "notes/Introduction.html#where-machine-learning-fits-in-ai",
+    "href": "notes/Introduction.html#where-machine-learning-fits-in-ai",
+    "title": "Introduction",
+    "section": "Where machine learning fits in AI",
+    "text": "Where machine learning fits in AI\nThe terms nest inside one another:\nArtificial Intelligence → Machine Learning (this course) → Deep Learning → LLMs\nArtificial intelligence is the broad goal of getting systems to perform tasks that normally require human cognition and decision-making. Machine learning is the subset that learns those capabilities from data.\nSome parts of AI are not machine learning: knowledge representation, constraint optimization, logical and probabilistic reasoning, and planning. These solve problems by reasoning over rules you provide rather than by learning patterns from examples. [CHECK — this contrast is mine; the slide notes name these areas but do not say how they work.]\nChatGPT is one member of this family. This course teaches the family — the concepts every member shares."
+  },
+  {
+    "objectID": "notes/Introduction.html#what-is-a-model",
+    "href": "notes/Introduction.html#what-is-a-model",
+    "title": "Introduction",
+    "section": "What is a model?",
+    "text": "What is a model?\nA model is a mathematical function that maps inputs to outputs to make predictions:\n\\[\\hat{y} = f_{\\theta}(x)\\]\nFor a linear model:\n\\[f_{\\theta}(x) = \\theta_0 + \\theta_1 x\\]\nwhere:\n\n\\(x\\) is the input feature\n\\(\\hat{y}\\) is the predicted output\n\\(\\theta\\) are the model parameters — the values the model learns during training\n\nThe parameters are what training produces. Once trained, the model can be reused over and over to predict outcomes.\n\nA worked example\nSuppose training on rideshare data produced \\(\\theta_0 = 2.50\\) and \\(\\theta_1 = 1.75\\), where \\(x\\) is trip distance in miles. The fitted model is\n\\[\\hat{y} = 2.50 + 1.75x\\]\nFor a 3.2-mile trip:\n\\[\\hat{y} = 2.50 + 1.75(3.2) = 2.50 + 5.60 = 8.10\\]\nso the model predicts $8.10. Read the parameters this way: \\(\\theta_0\\) is the base fare that applies to any trip, and \\(\\theta_1\\) is the additional cost per mile.\n[CHECK — the numbers 2.50 and 1.75, the 3.2-mile trip, the resulting $8.10, and the reading of \\(\\theta_0\\) as a base fare and \\(\\theta_1\\) as cost per mile are all mine. The slides give the formula and the rideshare setting but no fitted values and no interpretation of the coefficients.]"
+  },
+  {
+    "objectID": "notes/Introduction.html#what-is-an-algorithm",
+    "href": "notes/Introduction.html#what-is-an-algorithm",
+    "title": "Introduction",
+    "section": "What is an algorithm?",
+    "text": "What is an algorithm?\nAn algorithm is a step-by-step procedure used to train a model on data.\n\\[\\mathcal{A} : (\\textit{data},\\ \\textit{hyperparameters}) \\rightarrow f_{\\theta^{*}}\\]\nIt takes:\n\nInput: training data and hyperparameters\nProcess: optimization rules\nOutput: a trained model \\(f_{\\theta^{*}}\\), where \\(\\theta^{*}\\) are the best-fitting parameters\n\nGradient descent algorithms are used to train regression models. In scikit-learn, SGDRegressor() uses stochastic gradient descent, updating the model’s weights gradually as it sees each data point."
+  },
+  {
+    "objectID": "notes/Introduction.html#model-vs.-algorithm",
+    "href": "notes/Introduction.html#model-vs.-algorithm",
+    "title": "Introduction",
+    "section": "Model vs. algorithm",
+    "text": "Model vs. algorithm\nThis distinction is subtle but really important:\n\nA model is the mathematical function that makes predictions. Once trained, it can be reused over and over.\nAn algorithm is the method used to train the model. It iteratively adjusts the model’s parameters to reduce error.\n\nPut another way: the model is the structure, and the algorithm is the recipe for filling in that structure with the right values. The algorithm is the process; the model is the result.\nThe two terms are sometimes used interchangeably in casual conversation, but the difference matters once you start talking about training, optimization, and deployment."
+  },
+  {
+    "objectID": "notes/Introduction.html#worked-example-predicting-a-rideshare-price",
+    "href": "notes/Introduction.html#worked-example-predicting-a-rideshare-price",
+    "title": "Introduction",
+    "section": "Worked example: predicting a rideshare price",
+    "text": "Worked example: predicting a rideshare price\nThe goal is to predict the price of a ride using input features.\nFor each trip, a rideshare company records inputs such as distance, starting location, traffic conditions, time of day, and vehicle type. Those inputs are passed into a machine learning model, which uses an algorithm or statistical model to predict the price. The predicted price is the model’s output.\nThis is a supervised learning task: the training data is labeled, because the correct price of each past trip is already known. Once trained, the model can predict the price of a new trip from similar features."
+  },
+  {
+    "objectID": "notes/Introduction.html#what-is-a-dataset",
+    "href": "notes/Introduction.html#what-is-a-dataset",
+    "title": "Introduction",
+    "section": "What is a dataset?",
+    "text": "What is a dataset?\nA dataset is a structured collection of data, consisting of:\n\nFeatures (or variables): a measurable property — a column. For example time, price, or vehicle type.\nInstances (or samples): a single data point — a row. For example one rideshare trip.\n\n\n\n\n\n\n\n\n\n\n\n\ndistance\ncab_type\ntime_stamp\ndestination\nprice\nsurge_multiplier\n\n\n\n\n1.3\nUber\n08:04.4\nTheatre District\n17.5\n1\n\n\n1.35\nLyft\n22:57.4\nSouth Station\n7\n1\n\n\n1.1\nLyft\n15:09.6\nFinancial District\n13.5\n1\n\n\n\nWhen data is organized in a table like this — in a spreadsheet or a pandas dataframe — it is called tabular data. Each row is one instance and each column is one feature. This format is extremely common, and it is the type used in most of our examples."
+  },
+  {
+    "objectID": "notes/Introduction.html#input-and-output-features",
+    "href": "notes/Introduction.html#input-and-output-features",
+    "title": "Introduction",
+    "section": "Input and output features",
+    "text": "Input and output features\nFeatures split into two roles:\n\nInput features (predictors, explanatory variables, \\(\\mathbf{X}\\)): the known information fed into the model.\nOutput feature (target, response, \\(\\mathbf{y}\\)): the value we want the model to predict.\n\nIn the rideshare example, the input is distance and the output is price:\n\ninput feature: distance → model → output feature: price\n\nA useful shorthand: inputs are what you know, and the output is what you want to find out. Which features play which role is decided by the machine learning task, or research question. Choosing good input features is critical to building accurate models."
+  },
+  {
+    "objectID": "notes/Introduction.html#knowledge-check-which-feature-is-the-target",
+    "href": "notes/Introduction.html#knowledge-check-which-feature-is-the-target",
+    "title": "Introduction",
+    "section": "Knowledge check: which feature is the target?",
+    "text": "Knowledge check: which feature is the target?\nA hospital wants to predict which nurses are likely to quit, and has collected this data:\n\n\n\nEmployee ID\nAge\nQuit?\nDepartment\nDaily rate\n\n\n\n\n1415194\n34\nNo\nMaternity\n404\n\n\n1620383\n30\nNo\nMaternity\n1312\n\n\n1533398\n25\nYes\nCardiology\n383\n\n\n1479961\n35\nNo\nMaternity\n982\n\n\n1570909\n38\nNo\nCardiology\n508\n\n\n\nWork through two questions:\n\nWhat is the output feature (target)?\nWhat is / are the input feature(s)?\n\n[CHECK — this paragraph of reasoning guidance is mine, not on the slide.] To reason about it, ask what the hospital is trying to find out, and then ask of every remaining column whether it could plausibly help predict that. One column is an identifier rather than a measured property of the nurse, and identifiers carry no predictive information even though they are stored as numbers.\nThe rule of thumb to carry forward: always ask whether a feature is informative or just a label.\nAnswers are worked through in class."
+  },
+  {
+    "objectID": "notes/Introduction.html#types-of-machine-learning",
+    "href": "notes/Introduction.html#types-of-machine-learning",
+    "title": "Introduction",
+    "section": "Types of machine learning",
+    "text": "Types of machine learning\nThe type of machine learning you use depends on the task and on what data you have.\n\n\n\n\n\n\n\n\nType\nData\nTypical tasks\n\n\n\n\nSupervised\nData has labels\nRegression (predict a number), classification (predict a category)\n\n\nUnsupervised\nNo labels: find structure\nClustering (group similar rows), dimension reduction (compress columns)\n\n\nReinforcement\nLearn from rewards\n—\n\n\n\nApplied to the rideshare setting:\n\nPredicting the price of a trip from distance and time is supervised, since the output feature (price) is known.\nCategorizing customers as “commuters”, “sports fans”, or “tourists” is unsupervised, since those categories are not an observed feature.\nAdjusting the price after a customer declines is reinforcement learning: the prediction is updated based on the customer’s decision.\n\nTwo further paradigms — semi-supervised and self-supervised learning — are covered below."
+  },
+  {
+    "objectID": "notes/Introduction.html#supervised-learning",
+    "href": "notes/Introduction.html#supervised-learning",
+    "title": "Introduction",
+    "section": "Supervised learning",
+    "text": "Supervised learning\nModels learn from labeled data: we give them both the inputs and the correct outputs, and the model learns the relationship between the two. It is the most common machine learning approach.\nThere are two categories:\n\nRegression predicts numbers. Example: predict a ride price, such as $17.32.\nClassification predicts categories. Example: predict animal type, cat vs. dog.\n\nThe quick test: if the output is numeric, it is regression; if it is categorical, it is classification."
+  },
+  {
+    "objectID": "notes/Introduction.html#unsupervised-learning",
+    "href": "notes/Introduction.html#unsupervised-learning",
+    "title": "Introduction",
+    "section": "Unsupervised learning",
+    "text": "Unsupervised learning\nModels find structure in unlabeled data — no output labels are provided. The model is given a dataset and asked to discover structure or relationships within it.\n\nClustering: group rides into “commuters”, “sports fans”, “tourists”.\nOutlier detection: find suspicious rides with abnormally high prices.\nDimensionality reduction: transform the data, for example with PCA — combining time and distance into a single “trip intensity” measure.\n\nThis is especially useful for exploratory analysis, or whenever labels are unavailable."
+  },
+  {
+    "objectID": "notes/Introduction.html#reinforcement-learning",
+    "href": "notes/Introduction.html#reinforcement-learning",
+    "title": "Introduction",
+    "section": "Reinforcement learning",
+    "text": "Reinforcement learning\nModels learn by trial and error: they take actions and receive feedback. A model — called an agent — interacts with an environment and learns from the rewards or penalties it receives.\n\nAgent: the decision-maker\nEnvironment: where it operates\nReward: feedback after an action\n\nA self-driving car learning to stay in its lane earns rewards when it stays centered and penalties when it crosses a lane. Reinforcement learning is used in robotics, game AI, and recommendation systems."
+  },
+  {
+    "objectID": "notes/Introduction.html#semi-supervised-learning",
+    "href": "notes/Introduction.html#semi-supervised-learning",
+    "title": "Introduction",
+    "section": "Semi-supervised learning",
+    "text": "Semi-supervised learning\nSemi-supervised learning combines a small amount of labeled data with a large pool of unlabeled data.\nThe motivation is cost: labeling data is time-consuming and expensive, so you will often have plenty of unlabeled instances and few labeled ones. Some algorithms can work with data that is only partially labeled.\nFor example, only 100 rides have prices labeled, but 10,000 do not. The model starts with the labeled data, then generalizes by learning from the rest. This is widely used in domains like medical imaging and natural language processing, where labeled data is rare but unlabeled data is abundant."
+  },
+  {
+    "objectID": "notes/Introduction.html#self-supervised-learning",
+    "href": "notes/Introduction.html#self-supervised-learning",
+    "title": "Introduction",
+    "section": "Self-supervised learning",
+    "text": "Self-supervised learning\nSelf-supervised learning learns from unlabeled data by creating its own labels. No human labeling is involved — the labels are generated from the input itself.\n\nIn NLP: mask a word in a sentence and train the model to guess it. Given “The cab arrived at the ___“, the model learns to predict the missing word from the surrounding context.\nIn vision: cut out part of an image and train the model to predict what is missing.\n\nThis approach is behind large language models such as ChatGPT, BERT, and DALL·E. Its power is that it can learn from vast amounts of raw data without manual annotation."
+  },
+  {
+    "objectID": "notes/Introduction.html#knowledge-check-matching-tasks-to-learning-types",
+    "href": "notes/Introduction.html#knowledge-check-matching-tasks-to-learning-types",
+    "title": "Introduction",
+    "section": "Knowledge check: matching tasks to learning types",
+    "text": "Knowledge check: matching tasks to learning types\nMatch each task to the best type of machine learning — supervised, unsupervised, semi-supervised, self-supervised, or reinforcement learning:\n\nPrescribing a new chemotherapy drug dosage based on a patient’s response to earlier treatment.\nPredicting whether a nurse is likely to quit.\nGrouping patients with similar clinical profiles from EHRs, with no outcome labels.\nPretraining a model on clinical notes by predicting masked words.\nTraining a diagnosis model with 100 labeled X-rays and 10,000 unlabeled ones.\n\n[CHECK — this reasoning guidance is mine.] Two questions resolve most cases. First: are there labels, none, or only a few? Second: does the model receive feedback on its own actions over time, or does it generate its own labels from the raw input? Matching your data and your problem to the right paradigm is the first design decision in any machine learning solution.\nAnswers are worked through in class."
+  },
+  {
+    "objectID": "notes/Introduction.html#types-of-features",
+    "href": "notes/Introduction.html#types-of-features",
+    "title": "Introduction",
+    "section": "Types of features",
+    "text": "Types of features\nFeatures in a dataset are either categorical or numerical.\n\nCategorical: non-numeric values, or numeric values with no mathematical meaning. Examples: “Yes”/“No”, customer type (“Regular”, “New”), address.\nNumerical: measurable quantities with mathematical meaning. Examples: age, income, transaction amount, square footage.\n\nThe values alone are not always enough to determine a feature’s type — context matters. Phone numbers are stored as numbers, but arithmetic on phone numbers is meaningless, so they are categorical. ZIP codes behave the same way. This matters because feature type determines how you process and encode a column.\nIn the rideshare dataframe:\n\n\n\n\n\n\n\n\nFeature\nType\nWhy\n\n\n\n\ncab_type, destination\nCategorical\nNon-numerical values\n\n\ndistance, price, surge_multiplier\nNumerical\nNumerical values with meaning\n\n\ntime_stamp\nNumerical\nArithmetic on time is meaningful — 2018-12-01 is two days after 2018-11-29"
+  },
+  {
+    "objectID": "notes/Introduction.html#exploratory-data-analysis",
+    "href": "notes/Introduction.html#exploratory-data-analysis",
+    "title": "Introduction",
+    "section": "Exploratory data analysis",
+    "text": "Exploratory data analysis\nExploratory data analysis (EDA) is the process of exploring data through plots and descriptive statistics to identify potential relationships and patterns. It comes before any modeling.\nCommon EDA tasks are examining distributions, visualizing correlations, and detecting outliers. Both lines below assume rides is a pandas dataframe of trips:\nrides['distance'].hist()\nrides.plot.scatter('distance', 'price')\nThe histogram shows how one feature is distributed; the scatter plot reveals the relationship between two variables. [CHECK — your speaker notes say the histogram shows “the distribution of prices”, but the code plots distance; I have described it by feature to resolve the mismatch.]\nTwo popular Python plotting libraries are matplotlib, for static, dynamic and interactive plots, and seaborn, a higher-level library that works especially well with dataframes.\nEDA shapes feature selection and preprocessing. It often reveals problems — skewed distributions, missing values, outliers — that must be addressed before modeling. The better you know your data, the better your models will be."
+  },
+  {
+    "objectID": "notes/Introduction.html#classification-models",
+    "href": "notes/Introduction.html#classification-models",
+    "title": "Introduction",
+    "section": "Classification models",
+    "text": "Classification models\nClassification models are supervised models that predict categories or labels from input features.\n\nExamples: logistic regression, naïve Bayes, k-nearest neighbors, decision trees, support vector machines, neural networks.\nUse case: predict whether to accept (Yes) or decline (No) an offer.\nOutput: discrete class labels — Yes and No.\n\nA classification model may predict the class directly, or predict the probability that an instance belongs to a given class. In the probability case, the predicted probability is compared against a threshold to produce a class prediction.\nInput features may be categorical or numerical, but the output feature must be categorical."
+  },
+  {
+    "objectID": "notes/Introduction.html#regression-models",
+    "href": "notes/Introduction.html#regression-models",
+    "title": "Introduction",
+    "section": "Regression models",
+    "text": "Regression models\nRegression models are supervised models that predict continuous numerical values.\n\nExamples: linear regression, regression trees, k-NN regression.\nUse case: predict the salary attached to an offer.\nOutput: a real-valued number, for example $70,065.\n\nAs with classification, input features may be categorical or numerical, but the output feature should always be numerical.\nThe distinction from classification is exactly the output type: regression models predict numbers, classification models predict categories."
+  },
+  {
+    "objectID": "notes/Introduction.html#unsupervised-models-clustering",
+    "href": "notes/Introduction.html#unsupervised-models-clustering",
+    "title": "Introduction",
+    "section": "Unsupervised models: clustering",
+    "text": "Unsupervised models: clustering\nClustering groups similar observations together without labeled data.\n\nExamples: K-Means clustering, hierarchical clustering.\nUse cases: customer segmentation, behavior profiling.\nOutput: cluster assignments, for example Cluster 1, Cluster 2.\n\nK-Means assigns each instance to one of K groups based on feature similarity. Hierarchical clustering instead builds a tree-like structure of nested clusters. Note what the output is: not a predicted value but a group label."
+  },
+  {
+    "objectID": "notes/Introduction.html#unsupervised-models-outlier-detection",
+    "href": "notes/Introduction.html#unsupervised-models-outlier-detection",
+    "title": "Introduction",
+    "section": "Unsupervised models: outlier detection",
+    "text": "Unsupervised models: outlier detection\nOutlier detection identifies rare or unusual instances that do not fit the general pattern.\n\nExample: DBSCAN, which detects outliers as a by-product of clustering.\nUse cases: fraud detection (spotting abnormal transactions), error checking (finding data-entry mistakes or system glitches).\n\nNo labels are required — the algorithm finds anomalies from the data itself, by comparing each point’s behavior to the others. This is a practical technique when working with real-world, noisy datasets."
+  },
+  {
+    "objectID": "notes/Introduction.html#unsupervised-models-dimension-reduction",
+    "href": "notes/Introduction.html#unsupervised-models-dimension-reduction",
+    "title": "Introduction",
+    "section": "Unsupervised models: dimension reduction",
+    "text": "Unsupervised models: dimension reduction\nDimension reduction simplifies high-dimensional data while keeping important structure.\nThe most common method is Principal Component Analysis (PCA), which transforms the original features into a smaller number of new, uncorrelated variables called principal components. Think of it as combining features that are strongly related — distance and time, say — into new features that capture the variance.\n\nData compression: reducing storage or transmission requirements.\nNoise reduction: removing irrelevant or redundant features.\nVisualization: reducing data to 2D so it can be plotted.\n\nDimension reduction is often a crucial step before clustering or classification when a dataset has dozens or hundreds of features."
+  },
+  {
+    "objectID": "notes/Introduction.html#knowledge-check-matching-tasks-to-unsupervised-models",
+    "href": "notes/Introduction.html#knowledge-check-matching-tasks-to-unsupervised-models",
+    "title": "Introduction",
+    "section": "Knowledge check: matching tasks to unsupervised models",
+    "text": "Knowledge check: matching tasks to unsupervised models\nMatch each task to dimension reduction, outlier detection, or clustering:\n\nGroup rideshare customers into categories such as “frequent user”, “sports fan”, and “commuter”.\nIdentify customers with unusual behavior.\nCombine trip distance and rating into a quality measure.\n\nAll three use unlabeled data, but they serve different purposes. [CHECK — the prompt to ask which of the three goals applies is my phrasing.] Ask what the goal is: to discover groups, to find anomalies, or to simplify the data.\nAnswers are worked through in class."
+  },
+  {
+    "objectID": "notes/Introduction.html#generalization-the-goal-of-machine-learning",
+    "href": "notes/Introduction.html#generalization-the-goal-of-machine-learning",
+    "title": "Introduction",
+    "section": "Generalization: the goal of machine learning",
+    "text": "Generalization: the goal of machine learning\nA model that memorizes its training data can score 100% on it and still be useless.\nWe do not care how well a model does on data it has seen. We care how well it does on data it has not. That target — performance on unseen data — is called generalization. The test set exists to estimate it: it simulates the future.\nThis is why data is split into training and test sets before any model is fit, and why a score on training data is never by itself evidence that a model works. [CHECK — my inference from the slide; stated here as a consequence.]"
+  },
+  {
+    "objectID": "notes/Introduction.html#what-is-bias",
+    "href": "notes/Introduction.html#what-is-bias",
+    "title": "Introduction",
+    "section": "What is bias?",
+    "text": "What is bias?\nIn machine learning, bias is not a social or ethical term. It refers to error caused by incorrect or overly strong assumptions in the model — the part of the error that persists no matter how much data you collect.\nMore formally, the error for one instance is the difference between the observed and predicted value:\n\\[e_i = y_i - \\hat{y}_i\\]\nand the bias is the average error across all predictions:\n\\[\\text{Bias} = \\text{mean}(e_i)\\]\nA model is unbiased when that mean difference is always 0. Least squares regression is a regression model whose weights are estimated so that the bias is guaranteed to be 0.\nA model with high bias is too simple to capture the true patterns in the data. It consistently underperforms — this is underfitting. Predicting every ride’s price with a single constant is the extreme case. [CHECK — the reading that this prediction ignores the input entirely, and is therefore systematically wrong however much data you gather, is my elaboration of the slide’s example.]\nBias may come from poor model fitting or violated model assumptions. It may also come from systematic errors in the data itself — underrepresenting a particular group, or failing to measure an important feature."
+  },
+  {
+    "objectID": "notes/Introduction.html#what-is-variance",
+    "href": "notes/Introduction.html#what-is-variance",
+    "title": "Introduction",
+    "section": "What is variance?",
+    "text": "What is variance?\nVariance measures how much predictions fluctuate across different subsets of the same dataset. Statistically, variance is the average squared difference between an observation and the mean; error variance is the variance of a model’s prediction errors.\nA model may perform very well on the training data, but if its predictions change drastically with every new sample, it has high variance. That is overfitting — the model is memorizing noise in the training set instead of learning general patterns. Your model gets all the answers right on one dataset and fails on the next.\nA good model has both low bias and low error variance, so its predicted values are consistently close to the observed values."
+  },
+  {
+    "objectID": "notes/Introduction.html#the-biasvariance-trade-off",
+    "href": "notes/Introduction.html#the-biasvariance-trade-off",
+    "title": "Introduction",
+    "section": "The bias–variance trade-off",
+    "text": "The bias–variance trade-off\nBias and variance pull against each other:\n\n\n\n\n\n\n\n\n\nModel complexity\nBias\nVariance\nResult\n\n\n\n\nSimple\nHigh\nLow\nUnderfits — misses patterns, but is stable\n\n\nComplex\nLow\nHigh\nOverfits — captures detail, but does not generalize\n\n\n\nThe goal is the sweet spot: a model complex enough to capture the key relationships, but not so complex that it overreacts to noise.\nThe archery analogy in the speaker notes is a good way to hold this in mind. Prediction is like trying to hit a bullseye:\n\nLow bias, low error variance: consistently hits the bullseye — the good model.\nLow bias, high error variance: occasionally hits the bullseye, but is inconsistent.\nHigh bias, low error variance: consistently hits the same spot, just not the centre.\nHigh bias, high error variance: inaccurate and inconsistent — the worst case.\n\nThis is why we split data into training and test sets and watch performance carefully during tuning."
+  },
+  {
+    "objectID": "notes/Introduction.html#training-vs.-test-accuracy",
+    "href": "notes/Introduction.html#training-vs.-test-accuracy",
+    "title": "Introduction",
+    "section": "Training vs. test accuracy",
+    "text": "Training vs. test accuracy\nPlotting accuracy against model complexity shows the trade-off directly: training accuracy rises monotonically, while test accuracy rises, peaks, then falls.\nThe peak of the test curve is the sweet spot — enough model complexity to learn the underlying pattern in the dataset, but not so much that the model starts fitting noise. The widening gap between the two curves past that peak is the visible signature of overfitting. [CHECK — describing the widening gap as the signature of overfitting is my addition; the slide describes the two curves but does not name the gap.]"
+  },
+  {
+    "objectID": "notes/Introduction.html#knowledge-check-reading-fit-from-graphs",
+    "href": "notes/Introduction.html#knowledge-check-reading-fit-from-graphs",
+    "title": "Introduction",
+    "section": "Knowledge check: reading fit from graphs",
+    "text": "Knowledge check: reading fit from graphs\nGiven the three model graphs on the slides:\n\nWhich of the models has the greatest prediction variance?\nWhich model is most likely to be underfitted?\n\n[CHECK — this paragraph on how to read the graphs is mine.] Read the shape of the fitted line against the data points. A line that stays far from most points is making a strong assumption the data does not support. A line that bends to pass through nearly every point has fit the noise as well as the signal. A line that follows the trend without chasing individual points is balanced.\nThese visual cues are often more intuitive than the equations, and you will see them again in model diagnostics later in the course.\nAnswers are worked through in class."
+  },
+  {
+    "objectID": "notes/Introduction.html#the-six-steps",
+    "href": "notes/Introduction.html#the-six-steps",
+    "title": "Introduction",
+    "section": "The six steps",
+    "text": "The six steps\nA typical machine learning pipeline includes:\n\nFrame — what is \\(x\\)? what is \\(y\\)? what does success mean?\nGet & split data — hold some data back.\nPreprocess — clean, encode, scale.\nTrain — fit a model to training data.\nEvaluate — metrics on held-out data.\nInterpret & act — explain, decide, communicate.\n\nIn scikit-learn terms: split the data with train_test_split() to create training and test sets; preprocess features by scaling, encoding, or imputing values; choose a model such as LinearRegression or DecisionTreeClassifier; fit it on the training data; evaluate on the test data using accuracy, mean squared error, or another appropriate metric; then tune and, if warranted, deploy.\nThis structure is the foundation of everything in this course, and we will refer back to it repeatedly."
+  },
+  {
+    "objectID": "notes/Introduction.html#scikit-learn",
+    "href": "notes/Introduction.html#scikit-learn",
+    "title": "Introduction",
+    "section": "scikit-learn",
+    "text": "scikit-learn\nscikit-learn is a popular Python library for building machine learning models. It is well documented and supports both supervised and unsupervised models, along with preprocessing, training, and evaluation.\nThe central concept is the estimator: an object that fits a model or algorithm. For example, LinearRegression() trains a linear model. The snippet below assumes X_train and y_train already exist:\nfrom sklearn.linear_model import LinearRegression\nmodel = LinearRegression().fit(X_train, y_train)\nInput and output features are separated into two structures: X and y. Each estimator is initialized into the workspace, with any user-defined settings specified at initialization. Three methods then do the work:\n\n\n\n\n\n\n\nMethod\nWhat it does\n\n\n\n\n.fit()\nEstimates model parameters, such as regression weights, or applies an algorithm to the input and output features\n\n\n.predict()\nCalculates predicted values for a set of inputs — either new values or the original inputs\n\n\n.score()\nCalculates a performance metric based on the type of machine learning task"
+  },
+  {
+    "objectID": "notes/Introduction.html#practice-the-ml-workflow",
+    "href": "notes/Introduction.html#practice-the-ml-workflow",
+    "title": "Introduction",
+    "section": "Practice: the ML workflow",
+    "text": "Practice: the ML workflow\nThe lab walks through the full workflow in scikit-learn, from loading data to evaluating a model. The goals are to build a supervised learning pipeline and to evaluate model performance — splitting data into train and test sets, fitting a model to the training data, and evaluating it on unseen data.\nTo begin:\n\nDownload modeling_the_ml_workflow.ipynb from Canvas. [CHECK — the slide says modeling_the_ml_workflow.ipynb but its speaker notes say modeling_workflow_in_scikit_learn.ipynb; confirm which is correct.]\nOpen https://colab.research.google.com.\nUpload and run the notebook."
   },
   {
     "objectID": "index.html",
@@ -25,27 +270,300 @@
     "href": "index.html#topics",
     "title": "Introduction to Machine Learning",
     "section": "Topics",
-    "text": "Topics\n\nTopic 1: What Is Machine Learning?"
+    "text": "Topics\n\nIntroduction: How do machines learn?\nCore vocabulary, the five types of machine learning, features and models, the bias–variance trade-off, and the scikit-learn workflow.\nNotes · Slides"
   },
   {
-    "objectID": "slides/topic-01.html#learning-objectives",
-    "href": "slides/topic-01.html#learning-objectives",
-    "title": "Topic 1: What Is Machine Learning?",
-    "section": "Learning objectives",
-    "text": "Learning objectives\nBy the end of this lecture you should be able to:\n\nExplain the difference between prediction and inference\nDistinguish supervised from unsupervised learning\nDescribe the bias-variance trade-off in one sentence"
+    "objectID": "slides/Introduction.html#objectives",
+    "href": "slides/Introduction.html#objectives",
+    "title": "Introduction",
+    "section": "Objectives",
+    "text": "Objectives\n\n✅ Define core ML concepts and learning types\n✅ Identify features, targets, models, algorithms\n✅ Explain generalization and the bias–variance trade-off\n✅ Apply the ML workflow in scikit-learn\n\n\nBefore we begin, here are our learning objectives for today’s topic. By the end of this introduction, you should be able to: Define core ML vocabulary — terms like dataset, feature, label, model, and algorithm. Understand and compare different types of machine learning — supervised, unsupervised, semi- and self-supervised, and reinforcement learning. Walk through a standard ML workflow using Python and scikit-learn. Explain the bias–variance tradeoff, which is fundamental to building generalizable models. And finally, discuss ethical concerns in machine learning and how to design responsible ML systems. Each of these objectives will align with a section of this lecture.\nFOR NOTES: By the end of this topic, you will be able to: ✅ Define core machine learning concepts and learning types. ✅ Identify features, targets, models, and algorithms. ✅ Explain generalization and bias–variance trade-offs. ✅ Apply the basic machine learning workflow using scikit-learn."
   },
   {
-    "objectID": "slides/topic-01.html#the-core-idea",
-    "href": "slides/topic-01.html#the-core-idea",
-    "title": "Topic 1: What Is Machine Learning?",
-    "section": "The core idea",
-    "text": "The core idea\nWe observe inputs \\(X\\) and an output \\(Y\\) and assume\n\\[\nY = f(X) + \\varepsilon\n\\]\nMachine learning is the set of methods for estimating \\(f\\)."
+    "objectID": "slides/Introduction.html#outline",
+    "href": "slides/Introduction.html#outline",
+    "title": "Introduction",
+    "section": "Outline",
+    "text": "Outline\n\nIntroduction to machine learning\nFeatures and models\nBias-variance tradeoff\nMachine learning workflow\n\n\nHere’s how the topic is structured. We’ll start with an introduction to machine learning — what it is. Next, we’ll define features, models, and algorithms — these are the building blocks of any ML system. Then we’ll walk through a practical machine learning workflow using scikit-learn — from loading data to model evaluation. After that, we’ll dive into the bias–variance tradeoff — understanding why models can underfit or overfit. And we’ll wrap up by discussing machine learning ethics — an increasingly important topic in real-world AI deployment."
   },
   {
-    "objectID": "slides/topic-01.html#a-first-look-at-data",
-    "href": "slides/topic-01.html#a-first-look-at-data",
-    "title": "Topic 1: What Is Machine Learning?",
-    "section": "A first look at data",
-    "text": "A first look at data\n\nimport numpy as np\nimport matplotlib.pyplot as plt\n\nrng = np.random.default_rng(42)\nx = rng.uniform(0, 10, 100)\ny = 2 * np.sin(x) + x / 2 + rng.normal(0, 0.8, 100)\n\nplt.scatter(x, y, alpha=0.6)\nplt.xlabel(\"X\"); plt.ylabel(\"Y\")\nplt.title(\"Noisy observations of an unknown f\")\nplt.show()"
+    "objectID": "slides/Introduction.html#lets-begin",
+    "href": "slides/Introduction.html#lets-begin",
+    "title": "Introduction",
+    "section": "Let’s Begin",
+    "text": "Let’s Begin\n\n▶︎ Introduction to machine learning\n⏳ Features and models\n⏳ Bias-variance tradeoff\n⏳ Machine learning workflow\n\n\nThroughout the lecture, I’ll be checking in with this progress slide so you know where we are in the overall roadmap.\nRight now, we’re at the very beginning: Introduction to machine learning.\nWe’ll build up from the fundamental question: What is machine learning and how does it work?"
+  },
+  {
+    "objectID": "slides/Introduction.html#what-is-machine-learning",
+    "href": "slides/Introduction.html#what-is-machine-learning",
+    "title": "Introduction",
+    "section": "What is Machine Learning?",
+    "text": "What is Machine Learning?\n\nComputers learn patterns from data — no rules written by hand\n🗂️ Input: historical data\n🔧 Process: learning algorithm\n🤖 Output: predictive model\n\n\nMachine Learning algorithms, perspectives, and real-world application: Empirical evidence from United States trade data (Sakshi Aggarwal, 2023)\n\nSo, what exactly is machine learning?\nMachine learning is a subfield of artificial intelligence.\nIt’s focused on building systems that learn patterns from data and make predictions — without being explicitly programmed.\nLet’s break that down: The input is historical data — think of spreadsheets, sensor data, images, or text. The process is a learning algorithm — this could be linear regression, decision trees, or a neural network. And the output is a predictive model — a trained function that can make future predictions based on new input data.\nUnlike traditional programming, where we write explicit rules, machine learning learns those rules from the data itself.\nThat’s what makes it so powerful for automation and pattern recognition.\nMachine learning uses algorithms and models to make predictions and discover patterns in data.\nA model is a mathematical function for describing the relationship between inputs and outputs and making predictions.\nAn algorithm is a procedure or set of decision rules used to carry out a machine learning task, such as making a prediction.\nMachine learning combines tools and theory from computer science, artificial intelligence, statistics, and mathematics to make predictions and apply knowledge to new data.\nML – a subset of AI What’s in AI and not in ML? Areas of knowledge representation, constraint optimization, logical and probabilistic reasoning, and planning. AI is about getting systems to perform tasks that typically require human cognition and decision-making abilities.\nFOR NOTES: Machine learning is a subfield of artificial intelligence where computers learn patterns from data and make predictions without being explicitly programmed. 🗂️ Input: Historical data 🔧 Process: Learning algorithm 🤖 Output: Predictive model"
+  },
+  {
+    "objectID": "slides/Introduction.html#ml-vs.-traditional-programming",
+    "href": "slides/Introduction.html#ml-vs.-traditional-programming",
+    "title": "Introduction",
+    "section": "ML vs. Traditional Programming",
+    "text": "ML vs. Traditional Programming\n\nTraditional: Rules + Data → Computer → Answers\n\nYou write if \"FREE!!!\" in subject: spam\n\nMachine learning: Data + Answers → Computer → Rules\n\nYou give 10,000 labeled emails; the algorithm produces the rule: the model.\n\n📌 ML is the tool for problems where the rules are too complex, unknown, or constantly changing to write by hand.\n\n\nSo, what exactly is machine learning?\nMachine learning is a subfield of artificial intelligence.\nIt’s focused on building systems that learn patterns from data and make predictions — without being explicitly programmed.\nLet’s break that down: The input is historical data — think of spreadsheets, sensor data, images, or text. The process is a learning algorithm — this could be linear regression, decision trees, or a neural network. And the output is a predictive model — a trained function that can make future predictions based on new input data.\nUnlike traditional programming, where we write explicit rules, machine learning learns those rules from the data itself.\nThat’s what makes it so powerful for automation and pattern recognition.\nMachine learning uses algorithms and models to make predictions and discover patterns in data.\nA model is a mathematical function for describing the relationship between inputs and outputs and making predictions.\nAn algorithm is a procedure or set of decision rules used to carry out a machine learning task, such as making a prediction.\nMachine learning combines tools and theory from computer science, artificial intelligence, statistics, and mathematics to make predictions and apply knowledge to new data.\nML – a subset of AI What’s in AI and not in ML? Areas of knowledge representation, constraint optimization, logical and probabilistic reasoning, and planning. AI is about getting systems to perform tasks that typically require human cognition and decision-making abilities.\nFOR NOTES: Traditional programming"
+  },
+  {
+    "objectID": "slides/Introduction.html#where-machine-learning-fits-in-ai",
+    "href": "slides/Introduction.html#where-machine-learning-fits-in-ai",
+    "title": "Introduction",
+    "section": "Where Machine Learning Fits in AI",
+    "text": "Where Machine Learning Fits in AI\n\nArtificial Intelligence → Machine Learning (this course) → Deep Learning → LLMs\nChatGPT is one member of the family.\nThis course teaches the family: the concepts every member shares.\n\n\nLet’s talk about the concept of a model.\nIn machine learning, a model is a mathematical function that takes input data and maps it to an output.\nIt makes predictions based on patterns it has learned from the training data.\nFor example, a linear model might take a feature like distance and use it to predict price, using the formula: y^=fθ(x)=θ0+θ1x = f_(x) = _0 + _1 xy^=fθ(x)=θ0+θ1x Here, xxx is the input feature, yy is the predicted output, and θrepresents the parameters — values the model learns during training.\nThe code at the bottom shows how we create and train a model in Python using scikit-learn.\nThis model learns to fit the best line through the data points — and then we can use it to make predictions on new data."
+  },
+  {
+    "objectID": "slides/Introduction.html#what-is-a-model",
+    "href": "slides/Introduction.html#what-is-a-model",
+    "title": "Introduction",
+    "section": "What is a Model?",
+    "text": "What is a Model?\n\\[\\hat{y} = f_{\\theta}(x)\\]\n\nLinear example: \\(f_{\\theta}(x) = \\theta_0 + \\theta_1 x\\)\n\\(x\\) input · \\(\\hat{y}\\) prediction · \\(\\theta\\) learned parameters\n\n\nLet’s talk about the concept of a model.\nIn machine learning, a model is a mathematical function that takes input data and maps it to an output.\nIt makes predictions based on patterns it has learned from the training data.\nFor example, a linear model might take a feature like distance and use it to predict price, using the formula: y^=fθ(x)=θ0+θ1x = f_(x) = _0 + _1 xy^=fθ(x)=θ0+θ1x Here, xxx is the input feature, yy is the predicted output, and θrepresents the parameters — values the model learns during training.\nThe code at the bottom shows how we create and train a model in Python using scikit-learn.\nThis model learns to fit the best line through the data points — and then we can use it to make predictions on new data.\nFOR NOTES: A model is a mathematical function that maps input(s) to output(s) to make predictions: \\(\\hat{y} = f_{\\theta}(x)\\) Example (linear model): \\(f_{\\theta}(x) = \\theta_0 + \\theta_1 x\\), where \\(x\\): input feature \\(\\hat{y}\\): predicted output \\(\\theta\\): model parameters"
+  },
+  {
+    "objectID": "slides/Introduction.html#what-is-an-algorithm",
+    "href": "slides/Introduction.html#what-is-an-algorithm",
+    "title": "Introduction",
+    "section": "What is an Algorithm?",
+    "text": "What is an Algorithm?\n\\[\\mathcal{A} : (\\textit{data},\\ \\textit{hyperparameters}) \\rightarrow f_{\\theta^{*}}\\]\n\n🗂️ Input: training data and hyperparameters\n🔧 Process: optimization rules\n🤖 Output: a trained model \\(f_{\\theta^{*}}\\)\nEx: gradient descent trains regression models\n\n\nNow, while the model is the function that makes predictions, the algorithm is what trains that model.\nThink of it like this: the model is the structure, and the algorithm is the recipe for filling in that structure with the right values.\nAn algorithm takes: Input: training data and hyperparameters Processes: optimization steps, like gradient descent Output: a trained model with the best-fitting parameters\nIn math terms, we can write this as: A(data,hyperparameters)→fθ∗(, ) f^*_(data,hyperparameters)→fθ∗\nFor instance, SGDRegressor() in scikit-learn uses stochastic gradient descent to train a model. It updates the model’s weights gradually as it sees each data point. So again — the algorithm is the process, and the model is the result.\nFOR NOTES: An algorithm is a step-by-step procedure used to train a model on data. Examples: gradient descent algorithms are used to train regression models. It takes: 🔧 Processes: optimization rules"
+  },
+  {
+    "objectID": "slides/Introduction.html#model-vs-algorithm",
+    "href": "slides/Introduction.html#model-vs-algorithm",
+    "title": "Introduction",
+    "section": "Model vs Algorithm",
+    "text": "Model vs Algorithm\n\n🤖 Model: a mathematical function that makes predictions\n⚙️ Algorithm: a method that adjusts the model’s parameters using data\n📌 These terms are sometimes used interchangeably in casual conversation.\n\n\nLet’s pause and clarify this distinction:\nA model is the mathematical function that makes predictions. Once trained, it can be reused over and over to predict outcomes.\nAn algorithm is the method used to train the model. It iteratively adjusts the model’s parameters to reduce error.\nThis distinction is subtle but really important, especially when we start talking about training, optimization, and deployment."
+  },
+  {
+    "objectID": "slides/Introduction.html#example-predicting-rideshare-price",
+    "href": "slides/Introduction.html#example-predicting-rideshare-price",
+    "title": "Introduction",
+    "section": "Example: Predicting Rideshare Price",
+    "text": "Example: Predicting Rideshare Price\nGoal: Predict the price of a ride using input features.\n\nMachine Learning (zyBooks, 2025)\n\nLet’s walk through a practical example of a machine learning system.\nSuppose we want to predict the price of a rideshare trip.\nOur input features might include: Distance Starting location Traffic conditions Time of day Vehicle type\nWe feed these into a model, and it outputs the predicted price.\nThis is a classic example of supervised learning — we’re using labeled training data where the correct price is already known, so the model can learn from it.\nLater, the model can predict the price for a new trip based on similar features.\nThe price of a ride using a rideshare company like Uber or Lyft can be predicted with machine learning. Inputs like distance, starting location, traffic conditions, time, and vehicle type are recorded for each trip. Inputs are passed into a machine learning model, which uses an algorithm or statistical model to predict the price. The predicted price is the machine learning model’s output."
+  },
+  {
+    "objectID": "slides/Introduction.html#what-is-a-dataset",
+    "href": "slides/Introduction.html#what-is-a-dataset",
+    "title": "Introduction",
+    "section": "What is a Dataset?",
+    "text": "What is a Dataset?\n\nFeatures = columns — time, price, vehicle type\nInstances = rows — one rideshare trip\n\n\n\n\n\n\n\n\n\n\n\n\ndistance\ncab_type\ntime_stamp\ndestination\nprice\nsurge_multiplier\n\n\n\n\n1.3\nUber\n08:04.4\nTheatre District\n17.5\n1\n\n\n1.35\nLyft\n22:57.4\nSouth Station\n7\n1\n\n\n1.1\nLyft\n15:09.6\nFinancial District\n13.5\n1\n\n\n\nMachine Learning (zyBooks, 2025)\n\nNow that we’ve talked about models and algorithms, let’s look at the data they learn from.\nA dataset is a structured collection of data that typically consists of features and instances.\nA feature is a measurable property — for example, the trip’s distance or price. These form the columns of the dataset.\nAn instance is a single data point — for example, one rideshare trip. These are the rows of the dataset.\nWhen the data is organized in a table — like in a spreadsheet or a pandas dataframe — it’s called tabular data.\nThis format is extremely common and will be the type we use for most of our examples.\nDataframes store data in tabular format: Each row contains a single instance and each column contains a single feature. Features in the ride share dataframe include distance, cab type, time stamp, destination, price, and adjustment for high demand (surge multiplier). Each instance represents a single rideshare trip.\nFOR NOTES: A dataset is a structured collection of data, consisting of: Features (or variable): a measurable property (column), e.g., time, price, vehicle type Instances (or samples): a single data point (row), e.g., one rideshare trip"
+  },
+  {
+    "objectID": "slides/Introduction.html#input-and-output-features",
+    "href": "slides/Introduction.html#input-and-output-features",
+    "title": "Introduction",
+    "section": "Input and Output Features",
+    "text": "Input and Output Features\n\nInputs (predictors, \\(\\mathbf{X}\\)): what you know\nOutput (target, response, \\(\\mathbf{y}\\)): what you want to find out\nEx: distance → model → price\n\n\nMachine Learning (zyBooks, 2025)\n\nIn machine learning, we divide features into inputs and outputs. Input features (also called predictors or explanatory variables) are the known information we feed into the model. The output feature (also called the target or response variable) is what we want the model to predict.\nIn our rideshare example: Input: distance Output: price\nYou can think of it like this: Inputs = what you know Output = what you want to find out\nChoosing the right input features is critical for building accurate models.\nFOR NOTES: Inputs (predictors, \\(\\mathbf{X}\\)): Variables used to make a prediction Output (target, response, \\(\\mathbf{y}\\)): The value we want the model to predict Task: Predict ride price based on distance Input feature: distance → model → output feature: price 📌 Think of inputs as “what you know”, and outputs as “what you want to find out.”"
+  },
+  {
+    "objectID": "slides/Introduction.html#knowledge-check",
+    "href": "slides/Introduction.html#knowledge-check",
+    "title": "Introduction",
+    "section": "Knowledge Check",
+    "text": "Knowledge Check\n\nGoal: predict which nurses are likely to quit\nWhich feature is the target?\nWhich are the inputs?\n\n\n\n\nEmployee ID\nAge\nQuit?\nDepartment\nDaily rate\n\n\n\n\n1415194\n34\nNo\nMaternity\n404\n\n\n1620383\n30\nNo\nMaternity\n1312\n\n\n1533398\n25\nYes\nCardiology\n383\n\n\n1479961\n35\nNo\nMaternity\n982\n\n\n1570909\n38\nNo\nCardiology\n508\n\n\n\n\nLet’s look at another scenario. Suppose a hospital wants to predict which nurses are likely to quit. They’ve collected data with the following features: Employee ID Age Whether the nurse quit Department Daily rate\nSo here’s your task: The output feature is: Quit? — that’s what we’re trying to predict. The input features include: Age, Department, and Daily rate.\nBe sure to ignore Employee ID — it’s just an identifier, not a meaningful predictor. A good rule of thumb is: always ask, Is this feature informative, or just a label?\nHospitals are interested in increasing employee retention, especially for nurses. The following table contains the employee IDs, age, whether or not a nurse recently quit, department, and daily pay rate for a sample of nurses at a large hospital.\nInput and output features Machine learning models use input features to predict the value of an output feature.\nInput features are the model’s inputs, or explanatory features.\nOutput features are the model’s target feature, or response feature. Input and output features are selected based on the machine learning task, or research question.\nFOR NOTES: What is the output feature (target)? What is/are the input feature(s)? Ignore Employee ID — it’s an identifier, not a predictive variable. ⚠️ Always ask: “Is this feature informative or just a label?” Goal: Predict which nurses are likely to quit. ⚠️ Always ask: “Is this feature informative or just a label?”"
+  },
+  {
+    "objectID": "slides/Introduction.html#types-of-machine-learning",
+    "href": "slides/Introduction.html#types-of-machine-learning",
+    "title": "Introduction",
+    "section": "Types of Machine Learning",
+    "text": "Types of Machine Learning\n\nSupervised — data has labels → Regression (predict a number) · Classification (predict a category)\nUnsupervised — no labels, find structure → Clustering (group similar rows) · Dimension reduction (compress columns)\nReinforcement — learn from rewards\n\n\nLet’s now take a step back and look at the big picture of machine learning types.\nThere are several learning paradigms, and choosing the right one depends on your task and the type of data you have.\nFirst, we have Supervised Learning. This is when we train the model using labeled data — that is, we already know the correct answers. We use it for tasks like regression and classification.\nNext is Unsupervised Learning, where we don’t have labeled outcomes. The model’s goal is to find patterns or structure — for example, clustering similar items together or reducing dimensionality.\nThen there’s Reinforcement Learning, which is different — here, the model learns by interacting with an environment and receiving feedback in the form of rewards or penalties. This is used in areas like robotics or game-playing agents.\nLater, we’ll also cover semi-supervised and self-supervised learning — two increasingly important techniques in modern ML.\nThe type of machine learning used depends on the machine learning task. Predicting the price of a rideshare trip based on distance and time is a supervised learning task, since the output feature (price) is known. Categorizing customers as “commuters”, “sports fans”, or “tourists” is unsupervised learning, since these categories are not an observed feature. Adjusting the price of a rideshare after a customer has declined is reinforcement learning. The prediction is updated based on the customer’s decision.\nFOR NOTES: no labels: find structure"
+  },
+  {
+    "objectID": "slides/Introduction.html#supervised-learning",
+    "href": "slides/Introduction.html#supervised-learning",
+    "title": "Introduction",
+    "section": "Supervised Learning",
+    "text": "Supervised Learning\n\nLearns from labeled data: inputs and correct outputs\nRegression → numbers, e.g., ride price $17.32\nClassification → categories, e.g., cat vs. dog\n📌 Numeric output = regression; categorical = classification\n\n\nSupervised Learning: Types and Techniques (Bot Pengiun, 2024)\n\nLet’s zoom in on supervised learning, which is the most common ML approach.\nIn supervised learning, we give the model a set of input features and the correct output — it learns the relationship between the two.\nThere are two major categories: Regression: This is when we predict numeric values. For example, predicting the price of a ride: $17.32. Classification: This is when we predict categories or labels. For example, classifying an animal as a cat or a dog.\nA quick way to distinguish the two: If the output is a number, it’s regression. If the output is a label or class, it’s classification.\nWe’ll use supervised learning in many of our hands-on examples this semester.\nFOR NOTES: Models learn from labeled data — we give them both inputs and correct outputs. Regression: Predict numbers Ex: Predict ride price (e.g., $17.32) Classification: Predict categories Ex: Predict animal type: Cat vs. Dog 📌 If the output is numeric, it’s regression. If it’s categorical, it’s classification."
+  },
+  {
+    "objectID": "slides/Introduction.html#unsupervised-learning",
+    "href": "slides/Introduction.html#unsupervised-learning",
+    "title": "Introduction",
+    "section": "Unsupervised Learning",
+    "text": "Unsupervised Learning\n\nFinds structure in unlabeled data — no output labels\nClustering: commuters, sports fans, tourists\nOutlier detection: rides with abnormally high prices\nDimensionality reduction: transforming data, e.g., PCA\n\n\nMachine Learning (zyBooks, 2025)\n\nNext is unsupervised learning — and this works without labeled data.\nThe model is given a dataset and asked to discover structure or relationships within it.\nCommon unsupervised learning tasks include: Clustering: Grouping instances into meaningful clusters — for example, rideshare customers who behave similarly. Outlier Detection: Identifying unusual or suspicious instances — like a ride that’s far too expensive. Dimensionality Reduction: Transforming a dataset with many features into fewer ones — for example, combining time and distance into a ‘trip intensity’ metric.\nThis is especially useful for exploratory data analysis or when labels are unavailable.\nFOR NOTES: Models find structure in unlabeled data — no output labels provided. Clustering: Group rides into “commuters”, “sports fans”, “tourists” Outlier Detection: Find suspicious rides with abnormally high prices Dimensionality Reduction: Transforming data (e.g., PCA)"
+  },
+  {
+    "objectID": "slides/Introduction.html#reinforcement-learning",
+    "href": "slides/Introduction.html#reinforcement-learning",
+    "title": "Introduction",
+    "section": "Reinforcement Learning",
+    "text": "Reinforcement Learning\n\nLearns by trial and error: take actions, receive feedback\nAgent: the decision-maker\nEnvironment: where it operates\nReward: feedback after an action\nEx: a self-driving car earns rewards for staying in its lane\n\n\n\n\nReinforcement Learning: Teaching Computers to Make Optimal Decisions (Bala Priya C, 2023)\nHands-On Machine Learning with Scikit-Learn, Keras, and TensorFlow (Aurélien Géron, 2019)\n\n\nNow let’s look at reinforcement learning, which is different from the others.\nIn reinforcement learning, a model — called an agent — interacts with an environment, takes actions, and learns from rewards or penalties it receives.\nThink of a self-driving car learning to stay in its lane. It receives positive feedback (rewards) when it does well — like staying centered. It receives negative feedback (penalties) when it makes mistakes — like crossing a lane.\nKey components: The agent makes decisions The environment provides feedback The reward is the signal used to improve over time\nThis type of learning is often used in robotics, game AI, and recommendation systems.\nFOR NOTES: Models learn by trial and error — they take actions and receive feedback. Ex: A self-driving car earns rewards for staying in its lane Key terms: Agent: The decision-maker Environment: Where it operates Reward: Feedback after an action"
+  },
+  {
+    "objectID": "slides/Introduction.html#semi-supervised-learning",
+    "href": "slides/Introduction.html#semi-supervised-learning",
+    "title": "Introduction",
+    "section": "Semi-Supervised Learning",
+    "text": "Semi-Supervised Learning\n\nSmall labeled set + large unlabeled pool\nEx: 100 rides priced, 10,000 not\n\n\nSemi-Supervised Learning Explained: Techniques and Real-World Applications (Roman Panarin, 2024)\n\nNow we get into more nuanced learning strategies — starting with semi-supervised learning.\nThis approach uses a small amount of labeled data and a large amount of unlabeled data.\nWhy do this? Because labeling data can be expensive and time-consuming, but there’s usually lots of unlabeled data available.\nHere’s an example: Suppose you have 100 ride records with labeled prices and 10,000 rides without prices. You train your model on the small labeled set, and then it begins to generalize by learning from the larger unlabeled set.\nSemi-supervised learning is widely used in domains like medical imaging and natural language processing, where labeled data is rare but unlabeled data is abundant\nSince labeling data is usually time-consuming and costly, you will often have plenty of unlabeled instances, and few labeled instances.\nSome algorithms can deal with data that’s partially labeled.\nFOR NOTES: Combines a small amount of labeled data with a large pool of unlabeled data. Ex: Only 100 images of rides have prices labeled, but 10,000 don’t. The model starts with labeled data, then generalizes by learning from the rest. Ex: Only 100 images of rides have prices labeled, but 10,000 don’t. The model starts with labeled data, then generalizes by learning from the rest."
+  },
+  {
+    "objectID": "slides/Introduction.html#self-supervised-learning",
+    "href": "slides/Introduction.html#self-supervised-learning",
+    "title": "Introduction",
+    "section": "Self-Supervised Learning",
+    "text": "Self-Supervised Learning\n\nCreates its own labels from unlabeled data\n📘 NLP: mask a word, train the model to guess it\n📷 Vision: predict the missing part of an image\n\n\n\n\nHands-On Machine Learning with Scikit-Learn, Keras, and TensorFlow (Aurélien Géron, 2019)\nSelf Supervised Representation Learning in NLP (Amit Chaudhary, 2020)\n\n\nNext, we have self-supervised learning, which is one of the most exciting developments in modern machine learning.\nIn self-supervised learning, the model is trained without any human-labeled data — instead, it generates its own labels from the input data.\nFor example, in natural language processing: You take a sentence and mask a word: ‘The cab arrived at the ___.’ The model learns to predict the missing word — like ‘airport’ — using the surrounding context.\nIn computer vision, you might cut out part of an image and ask the model to predict what’s missing.\nSelf-supervised learning is behind the success of large language models like ChatGPT, BERT, and DALL·E.\nIt’s incredibly powerful because it lets us learn from vast amounts of raw data, without manual annotation.\nFOR NOTES: Learns from unlabeled data by creating its own labels 📘 In NLP, mask a word in a sentence and train the model to guess it: 📷 In vision: Train a model to predict the missing part of an image"
+  },
+  {
+    "objectID": "slides/Introduction.html#knowledge-check-1",
+    "href": "slides/Introduction.html#knowledge-check-1",
+    "title": "Introduction",
+    "section": "Knowledge Check",
+    "text": "Knowledge Check\nMatch each task to a learning type:\n\nChemotherapy dosage from a patient’s response\nPredicting whether a nurse is likely to quit\nGrouping patients from EHRs, no outcome labels\nPretraining on clinical notes by predicting masked words\n100 labeled X-rays + 10,000 unlabeled\n\n\nLet’s solidify what we just learned with a quick matching exercise.\nMatch each machine learning task to the correct learning type: 1. Prescribing a new chemotherapy drug dosage based on a patient’s response → This is Reinforcement Learning. The model is learning by trial and feedback. 2. Predicting whether a nurse is likely to quit → This is Supervised Learning. We’re training on historical data with labels. 3. Identifying high-risk patients based on EHRs → This is Unsupervised Learning. No labels, just clustering based on feature patterns.\nThese distinctions are really important when designing a machine learning solution — you have to match your data and your problem to the right learning paradigm.\n1: Learn from outcomes and adjust (reward-based) 2: Predict yes/no from labeled history 3: No labels — group or score based on similarity\nFOR NOTES: Match the machine learning task with the best type of machine learning: supervised, unsupervised, semi-supervised, self-supervised, or reinforcement learning. Prescribing a new chemotherapy drug dosage based on a patient’s response to earlier treatment. Predicting whether a nurse is likely to quit. Grouping patients with similar clinical profiles from EHRs, with no outcome labels Pretraining a model on clinical notes by predicting masked words Training a diagnosis model with 100 labeled X-rays and 10,000 unlabeled ones"
+  },
+  {
+    "objectID": "slides/Introduction.html#where-are-we-now",
+    "href": "slides/Introduction.html#where-are-we-now",
+    "title": "Introduction",
+    "section": "Where Are We Now?",
+    "text": "Where Are We Now?\n\n✅ Introduction to machine learning\n▶︎ Features and model\n⏳ Bias-variance tradeoff\n⏳ Machine learning workflow\n\n\nLet’s pause here for a moment to see where we are in the lecture.\nSo far, we’ve: Introduced the basic idea of machine learning Talked about features, models, and algorithms Walked through the major types of machine learning: supervised, unsupervised, reinforcement, and hybrid approaches\nNext up, we’ll look at how to work with different types of features and start preparing data for model building. This is a good time to take stock and ask: Are there any concepts you’d like me to revisit?"
+  },
+  {
+    "objectID": "slides/Introduction.html#types-of-features",
+    "href": "slides/Introduction.html#types-of-features",
+    "title": "Introduction",
+    "section": "Types of Features",
+    "text": "Types of Features\n\nCategorical: no numeric meaning — “Yes”/“No”, customer type\nNumerical: measurable quantities — age, income, amount\n📌 Some numeric-looking values (e.g., ZIP code) might be categorical.\n\n\n\n\n\n\n\n\n\n\n\n\ndistance\ncab_type\ntime_stamp\ndestination\nprice\nsurge_multiplier\n\n\n\n\n1.3\nUber\n08:04.4\nTheatre District\n17.5\n1\n\n\n1.35\nLyft\n22:57.4\nSouth Station\n7\n1\n\n\n\nMachine Learning (zyBooks, 2025)\n\nNow let’s look at feature types, which are incredibly important in machine learning.\nFeatures generally fall into two categories: Categorical Features: These are variables that represent categories or groups. They may be strings like ‘Regular’ or ‘New’, or numbers with no inherent order — like ZIP codes. Example: Yes/No values, Customer type\nNumerical Features: These are measurable values where arithmetic operations make sense. Example: Age, income, transaction amount\nOne important note: just because a feature is stored as a number doesn’t mean it’s numerical in a mathematical sense. For example, ZIP codes are typically treated as categorical, because there’s no real arithmetic relationship between them. Knowing which features are which affects how we process and encode them.\nFeature types Features in a dataset may be categorical or numerical. A categorical feature has non-numerical values, or numerical values without mathematical meaning. Ex: Yes/no, address, type of customer (regular, occasional, new). A numerical feature has numerical values with mathematical meaning. Ex: Amount spent on a transaction, square footage of a house. The actual values in a dataframe may not be enough to determine a feature’s type—context matters. Ex: Phone numbers are numerical, but mathematical operations on phone numbers have no meaning. Thus, phone numbers are categorical features.\nFeatures in the rideshare dataframe can be classified as categorical or numerical. Categorical features have non-numerical values, such as cab type and destination. Numerical features have numerical values with meaning, such as distance, price, and surge multiplier. Time stamp is a numerical feature, since mathematical operations on time have meaning. Ex: 2018-12-01 is two days after 2018-11-29.\nFOR NOTES: categorical / numerical (column labels on the source table) Categorical: Non-numeric or no inherent order – e.g., “Yes”/ “No”, Customer Type (“Regular”, “New”) Numerical: Measurable quantities with mathematical meaning – e.g., Age, Income, Transaction amount Categorical: Non-numeric or no inherent order – e.g., “Yes”/ “No”, Customer Type (“Regular”, “New”)"
+  },
+  {
+    "objectID": "slides/Introduction.html#exploratory-data-analysis",
+    "href": "slides/Introduction.html#exploratory-data-analysis",
+    "title": "Introduction",
+    "section": "Exploratory Data Analysis",
+    "text": "Exploratory Data Analysis\n\nExplore patterns with graphs and summary statistics\nDistributions · correlations · outliers\n\nrides['distance'].hist()\nrides.plot.scatter('distance', 'price')\n\n💡 EDA shapes feature selection and preprocessing\n\n\n\nMachine Learning (zyBooks, 2025)\n\nBefore we train any model, we must explore the data — and that’s where Exploratory Data Analysis, or EDA, comes in.\nEDA helps us: Visualize distributions of data Detect patterns and correlations Spot missing values or outliers\nHere are a couple of examples: A histogram like rides[distance’].hist() lets you see the distribution of prices. A scatter plot like rides.plot.scatter(‘distance’, ‘price’) helps reveal relationships between two variables.\nEDA is both an art and a science. The better you know your data, the better your models will be. This step often reveals issues — like skewed distributions or missing values — that must be addressed before modeling.\nExploratory data analysis is the process of exploring data via plots and descriptive statistics to identify potential relationships and patterns.\nTwo popular Python libraries for plotting data are matplotlib and seaborn. matplotlib is a library for creating static, dynamic, and interactive plots. seaborn is a high-level library for creating plots that work especially well with dataframes.\nFOR NOTES: Use graphs and summary stats to explore patterns in data Common EDA tasks: Examine distributions, Visualize correlations, Detect outliers 💡 EDA helps shape feature selection and preprocessing strategies."
+  },
+  {
+    "objectID": "slides/Introduction.html#classification-models",
+    "href": "slides/Introduction.html#classification-models",
+    "title": "Introduction",
+    "section": "Classification Models",
+    "text": "Classification Models\n\nPredicts categories from input features\nOutput: discrete class labels — Yes / No\nEx: accept or decline an offer\nModels: logistic regression, naïve Bayes, k-NN, decision trees, SVM, neural nets\n\n\nIntroduction to Decision Trees: Why Should You Use Them? (The 365 Team, 2024)\n\nLet’s now shift into different types of models — starting with classification models.\nClassification models are used when the output we want to predict is a category or label.\nHere are a few examples: Logistic Regression: A linear model used for binary classification Naïve Bayes: Based on probability and Bayes’ theorem Decision Trees: Tree-like structures that split the data based on feature values\nExample use case: We might want to predict whether a user will accept or decline an offer — so the model outputs a class: Yes or No. The key thing to remember is: classification problems deal with discrete outputs.\nClassification models are supervised machine learning models that classify instances into a predicted level, or class, of a categorical output feature based on the input features.\nClassification models may predict the class directly or the probability an instance belongs to a given class. In the probability case, predicted probabilities are compared against a threshold value to produce a class prediction.\nIn classification, input features may be categorical or numerical, but output features must be categorical.\nFOR NOTES: Predict categories or labels based on input features Examples: Logistic Regression, Naïve Bayes, k-Nearest Neighbors, Decision Trees, Support Vector Machines, Neural Networks Example use case: Predict whether to accept (Yes) or decline (No) an offer Output: discrete class labels – Yes and No"
+  },
+  {
+    "objectID": "slides/Introduction.html#regression-models",
+    "href": "slides/Introduction.html#regression-models",
+    "title": "Introduction",
+    "section": "Regression Models",
+    "text": "Regression Models\n\nPredicts continuous numbers\nOutput: a real value, e.g., $70,065\nEx: predict the salary of an offer\nModels: linear regression, regression trees, k-NN regression\n\n\nSimple Linear Regression model to predict the Salary based on Years of Experience (Yash Kulkarni, 2023)\n\nNow contrast classification with regression models.\nRegression is used when the output is a continuous numeric value.\nFor example: Predicting someone’s salary based on experience Estimating the price of a rideshare trip\nSome common regression models: Linear Regression: Fits a straight line through the data Regression Trees: A variant of decision trees tailored for numeric outputs\nThe important distinction is that regression models predict numbers, not categories.\nLater, we’ll walk through coding examples of both classification and regression using scikit-learn.”\nRegression models are supervised learning models that predict the value of a numerical output feature based on the input features.\nEx: Simple linear regression is a regression model, since the predicted values are numerical.\nLike classification models, categorical or numerical input features may be used in regression.\nHowever, the output feature for a regression model should always be numerical.\nFOR NOTES: Predict continuous numerical values Examples: Linear Regression, Regression Trees, k-NN regression Example use case: Predict the salary of an offer Output: real-valued number (e.g., $70,065)"
+  },
+  {
+    "objectID": "slides/Introduction.html#unsupervised-models-clustering",
+    "href": "slides/Introduction.html#unsupervised-models-clustering",
+    "title": "Introduction",
+    "section": "Unsupervised Models – Clustering",
+    "text": "Unsupervised Models – Clustering\n\nGroups similar observations — no labels\nEx: K-Means, hierarchical clustering\nUse: customer segmentation, behavior profiling\nOutput: cluster assignments (Cluster 1, Cluster 2)\n\n\nWhat is clustering (Google Machine Learning Education, 2025)\n\nLet’s revisit unsupervised models, starting with clustering.\nClustering algorithms group similar instances together, without any labels.\nA popular method is K-Means Clustering: It assigns each instance to one of K groups based on feature similarity. Another is Hierarchical Clustering, which builds a tree-like structure of nested clusters.\nUse cases include: Customer segmentation: e.g., grouping rideshare users into commuters, tourists, sports fans Behavior profiling: Identifying usage patterns or lifestyle segments\nThe output here is not a predicted value but a cluster label — like Group 1, Group 2, and so on.\nFOR NOTES: Group similar observations together without labeled data Examples: K-Means clustering Example use cases: Customer segmentation and behavior profiling Output: Cluster assignments (e.g., Cluster 1, Cluster 2)"
+  },
+  {
+    "objectID": "slides/Introduction.html#unsupervised-models-outlier-detection",
+    "href": "slides/Introduction.html#unsupervised-models-outlier-detection",
+    "title": "Introduction",
+    "section": "Unsupervised Models – Outlier Detection",
+    "text": "Unsupervised Models – Outlier Detection\n\nFinds rare instances that break the pattern\nEx: DBSCAN\nUse: fraud detection, error checking\nNo labels required — anomalies come from the data itself\n\n\nOutlier Analysis in Data Mining (Scaler, 2023)\n\nAnother important type of unsupervised learning is outlier detection.\nThese models identify instances that are unusual or rare — meaning they don’t fit the general pattern of the data.\nOne useful algorithm here is DBSCAN, which can detect outliers as a byproduct of clustering.\nUse cases include: Fraud detection: Spotting abnormal transactions Data cleaning: Identifying potential entry errors or system glitches\nThese models don’t require labeled data — they work by comparing each point’s behavior to others in the dataset. It’s a very practical technique, especially when working with real-world, noisy datasets.”\nFOR NOTES: Identify rare or unusual instances that don’t fit the general pattern Example: Example use cases: Error checking No labels required — algorithm finds anomalies from data itself"
+  },
+  {
+    "objectID": "slides/Introduction.html#unsupervised-models-dimension-reduction",
+    "href": "slides/Introduction.html#unsupervised-models-dimension-reduction",
+    "title": "Introduction",
+    "section": "Unsupervised Models – Dimension Reduction",
+    "text": "Unsupervised Models – Dimension Reduction\n\nSimplifies high-dimensional data, keeps the structure\nEx: PCA — combine distance & time into features capturing variance\nUse: compression, noise reduction, 2D visualization\n\n\nDimension Reduction (Anna Schaar, 2023)\n\nThe third major category of unsupervised models we’ll look at is dimensionality reduction.\nThis technique is used to transform high-dimensional datasets into simple versions, while preserving as much useful information as possible.\nThe most common method is PCA — Principal Component Analysis.\nPCA transforms the original features into a smaller number of new, uncorrelated variables called principal components.\nThink of it like combining features that are strongly related into a single, more informative feature.\nExample use cases include: Data compression: Reducing storage or transmission requirements Noise reduction: Removing irrelevant or redundant features Visualization: Reducing data to 2D or 3D so it can be plotted\nDimensionality reduction is often a crucial step before clustering or classification when your dataset has dozens or hundreds of features.\nFOR NOTES: Simplify high-dimensional data while keeping important structure Example: Principal Component Analysis (PCA) Combine features (e.g., distance & time) into new features capturing variance Example use cases: Visualization (e.g., reduce to 2D for plotting)"
+  },
+  {
+    "objectID": "slides/Introduction.html#knowledge-check-2",
+    "href": "slides/Introduction.html#knowledge-check-2",
+    "title": "Introduction",
+    "section": "Knowledge Check",
+    "text": "Knowledge Check\nMatch each task to: dimension reduction, outlier detection, or clustering.\n\nGroup customers as “frequent user”, “sports fan”, “commuter”\nIdentify customers with unusual behavior\nCombine trip distance and rating into a quality measure\n\n\nLet’s check your understanding of unsupervised models with a quick match-the-task activity. 1. Group rideshare customers into categories like ‘frequent user’, ‘sports fan’, or ‘commuter’ — this is clustering. 2. Identify customers with unusual behavior — this is outlier detection. 3. Combine trip distance and rating into a single ‘quality’ score — that’s dimensionality reduction.\nThese distinctions matter because even though all of these techniques use unlabeled data, they serve very different purposes.\nKnowing which one to use depends on your goal: discover patterns, find anomalies, or simplify data.\nFOR NOTES: Match the machine learning task to the type of unsupervised model: Dimension reduction, outlier detection, and clustering. Group rideshare customers into categories such as “frequent user”, “sports fan”, and “commuter”. Identify customers with unusual behavior. Combine trip distance and rating into a quality measure."
+  },
+  {
+    "objectID": "slides/Introduction.html#where-are-we-now-1",
+    "href": "slides/Introduction.html#where-are-we-now-1",
+    "title": "Introduction",
+    "section": "Where Are We Now?",
+    "text": "Where Are We Now?\n\n✅ Introduction to machine learning\n✅ Features and model\n▶︎ Bias-variance tradeoff\n⏳ Machine learning workflow\n\n\nWe’ve now wrapped up our overview of learning paradigms and model types, both supervised and unsupervised. Just to recap, you should now understand the difference between: Regression vs. Classification Clustering vs. Outlier Detection And how dimensionality reduction fits into the process\nUp next, we’ll look at the machine learning workflow — that is, how we build a model from raw data using Python and scikit-learn."
+  },
+  {
+    "objectID": "slides/Introduction.html#generalization-the-goal-of-machine-learning",
+    "href": "slides/Introduction.html#generalization-the-goal-of-machine-learning",
+    "title": "Introduction",
+    "section": "Generalization: The Goal of Machine Learning",
+    "text": "Generalization: The Goal of Machine Learning\n\nA model that memorizes its training data can score 100% on it and still be useless\nWhat matters is performance on data it has not seen\nThat target is generalization\nThe test set estimates it: it simulates the future\n\n\n\nFOR NOTES: A model that memorizes its training data can score 100% on it and still be useless. We do not care how well a model does on data it has seen. We care how well it does on data it hasn’t. That target — performance on unseen data — is called generalization. The test set exists to estimate it: it simulates the future."
+  },
+  {
+    "objectID": "slides/Introduction.html#what-is-bias-in-ml",
+    "href": "slides/Introduction.html#what-is-bias-in-ml",
+    "title": "Introduction",
+    "section": "What is Bias in ML?",
+    "text": "What is Bias in ML?\n\nSystematic error from overly strong assumptions\nPersists no matter how much data you collect\nHigh bias → too simple → underfits\nEx: predicting every ride’s price with one constant\n\n\nPredicted vs. Actual (Monolith AI, 2023)\n\nLet’s start with bias.\nIn machine learning, bias is not a social or ethical term — it refers to error caused by incorrect assumptions in the model.\nMore formally: The error for one instance is: ei=yi−y^ie_i = y_i - _iei=yi−y^i\nThe bias is the average error across all predictions: Bias=mean(ei) = (e_i)Bias=mean(ei)\nA model with high bias is too simple to capture the true patterns in the data. It consistently underperforms — this is called underfitting. Example: using a constant value to predict ride prices would lead to large, systematic errors — regardless of the input.\nA model without bias is unbiased — the mean difference between the predicted value and observed value is always 0.\nEx: Least squares regression is a regression model in which the weights are estimated such that the bias is guaranteed to be 0.\nBias may result from poor model fitting or violated model assumptions.\nUnderlying systematic errors in the data, such as underrepresenting a particular group or failing to measure an important feature, may also result in bias.\nFOR NOTES: Bias is a systematic error from overly strong assumptions The part of the error that persists no matter how much data you collect High bias → model too simple → underfits. Example: predicting every ride’s price with a single constant."
+  },
+  {
+    "objectID": "slides/Introduction.html#what-is-variance-in-ml",
+    "href": "slides/Introduction.html#what-is-variance-in-ml",
+    "title": "Introduction",
+    "section": "What is Variance in ML?",
+    "text": "What is Variance in ML?\n\nHow much predictions fluctuate across subsets of the same data\nHigh variance → too complex → overfits\nRight on one dataset, wrong on the next\n\n\n\nBias-variance decomposition for classification and regression losses (mlxtend)\n\nNow let’s look at the other side of the coin: variance.\nVariance refers to how much a model’s predictions fluctuate when trained on different datasets.\nYou might have a model that performs really well on the training data — but if it changes drastically with every new sample, it has high variance.\nThis is often a sign of overfitting — the model is memorizing the noise in the training set instead of learning general patterns.\nSo to recap: High bias = model is too simple → underfitting High variance = model is too complex → overfitting\nOur goal is to strike a balance between these two.\nVariance is the average squared difference between an observation and the mean.\nError variance is the variance of a model’s prediction errors.\nModels with low bias and low error variance have predicted values that are consistently close to the observed values. A good model should have low bias and low error variance.\nFOR NOTES: Variance measures how much predictions fluctuate across different subsets of the same dataset. High variance means model is too complex, thus, overfits training data Your model gets all answers right on one dataset but fails on new ones."
+  },
+  {
+    "objectID": "slides/Introduction.html#bias-variance-trade-off",
+    "href": "slides/Introduction.html#bias-variance-trade-off",
+    "title": "Introduction",
+    "section": "Bias-variance Trade-off",
+    "text": "Bias-variance Trade-off\n\nSimple models: high bias, low variance\nComplex models: low bias, high variance\nGoal: the sweet spot — best generalization\n\n\n\nBias–variance tradeoff (Wikipedia, 2025)\n\nSo how do bias and variance interact?\nThere’s a trade-off: Simple models tend to have high bias but low variance — they miss patterns but are stable Complex models have low bias but high variance — they capture detail but might not generalize\nYour job as an ML practitioner is to find the sweet spot: A model that’s complex enough to capture key relationships But not so complex that it overreacts to noise\nThis is why we split data into training and test sets, and why we monitor model performance carefully during tuning.\nUnderstanding this tradeoff helps you choose appropriate models, adjust their complexity, and improve generalization.\nArchery target diagram: High bias: off-center grouping High variance: scattered shots Balanced: tight grouping near center\nPrediction is like attempting to hit a bullseye on a target. A good model consistently (low error variance) hits the bullseye (low bias). A model with low bias and high error variance occasionally hits the bullseye but is less consistent. A model with high bias and low error variance consistently hits the same spot on the target, just not the center. The worst case scenario is a model with high bias and high error variance. Models with high bias and error variance are inaccurate and inconsistent.\nFOR NOTES: High bias, Low variance Low bias, High variance Goal: Find the sweet spot where both are balanced for best generalization."
+  },
+  {
+    "objectID": "slides/Introduction.html#generalizing",
+    "href": "slides/Introduction.html#generalizing",
+    "title": "Introduction",
+    "section": "Generalizing",
+    "text": "Generalizing\n\n\n\nTraining accuracy rises monotonically; test accuracy rises, peaks, then falls.\nThe goal is to find the sweet spot: enough model complexity to learn the underlying pattern in the dataset."
+  },
+  {
+    "objectID": "slides/Introduction.html#knowledge-check-3",
+    "href": "slides/Introduction.html#knowledge-check-3",
+    "title": "Introduction",
+    "section": "Knowledge Check",
+    "text": "Knowledge Check\n\nWhich model has the greatest prediction variance?\nWhich model is most likely underfitted?\n\n\n\n\nMachine Learning (zyBooks, 2025)\n\nLet’s apply what we just learned with a visual knowledge check.\nTake a look at the three models shown in the graphs. Each one represents a different kind of fit: Model A shows a straight line far from most points — that’s underfitting, or high bias. Model B fits the data well and generalizes — that’s the ideal fit. Model C is too wiggly, hugging every data point — this is overfitting, or high variance. These visual cues are often more intuitive than equations, and you’ll see them again in diagnostics later in the course. Understanding this trade-off helps you recognize when your model is doing too little or too much.\nKnowledge Check – Error Patterns Examine the models: 1️⃣ Which shows highest prediction variance? → Model C 2️⃣ Which is most underfitted? → Model A ✅ Model A: flat, underfitted ✅ Model C: highly curved, overfitted ✅ Model B: balanced\nFOR NOTES: Given the following graphs Which of the models has the greatest prediction variance? Which model is most likely to be underfitted?"
+  },
+  {
+    "objectID": "slides/Introduction.html#where-are-we-now-2",
+    "href": "slides/Introduction.html#where-are-we-now-2",
+    "title": "Introduction",
+    "section": "Where Are We Now?",
+    "text": "Where Are We Now?\n\n✅ Introduction to machine learning\n✅ Features and model\n✅ Bias-variance tradeoff\n▶︎ Machine learning workflow\n\n\nWe’ve now completed the machine learning workflow portion of our session. Let’s review: We explored how models are built using training data We discussed model evaluation and why testing on new data is critical And we just launched into practical exercises with scikit-learn\nComing up next, we’ll look at one of the most important theoretical concepts in ML — the bias–variance tradeoff. This helps us understand why some models perform well and others fail, even when the training looks good."
+  },
+  {
+    "objectID": "slides/Introduction.html#machine-learning-workflow",
+    "href": "slides/Introduction.html#machine-learning-workflow",
+    "title": "Introduction",
+    "section": "Machine Learning Workflow",
+    "text": "Machine Learning Workflow\n\nFrame — what is x? what is y? what is success?\nGet & split data — hold some data back\nPreprocess — clean, encode, scale\nTrain — fit a model to training data\nEvaluate — metrics on held-out data\nInterpret & act — explain, decide, communicate\n\n\nHere’s what a typical machine learning workflow looks like using scikit-learn.\nStep by step: Load and split the data — using train_test_split() to create training and test sets Preprocess features — scale, encode, or impute values as needed Choose a model — such as LinearRegression or DecisionTreeClassifier Fit the model on the training data Evaluate on the test data — using accuracy, mean squared error, etc. Tune and deploy — improve performance, then move it into production if needed\nThis structure will be the foundation of everything we do in this course — we’ll refer back to this workflow again and again.\nInput and output features are separated into two dataframes: X and y. Each estimator is loaded, or initialized, into the Python workspace. Any user-defined settings are specified during initialization. The .fit() method estimates model parameters, such as regression weights, or applies an algorithm to the input and output features. The .predict() method calculates predicted values for a set of inputs, either new values or the original inputs. The .score() method calculates a performance metric based on the type of machine learning task.\nFOR NOTES: A typical ML pipeline includes: (lead-in line from the source slide) what is x? what is y? what does success mean? Fit a model to training data"
+  },
+  {
+    "objectID": "slides/Introduction.html#introduction-to-scikit-learn",
+    "href": "slides/Introduction.html#introduction-to-scikit-learn",
+    "title": "Introduction",
+    "section": "Introduction to scikit-learn",
+    "text": "Introduction to scikit-learn\n\nPython library for building ML models\nKey concept: an estimator fits a model or algorithm\n\nfrom sklearn.linear_model import LinearRegression\nmodel = LinearRegression().fit(X_train, y_train)\n\nCovers supervised + unsupervised models, preprocessing, training, evaluation\n\n\nScikit-learn\n\nTo build machine learning models in Python, we’ll be using scikit-learn — one of the most widely used ML libraries.\nIt’s easy to learn, well-documented, and great for building both supervised and unsupervised models.\nA central concept in scikit-learn is the estimator: An estimator is any object that can fit a model to data. For example, LinearRegression() is an estimator used to fit a simple regression model. In code, we use .fit() to train the model:\nscikit-learn also includes tools for: Preprocessing data Splitting datasets Evaluating model performance\nWe’ll use all of these components in the workflow you’re about to see.\nFOR NOTES: scikit-learn is a popular Python library for building ML models. Key concept: Estimator — an object that fits a model or algorithm. Ex: LinearRegression() trains a linear model. scikit-learn supports: Supervised + Unsupervised models, Preprocessing, Training, Evaluation. An object that fits a model or algorithm"
+  },
+  {
+    "objectID": "slides/Introduction.html#practice-the-ml-workflow",
+    "href": "slides/Introduction.html#practice-the-ml-workflow",
+    "title": "Introduction",
+    "section": "Practice: The ML Workflow",
+    "text": "Practice: The ML Workflow\n\nBuild a supervised learning pipeline, then evaluate it\n📥 Download modeling_the_ml_workflow.ipynb from Canvas\n🌐 Open https://colab.research.google.com\n⬆️ Upload and run the notebook\n\n\nDALL·E (ChatGPT), 2025\n\nNow it’s your turn to apply what we just discussed in a hands-on lab.\nThis exercise will walk you through the full machine learning workflow using scikit-learn — from data loading to model evaluation.\nYou’ll learn to: Build a supervised learning pipeline Split your data into train and test sets Fit a model to training data Evaluate the model’s performance on unseen data\nTo begin: Download the notebook modeling_workflow_in_scikit_learn.ipynb from Canvas Open it in colab.research.google.com Upload and run the notebook cells\nThis lab is designed to reinforce the workflow we just discussed and build your confidence in using Python for end-to-end machine learning.\nFOR NOTES: Lab Goals: Build a supervised learning pipeline; Evaluate model performance."
+  },
+  {
+    "objectID": "slides/Introduction.html#summary-key-takeaways",
+    "href": "slides/Introduction.html#summary-key-takeaways",
+    "title": "Introduction",
+    "section": "Summary – Key Takeaways",
+    "text": "Summary – Key Takeaways\n\nMachine learning learns patterns from data to make predictions or discover structure.\nThe learning approach depends on the data, labels, and task.\nSuccessful models must perform well on unseen data, not just training data.\n\n\nLet’s wrap up with a quick summary of what we’ve covered today.\nYou should now be able to: Define key ML terms: dataset, features, models, algorithms Distinguish among the main learning types: Supervised → labeled data Unsupervised → unlabeled data Semi- and self-supervised → mix or auto-generated labels Reinforcement learning → reward-based learning Implement an ML workflow using scikit-learn — from loading data to evaluating models Explain the bias–variance tradeoff and recognize underfitting vs. overfitting Apply the W3C’s 10 ethical principles to guide responsible ML system design These foundational ideas will carry through the rest of the course — from labs and projects to your final assessment.\nCore ML Vocabulary You can now speak the language of machine learning: datasets hold the raw observations; features are the measurable attributes; labels/targets are the truths we aim to predict; a model is the mathematical function fθf_{}fθ we train; an algorithm is the procedure that tunes θ; and the training / test split lets us judge how well the model generalizes. Four Learning Paradigms You can distinguish when to use Supervised learning (labeled data, e.g., image classification), Unsupervised learning (no labels, e.g., customer clustering), Semi- / Self-supervised learning (leveraging unlabeled data, e.g., masked-token language models), and Reinforcement learning (agents learn by reward, e.g., game-playing AIs). End-to-End ML Workflow in scikit-learn Starting with a CSV, you can now: train_test_split → preprocessing.Pipeline → model.fit → metrics.evaluate. This pipeline mindset structures every future project—from data ingestion and feature engineering to model tuning and evaluation. Ethical Design Principles Fairness, transparency, privacy, and accountability are not add-ons—they shape model choices, data collection, and deployment strategies. You should now be able to identify at least one concrete design or policy decision that supports each principle."
+  },
+  {
+    "objectID": "slides/Introduction.html#further-reading",
+    "href": "slides/Introduction.html#further-reading",
+    "title": "Introduction",
+    "section": "Further Reading",
+    "text": "Further Reading\n\n📘 A Hands-On Introduction to Machine Learning (Chirag Shah, 2022)\n\n📖 Read Chapter 1\n\nGoogle’s ML Crash Course\nHow to Prevent Overfitting (Ken Hoffman, 2021)\n\n\n\nTo reinforce what you’ve learned and go a bit deeper, here’s some recommended reading.\nStart with Chapter 1 of A Hands-On Introduction to Machine Learning by Chirag Shah. It expands on many of the ideas we’ve introduced today with real-world case studies.\nIf you need a Python refresher, skim Chapter 2 — especially if you’re new to Jupyter notebooks or pandas.\nOptional but valuable: Google’s ML Crash Course — it’s beginner-friendly and includes interactive exercises. How to Prevent Overfitting by Ken Hoffman — a quick read that reinforces the bias–variance concepts.\nUse these as a springboard — especially if you want to explore topics like fairness, model tuning, or ethics in more detail."
   }
 ]
