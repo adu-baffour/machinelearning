@@ -1,8 +1,26 @@
-/.quarto/
+# Quarto build output and caches
+# NOTE: _freeze/ is intentionally NOT ignored — the publish workflow reuses it.
 /_site/
+/.quarto/
+**/*.quarto_ipynb
+
+# Python environment
 .venv/
 __pycache__/
+*.py[cod]
 .ipynb_checkpoints/
-.DS_Store
 
-**/*.quarto_ipynb
+# Tool- and editor-local settings
+.claude/
+.vscode/
+.idea/
+
+# OS cruft
+.DS_Store
+Thumbs.db
+
+# Local source material: keep the folder, publish none of its contents
+_archive/**
+!_archive/
+!_archive/pptx/
+!**/.gitkeep

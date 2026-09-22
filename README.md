@@ -1,7 +1,9 @@
-# Intro to Machine Learning — course site
+# Introduction to Machine Learning (COMP-SCI 465R)
 
-Built with Quarto, published to GitHub Pages.
+Course site for COMP-SCI 465R at the University of Missouri–Kansas City.
 
-- Local preview: `quarto preview`
-- Publish: push to `main`; GitHub Actions renders and deploys.
-- Always render locally before pushing any page with code, so its output lands in `_freeze/`.
+**Live site:** <https://adu-baffour.github.io/machinelearning/>
+
+Slides, notes, and labs are published here as the semester progresses. Graded work, solutions, and grades live in Canvas.
+
+Built with [Quarto](https://quarto.org).

@@ -17,10 +17,6 @@ By the end of this lecture you should be able to:
 - Distinguish supervised from unsupervised learning
 - Describe the bias-variance trade-off in one sentence
 
-::: notes
-Speaker notes go here. They appear in speaker view (press S) and never on the public slide.
-:::
-
 ## The core idea
 
 We observe inputs $X$ and an output $Y$ and assume
