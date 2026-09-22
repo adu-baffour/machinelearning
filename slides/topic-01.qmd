@@ -1,5 +1,6 @@
 ---
-title: "Week 1: What Is Statistical Learning?"
+title: "Topic 1: What Is Machine Learning?"
+subtitle: "COMP-SCI 465R"
 author: "Adu Baffour, PhD"
 format:
   revealjs:
@@ -28,7 +29,7 @@ $$
 Y = f(X) + \varepsilon
 $$
 
-Statistical learning is the set of methods for estimating $f$.
+Machine learning is the set of methods for estimating $f$.
 
 ## A first look at data
 

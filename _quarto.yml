@@ -3,20 +3,22 @@ project:
   output-dir: _site
 
 website:
-  title: "Intro to Machine Learning"
+  title: "Introduction to Machine Learning"
+  description: "COMP-SCI 465R"
   site-url: https://adu-baffour.github.io/machinelearning/
   repo-url: https://github.com/adu-baffour/machinelearning
   repo-actions: [issue]
   navbar:
+    title: "Introduction to Machine Learning"
     left:
       - href: index.qmd
         text: Home
-      - text: Weeks
+      - text: Topics
         menu:
-          - href: notes/week-01.qmd
-            text: "Week 1: What Is Machine Learning?"
+          - href: notes/topic-01.qmd
+            text: "Topic 1: What Is Machine Learning?"
   page-footer:
-    center: "Adu Baffour, PhD · University of Missouri–Kansas City"
+    center: "COMP-SCI 465R · Adu Baffour, PhD · University of Missouri–Kansas City"
 
 format:
   html:

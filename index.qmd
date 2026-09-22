@@ -1,9 +1,9 @@
 ---
-title: "Intro to Machine Learning"
-subtitle: "Course companion site"
+title: "Introduction to Machine Learning"
+subtitle: "COMP-SCI 465R · Course companion site"
 ---
 
-Welcome. This site hosts the slides, notes, and labs for the course.
+Welcome to **COMP-SCI 465R: Introduction to Machine Learning**. This site hosts the slides, notes, and labs for the course.
 
 ## How to use this site
 
