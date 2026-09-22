@@ -14,39 +14,25 @@
     "text": "Open the slides full screen"
   },
   {
-    "objectID": "notes/topic-01.html#notes",
-    "href": "notes/topic-01.html#notes",
-    "title": "Topic 1: What Is Machine Learning?",
-    "section": "Notes",
-    "text": "Notes\nExpanded notes for this topic go here: the explanations, examples, and context that do not fit on slides."
-  },
-  {
-    "objectID": "notes/topic-01.html#self-check",
-    "href": "notes/topic-01.html#self-check",
-    "title": "Topic 1: What Is Machine Learning?",
-    "section": "Self-check",
-    "text": "Self-check\nShort practice questions will go here."
-  },
-  {
     "objectID": "index.html",
     "href": "index.html",
     "title": "Introduction to Machine Learning",
     "section": "",
-    "text": "Welcome to COMP-SCI 465R: Introduction to Machine Learning. This site hosts the slides, notes, and labs for the course."
+    "text": "Course site for COMP-SCI 465R at the University of Missouri–Kansas City. Slides, notes, and labs are published here as the semester progresses.\nGraded work, solutions, and grades live in Canvas."
   },
   {
-    "objectID": "index.html#how-to-use-this-site",
-    "href": "index.html#how-to-use-this-site",
+    "objectID": "index.html#topics",
+    "href": "index.html#topics",
     "title": "Introduction to Machine Learning",
-    "section": "How to use this site",
-    "text": "How to use this site\n\nEach topic has a notes page with the slides embedded at the top.\nSlides open full screen from the link under each deck. Press F for full screen and S for speaker view.\nLabs are runnable Python notebooks.\n\nGraded work, solutions, and grades live in Canvas, not here."
+    "section": "Topics",
+    "text": "Topics\n\nTopic 1: What Is Machine Learning?"
   },
   {
     "objectID": "slides/topic-01.html#learning-objectives",
     "href": "slides/topic-01.html#learning-objectives",
     "title": "Topic 1: What Is Machine Learning?",
     "section": "Learning objectives",
-    "text": "Learning objectives\nBy the end of this lecture you should be able to:\n\nExplain the difference between prediction and inference\nDistinguish supervised from unsupervised learning\nDescribe the bias-variance trade-off in one sentence\n\n\nSpeaker notes go here. They appear in speaker view (press S) and never on the public slide."
+    "text": "Learning objectives\nBy the end of this lecture you should be able to:\n\nExplain the difference between prediction and inference\nDistinguish supervised from unsupervised learning\nDescribe the bias-variance trade-off in one sentence"
   },
   {
     "objectID": "slides/topic-01.html#the-core-idea",
